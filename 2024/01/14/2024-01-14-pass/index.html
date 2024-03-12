@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+    
+    <link rel='stylesheet' href="/./css/dracula.css">
+
+        <title>GPG + Password Store 密码管理器总结</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">iOSByte</a>
+            </div>
+        </div>
+
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="al_sidebar">
+
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>iOSByte</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                <h4>CNCYRCOM</h4>
+                <img class="al_sidebar_avatar" src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+                <p>Discover the fun side of iOS with iOSByte. Your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join the byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</p>
+            </div>
+
+            
+                <div class="al_sidebar_contact_info">
+                    <h4>GET IN TOUCH</h4>
+                    <p>A long way</p>
+
+                    <div class="dis_flex al_sidebar_social_widget">
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.github.com/cyr580">
+                                <svg class="al_social_icon" id="github">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_github"></use>
+                                </svg>
+                            </div>
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.twitter.com/CNCYRCOM/">
+                                <svg class="al_social_icon" id="twitter">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_twitter"></use>
+                                </svg>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        GPG + Password Store 密码管理器总结
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            Sun January 14, 2024 09:25 PM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                1k words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                3 minutes read
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E5%8C%96%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8"><span class="toc-text">图形化工具使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9D%9F%E4%BA%86%E5%90%97%EF%BC%9F"><span class="toc-text">结束了吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%BE%91%E5%99%A8%E9%9B%86%E6%88%90"><span class="toc-text">编辑器集成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E4%BD%BF%E7%94%A8"><span class="toc-text">移动端使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 如何使用自由软件和开源软件打造自己的网络账号密码管理</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 04</span></span><br><span class="line"></span><br><span class="line"><span class="section">### 说明</span></span><br><span class="line"></span><br><span class="line">由于使用到了相关自由软件和开源软件工具，所以前几章节都是工具使用介绍。文章面向的受众是会电脑操作，对账号密码、隐私有要求的人；相对专业人士来讲，可能比较啰嗦。所以，如果你熟悉对应的工具，建议直接跳过去，看不了解的部分。</span><br><span class="line"></span><br><span class="line"><span class="section">### 需求</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> 密码存储安全加密唯一性（只能由加密的人才可解密）。</span><br><span class="line"><span class="bullet">2.</span> 密码随机生成，任意长度、指定包含数字、特殊字符、字符大小写等。</span><br><span class="line"><span class="bullet">3.</span> 密码管理易用性、可维护性、可通用性（跨平台设备）。</span><br><span class="line"></span><br><span class="line"><span class="section">### 根据前面介绍</span></span><br><span class="line"></span><br><span class="line">了解了加密工具、密码生成工具、安全存储工具；本章将结合前面的工具做一个总结。</span><br><span class="line"></span><br><span class="line"><span class="section">## 使用演示</span></span><br><span class="line"></span><br><span class="line">经过前三篇文章 GPG 加密、密码生成与管理、Git 使用基本上已经完成了密码管理的工作了，本章将串联前三篇文章介绍的工具进行各个平台设备的使用演示。</span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> 使用 GPG 程序生成公私钥。gpg 名字叫做hacktribe，后面使用的时候 gpg-id 都指定它即可。</span><br><span class="line"></span><br><span class="line"><span class="code">    ```bash</span></span><br><span class="line"><span class="code">    $ gpg --full-generate-key</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>确定 pass 命令已经安装好。使用上一步生成公私钥时的名字初始化密码目录，使用默认的目录即可。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pass init hacktribe</span><br></pre></td></tr></table></figure></li>
+<li><p>配置好远程私有仓库。用于存放加密后的密码文件。选择创建一个私有的 Git 仓库，如 GitLab，并配置仓库的远程地址。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ pass git remote add main git@gitlab.com:hacktribe/password-store.git</span><br><span class="line">$ pass git pull main</span><br><span class="line">$ pass git push main</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="图形化工具使用"><a href="#图形化工具使用" class="headerlink" title="图形化工具使用"></a>图形化工具使用</h2><p>一般用户，不会使用命令行？没关系，还可以使用图形管理工具 qtpass 来管理。安装完成后，首次打开，会让配置相关配置。</p>
+<p>如果需要自动提交到远程仓库，需要在 settings 中把 Use git，相关的 git push 和 git pull 都选上。</p>
+<p>这样就完成了密码备份。</p>
+<h2 id="结束了吗？"><a href="#结束了吗？" class="headerlink" title="结束了吗？"></a>结束了吗？</h2><p>NO!!! 虽然现在完成了基本的使用，但是，现在还有移动设备等其他平台，或者换一台机器后怎么办？</p>
+<p>备份 GPG 密钥，采用 U 盘或者打印纸张藏起来。需要使用 <code>--export-ownertrust</code> 导出信任的数据。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpg --export-ownertrust &gt; file.txt</span><br></pre></td></tr></table></figure>
+
+<p>如果导出备份，没有使用该参数，会导致迁移其他平台时，状态是未知不可信的，生成密码等会提示是否知晓自己当前的操作的确认，在某些客户端下可能会导致使用有问题。</p>
+<p>It is NOT certain that the key belongs to the person named in the user ID. If you <em>really</em> know what you are doing, you may answer the next question with yes.</p>
+<p>Use this key anyway? (y/N)</p>
+<p>如果不希望提示，可以手动修改为信任：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --edit-key user@useremail.com</span><br><span class="line">gpg&gt; trust</span><br><span class="line">Please decide how far you trust this user...</span><br><span class="line">Your decision? 5</span><br><span class="line">gpg&gt; save</span><br></pre></td></tr></table></figure>
+
+<h2 id="编辑器集成"><a href="#编辑器集成" class="headerlink" title="编辑器集成"></a>编辑器集成</h2><p>小编经常需要用文本编辑器开发程序、写文章什么的，所以，PC端的客户端，只需要安装 password-store 程序，然后通过文本编辑器来管理密码或者一些敏感信息的。</p>
+<h2 id="移动端使用"><a href="#移动端使用" class="headerlink" title="移动端使用"></a>移动端使用</h2><p>这里以 iPhone 为例，到应用商店搜索 “password store” 找到 “pass - password store” 下载即可，或者到 <a target="_blank" rel="noopener" href="https://mssun.github.io/passforios/">GitHub</a> 上下载。</p>
+<p>接下来只需要配置好远程仓库即可。可以使用 SSH-key 或者用户名密码进行管理（账号密码就是 GitLab 的登录账号）。</p>
+<p><img src="insert_image_url_here" alt="Configuration"></p>
+<p>配置完成，就可以使用了。</p>
+<p><img src="insert_image_url_here" alt="App Screenshots"></p>
+<p>密码管理系列文章，到这里就结束了。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>使用下来，绝对不比商业软件差，就是配置稍微比较麻烦而已。好处在于，可以根据自己的需求改变，例如，你可以把 GitLab 部署在家庭网络里，这样所有数据都由自己保管。不依托第三方服务，不用担心一次性泄漏干干净净，底裤被人扒了。</p>
+
+                </section>
+
+                
+                
+
+                
+
+            </article>
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/2024/01/14/2024-01-14-pass-2/">
+                    
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-left"></use>
+                        </svg>
+                        <span class="al_text_ellipsis al_post_nav_desc">pass密码管理本不复杂</span>
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2024/01/14/2024-01-14-blog/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">GPG + Password Store 密码管理器使用指南</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
+    </div>
+
+
+        <div class="al_index_footer dis_flex_center">
+    <div class="al_index_footer_item al_index_footer_title">
+        CNCYRCOM
+    </div>
+
+    
+    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Created By 
+        <a target="_blank" rel="noopener" href="https://github.com/iGuan7u/Acetolog">AcetoLog</a>
+         · Power By 
+        <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
+    </div>
+
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
+    </div>
+</div>
+
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    <script src="//www.googletagmanager.com/gtag/js?id=51420056"></script>
+    <script>window.dataLayer=window.dataLayeror[];function gtag(){dataLayer.push(arguments);};gtag('js', new Date());gtag('config', '${theme.google_analytice.tracking_id}');</script>
+
+        
+        
+
+    </body>
+</html>
