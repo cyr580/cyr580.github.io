@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+    
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    
+    <link rel='stylesheet' href="/./css/dracula.css">
+
+        <title>基于 Github Action 自动构建 Hugo 博客</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">iOSByte</a>
+            </div>
+        </div>
+
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="al_sidebar">
+
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>iOSByte</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                <h4>CYRCOM</h4>
+                <img class="al_sidebar_avatar" src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+                <p>Discover the fun side of iOS with iOSByte. Your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join the byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</p>
+            </div>
+
+            
+                <div class="al_sidebar_contact_info">
+                    <h4>GET IN TOUCH</h4>
+                    <p>A long way</p>
+
+                    <div class="dis_flex al_sidebar_social_widget">
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.github.com/cyr580">
+                                <svg class="al_social_icon" id="github">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_github"></use>
+                                </svg>
+                            </div>
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.twitter.com/CNCYRCOM/">
+                                <svg class="al_social_icon" id="twitter">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_twitter"></use>
+                                </svg>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        基于 Github Action 自动构建 Hugo 博客
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            Fri August 5, 2022 09:54 PM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                702 words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                2 minutes read
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E6%96%87%E4%B8%BB%E8%A6%81%E8%AE%B0%E5%BD%95%E4%BA%86%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE-Github-Action-%E5%AE%9E%E7%8E%B0-Hugo-%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E3%80%82"><span class="toc-text">本文主要记录了如何配置 Github Action 实现 Hugo 博客自动部署。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="toc-text">1. 概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-text">2. 具体实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B5%8B%E8%AF%95"><span class="toc-text">3. 测试</span></a></li></ol></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <h2 id="本文主要记录了如何配置-Github-Action-实现-Hugo-博客自动部署。"><a href="#本文主要记录了如何配置-Github-Action-实现-Hugo-博客自动部署。" class="headerlink" title="本文主要记录了如何配置 Github Action 实现 Hugo 博客自动部署。"></a>本文主要记录了如何配置 Github Action 实现 Hugo 博客自动部署。</h2><p><img src="https://i.loli.net/2021/03/29/Kwh3819MRgteGn6.jpg"></p>
+<p>&lt;!— more —&gt;</p>
+<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>Hugo 都是静态博客，即最终生成的是静态页面，而所谓部署就是把这些静态文件放到 web 服务器(比如 Nginx、Caddy) 的对应目录就行了。</p>
+<p>因此整个 Github Action 只需要做两件事：</p>
+<ul>
+<li>编译，生成静态文件</li>
+<li>部署，把静态文件移动到合适的位置</li>
+<li>比如放到某个云服务器上</li>
+<li>或者放到 Github Pages<br>然后我们再通过 git push 来触发 Github Action 就可以了。</li>
+</ul>
+<h3 id="2-具体实现"><a href="#2-具体实现" class="headerlink" title="2. 具体实现"></a>2. 具体实现</h3><p>添加 Github Action</p>
+<p>需要在仓库根目录下创建 .github/workflow 这个二级目录，然后在 workflow 下以 yml 形式配置 Github Action。</p>
+<p>具体可以参考 这个仓库</p>
+<p>需要指定 action 触发条件，这里就设置为 push 触发，具体如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">push:</span><br><span class="line">  branches:</span><br><span class="line">    - main  # Set a branch to deploy</span><br><span class="line">pull_request:</span><br></pre></td></tr></table></figure>
+<p>以上表示在 main分支收到 push 事件时执行该 action。</p>
+<p>如果是之前创建的仓库，可能需要改成 master 分支。</p>
+<p>另外我们可以直接在 <a target="_blank" rel="noopener" href="https://github.com/marketplace?type=actions">marketplace</a> 找别人配置好的 action 来使用，就更加方便了，以下是本教程用到的 action</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/marketplace/actions/checkout">actions/checkout</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/marketplace/actions/hugo-setup">hugo-setup</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/marketplace/actions/github-pages-action">github-pages-action</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/marketplace/actions/rsync-deployments-action">rsync</a><br>我们要做的就是把这些单独的 action 进行组合，以实现自动部署。</li>
+</ul>
+<p>发布到 Github Pages</p>
+<p>静态博客可以直接用 Github Pages，比较简单，缺点就是国内访问会比较慢，甚至于直接打不开。</p>
+<p>action 文件如下</p>
+<figure class="highlight plaintext"><figcaption><span>GitHub Pages</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">on:</span><br><span class="line">  push:</span><br><span class="line">    branches:</span><br><span class="line">      - main  # Set a branch to deploy</span><br><span class="line">  pull_request:</span><br><span class="line"></span><br><span class="line">jobs:</span><br><span class="line">  deploy:</span><br><span class="line">    runs-on: ubuntu-20.04</span><br><span class="line">    concurrency:</span><br><span class="line">      group: $&#123;&#123; github.workflow &#125;&#125;-$&#123;&#123; github.ref &#125;&#125;</span><br><span class="line">    steps:</span><br><span class="line">      - uses: actions/checkout@v3</span><br><span class="line">        with:</span><br><span class="line">          submodules: true  # Fetch Hugo themes (true OR recursive)</span><br><span class="line">          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod</span><br><span class="line"></span><br><span class="line">      - name: Setup Hugo</span><br><span class="line">        uses: peaceiris/actions-hugo@v2</span><br><span class="line">        with:</span><br><span class="line">          hugo-version: ‘0.100.2’</span><br><span class="line">          # 是否启用 hugo extend</span><br><span class="line">          extended: true</span><br><span class="line"></span><br><span class="line">      - name: Build</span><br><span class="line">        run: hugo —minify</span><br><span class="line"></span><br><span class="line">      - name: Deploy</span><br><span class="line">        uses: peaceiris/actions-gh-pages@v3</span><br><span class="line">        if: $&#123;&#123; github.ref == ‘refs/heads/main’ &#125;&#125;</span><br><span class="line">        with:</span><br><span class="line">          github_token: $&#123;&#123; secrets.GITHUB_TOKEN &#125;&#125;</span><br><span class="line">          publish_dir: ./public</span><br></pre></td></tr></table></figure>
+<p>整个 Action 一个包含 4 个步骤：</p>
+<ol>
+<li>拉取代码</li>
+<li>准备 hugo 环境</li>
+<li>使用 hugo 编译生成静态文件</li>
+<li>把生成的静态文件发布到 Github Pages<br>其他都不需要改，唯一需要注意的是 Hugo 的版本以及是否启用 hugo 扩展。</li>
+</ol>
+<p>建议改成和自己当前使用的版本，否则可能会出现兼容性问题。</p>
+<figure class="highlight plaintext"><figcaption><span>name: Setup Hugo</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">uses: peaceiris/actions-hugo@v2</span><br><span class="line">with:</span><br><span class="line">  hugo-version: ‘0.100.2’</span><br><span class="line">  extended: true</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-测试"><a href="#3-测试" class="headerlink" title="3. 测试"></a>3. 测试</h3><p>随便修改点内容，执行提交</p>
+<figure class="highlight plaintext"><figcaption><span>hello > tmp.txt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add . </span><br><span class="line">git commit -m “test action”</span><br></pre></td></tr></table></figure>
+<p>然后打开 github action 页面查看，可以看到已经在执行了</p>
+<p>点开可以查看执行日志</p>
+<p>到此，整个配置就完成了，具体细节可以参考 这个仓库</p>
+<p>原文作者：意琦行<br>原文链接：<a target="_blank" rel="noopener" href="https://www.lixueduan.com/post/blog/01-github-action-deploy-hugo/">https://www.lixueduan.com/post/blog/01-github-action-deploy-hugo/</a></p>
+
+                </section>
+
+                
+                
+    <div id="al_gitalk_cnt" />
+    <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: "919cd316da6bdc2c2e6a",
+            clientSecret: "ae2c200effb3d1e09777cdba146557d4c2eb8bea",
+            repo: "cyr580.github.io",
+            owner: "cyr580",
+            admin: "cyr580",
+            id: "基于 Github Action 自动构建 Hugo 博客",
+        });
+        gitalk.render("al_gitalk_cnt")
+    </script>
+
+
+                
+
+            </article>
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/2022/08/16/2022-08-16-blog/">
+                    
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-left"></use>
+                        </svg>
+                        <span class="al_text_ellipsis al_post_nav_desc">NanoPi-R2S刷系统</span>
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2022/08/04/2022-08-04-blog/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">iOS快捷指令自动创建md</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
+    </div>
+
+
+        <div class="al_index_footer dis_flex_center">
+    <div class="al_index_footer_item al_index_footer_title">
+        CYRCOM
+    </div>
+
+    
+    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Created By 
+        <a target="_blank" rel="noopener" href="https://github.com/iGuan7u/Acetolog">AcetoLog</a>
+         · Power By 
+        <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
+    </div>
+
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
+    </div>
+</div>
+
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    <script src="//www.googletagmanager.com/gtag/js?id=51420056"></script>
+    <script>window.dataLayer=window.dataLayeror[];function gtag(){dataLayer.push(arguments);};gtag('js', new Date());gtag('config', '${theme.google_analytice.tracking_id}');</script>
+
+        
+        
+
+    </body>
+</html>

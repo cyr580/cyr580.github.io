@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+    
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    
+    <link rel='stylesheet' href="/./css/dracula.css">
+
+        <title>越狱手机上直接搭建cydia-repo源（github）</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">iOSByte</a>
+            </div>
+        </div>
+
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="al_sidebar">
+
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>iOSByte</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                <h4>CYRCOM</h4>
+                <img class="al_sidebar_avatar" src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+                <p>Discover the fun side of iOS with iOSByte. Your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join the byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</p>
+            </div>
+
+            
+                <div class="al_sidebar_contact_info">
+                    <h4>GET IN TOUCH</h4>
+                    <p>A long way</p>
+
+                    <div class="dis_flex al_sidebar_social_widget">
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.github.com/cyr580">
+                                <svg class="al_social_icon" id="github">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_github"></use>
+                                </svg>
+                            </div>
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.twitter.com/CNCYRCOM/">
+                                <svg class="al_social_icon" id="twitter">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_twitter"></use>
+                                </svg>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        越狱手机上直接搭建cydia-repo源（github）
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            Thu April 1, 2021 02:57 PM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                647 words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                2 minutes read
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAgithub%E4%BB%93%E5%BA%93"><span class="toc-text">创建github仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E4%B8%8B%E9%9D%A2%E8%BF%99%E4%B8%AA%E5%9C%B0%E5%9D%80%EF%BC%88%E5%90%8E%E9%9D%A2%E9%9C%80%E8%A6%81%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%99%E9%87%8C%EF%BC%89"><span class="toc-text">复制下面这个地址（后面需要推送到这里）</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%8B%E6%9C%BAnewterm%E6%8A%8A%E8%BF%99%E4%B8%AA%E4%BB%93%E5%BA%93%E5%85%8B%E9%9A%86%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="toc-text">手机newterm把这个仓库克隆到本地</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E7%9D%80%E4%BF%AE%E6%94%B9%E5%90%84%E7%A7%8D%E6%96%87%E4%BB%B6"><span class="toc-text">接着修改各种文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E7%9D%80%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90packages%E5%92%8Cpackages-bz2%E6%96%87%E4%BB%B6"><span class="toc-text">接着自动生成packages和packages.bz2文件</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%E5%B0%B1%E6%98%AFgit%E6%8E%A8%E9%80%81%E5%88%B0%E4%BB%93%E5%BA%93%E5%92%8C%E6%9B%B4%E6%94%B9github-pages%E5%88%86%E6%94%AF"><span class="toc-text">最后就是git推送到仓库和更改github pages分支</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B8%A9%E5%9D%91"><span class="toc-text">踩坑</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8D%E8%83%BDgit-push%E7%9A%84%E5%8E%9F%E5%9B%A0%E6%98%AF%E6%B2%A1%E6%9C%89%E8%AE%BE%E7%BD%AE%E9%82%AE%E7%AE%B1%E5%92%8C%E5%90%8D%E5%AD%97%EF%BC%8C%E8%BE%93%E5%85%A5%E4%BB%A5%E4%B8%8B%E5%91%BD%E4%BB%A4"><span class="toc-text">不能git push的原因是没有设置邮箱和名字，输入以下命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%AF%8F%E4%B8%80%E6%AC%A1%E5%A2%9E%E5%8A%A0-%E5%88%A0%E9%99%A4-%E4%BF%AE%E6%94%B9%E4%BB%BB%E4%BD%95deb%E6%96%87%E4%BB%B6%E5%90%8E%EF%BC%8C%E5%BF%85%E9%A1%BB%E7%82%B9%E5%87%BB-update-sh-%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E4%B8%80%E6%AC%A1packages-packages-bz2%EF%BC%88%E8%BF%99%E6%98%AF%E6%BA%90%E5%88%97%E8%A1%A8%EF%BC%89"><span class="toc-text">每一次增加&#x2F;删除&#x2F;修改任何deb文件后，必须点击 update.sh 重新生成一次packages&#x2F;packages.bz2（这是源列表）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%E6%9D%A5%E4%B8%80%E6%AC%A1%E5%AE%8C%E6%95%B4%E7%9A%84git"><span class="toc-text">最后来一次完整的git</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <p><img src="https://i.loli.net/2021/04/01/qEky7oj31FriUm8.jpg"></p>
+<p>拥有一个自己的repo，越狱后，各种折腾美化、插件，闲得蛋疼可以试试自己搭建一个repo，搭建容易，维护不易，需要花大量时间来关注并更新！</p>
+<span id="more"></span>
+
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ol>
+<li>git  ——默认Boss源或者<a target="_blank" rel="noopener" href="https://apt.procurs.us/">点击直达procurs-Taurine</a></li>
+<li>newterm2  ——<a target="_blank" rel="noopener" href="https://repo.packix.com/">点击直达packix</a></li>
+<li>github仓库  ——<a target="_blank" rel="noopener" href="https://www.github.com/">点击直达github</a></li>
+<li>Filza  ——<a target="_blank" rel="noopener" href="https://cydia.akemi.ai/">点击直达akemi</a></li>
+</ol>
+<h1 id="创建github仓库"><a href="#创建github仓库" class="headerlink" title="创建github仓库"></a>创建github仓库</h1><p><img src="https://i.loli.net/2021/04/01/HZfdW1j93JTtlnI.jpg"><br><img src="https://i.loli.net/2021/04/01/USI6GrwRO15DEzs.jpg"></p>
+<h4 id="复制下面这个地址（后面需要推送到这里）"><a href="#复制下面这个地址（后面需要推送到这里）" class="headerlink" title="复制下面这个地址（后面需要推送到这里）"></a>复制下面这个地址（后面需要推送到这里）</h4><p><img src="https://i.loli.net/2021/04/01/2AjUqt97QfuOeBi.jpg"></p>
+<h1 id="手机newterm把这个仓库克隆到本地"><a href="#手机newterm把这个仓库克隆到本地" class="headerlink" title="手机newterm把这个仓库克隆到本地"></a>手机newterm把这个仓库克隆到本地</h1><ol>
+<li>打开newterm</li>
+<li>输入<code>su</code><font color=#FF0000>必须获取root权限</font></li>
+<li>输入<code>alpine</code>(默认root密码)</li>
+<li>打开filza，我在Document目录下创建一个github文件夹</li>
+<li><code>cd /var/mobile/Documents/github/</code>我的文件夹路径</li>
+<li><code>git clone https://github.com/cyr580/myrepo</code>我的仓库地址</li>
+<li>打开filza，找到/Documents/github/myrepo</li>
+<li>把我传的文件复制进myrepo文件夹根目录<a target="_blank" rel="noopener" href="https://www.dropbox.com/s/laqs0fsfjoneg7b/myrepo.zip?dl=0">点击下载文件</a>  </li>
+</ol>
+<h4 id="接着修改各种文件"><a href="#接着修改各种文件" class="headerlink" title="接着修改各种文件"></a>接着修改各种文件</h4><p>—Release文件<br><img src="https://i.loli.net/2021/04/01/5z4XQPLDNwKZfRq.jpg"><br>—deb插件放入/debs目录</p>
+<h4 id="接着自动生成packages和packages-bz2文件"><a href="#接着自动生成packages和packages-bz2文件" class="headerlink" title="接着自动生成packages和packages.bz2文件"></a>接着自动生成packages和packages.bz2文件</h4><p>这个是源列表文件，有了这个文件才可以在cydia搜索到你的插件<br>上面发的文件内有一个<code>xxxx.sh</code>的文件，<font color=#FF0000>手机打开Filza点击sh文件，运行即可</font><br>检查目录下packages文件是否为0kb（0kb肯定有问题），如果你添加了deb到debs文件夹，那这个列表生成后会占用空间，而不是0kb</p>
+<h1 id="最后就是git推送到仓库和更改github-pages分支"><a href="#最后就是git推送到仓库和更改github-pages分支" class="headerlink" title="最后就是git推送到仓库和更改github pages分支"></a>最后就是git推送到仓库和更改github pages分支</h1><ol>
+<li>打开newterm</li>
+<li><code>su</code></li>
+<li><code>alpine</code>默认密码</li>
+<li><code>cd /var/mobile/Documents/github/myrepo</code>，看清楚🧐，cd到的目录是myrepo</li>
+<li><code>git add -A</code>添加全部文件</li>
+<li><code>git commit -m&quot;repo&quot;</code>，日志，每次必须操作一次，后面的repo字母可以随意改英文或者数字</li>
+<li><code>git push origin master</code>，推送到仓库，这里会踩坑，文章最后会说到</li>
+<li><code>git branch master</code><font color=#FF0000>创建分支，下面github pages改为master分支，保存</font></li>
+</ol>
+<p><img src="https://i.loli.net/2021/04/01/OdkylnCSVqAZLmY.jpg"></p>
+<p><img src="https://i.loli.net/2021/04/01/DBd42C6iOfWnemE.jpg"></p>
+<h1 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h1><h5 id="不能git-push的原因是没有设置邮箱和名字，输入以下命令"><a href="#不能git-push的原因是没有设置邮箱和名字，输入以下命令" class="headerlink" title="不能git push的原因是没有设置邮箱和名字，输入以下命令"></a>不能git push的原因是没有设置邮箱和名字，输入以下命令</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email “58054530@qq.com”</span><br><span class="line">git config --global user.name “cyr580”</span><br></pre></td></tr></table></figure>
+<h5 id="每一次增加-删除-修改任何deb文件后，必须点击-update-sh-重新生成一次packages-packages-bz2（这是源列表）"><a href="#每一次增加-删除-修改任何deb文件后，必须点击-update-sh-重新生成一次packages-packages-bz2（这是源列表）" class="headerlink" title="每一次增加/删除/修改任何deb文件后，必须点击 update.sh 重新生成一次packages/packages.bz2（这是源列表）"></a>每一次增加/删除/修改任何deb文件后，必须点击 <code>update.sh</code> 重新生成一次packages/packages.bz2（这是源列表）</h5><p><img src="https://i.loli.net/2021/04/01/jEnRclSVmZp6KN3.jpg"></p>
+<h5 id="最后来一次完整的git"><a href="#最后来一次完整的git" class="headerlink" title="最后来一次完整的git"></a>最后来一次完整的git</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取root权限</span></span><br><span class="line">su</span><br><span class="line"><span class="comment">#输入密码，下面是默认密码</span></span><br><span class="line">alpine</span><br><span class="line"><span class="comment">#cd 源目录</span></span><br><span class="line"><span class="built_in">cd</span> /xx/xx/xx/xx</span><br><span class="line"><span class="comment">#添加deb到debs，并用.sh文件生成packages和packages.bz2，接着git</span></span><br><span class="line">git add -A</span><br><span class="line"><span class="comment">#日志，每次必须操作</span></span><br><span class="line">git commit -m“repo”</span><br><span class="line"><span class="comment">#推送到仓库</span></span><br><span class="line">git push</span><br><span class="line"><span class="comment">#输入github的登录帐号和密码</span></span><br><span class="line">xxxxx 回车</span><br><span class="line">xxxxx 回车</span><br><span class="line">等待推送，会跑命令...</span><br><span class="line">接着去添加源愉快的玩耍吧</span><br></pre></td></tr></table></figure>
+                </section>
+
+                
+                
+    <div id="al_gitalk_cnt" />
+    <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: "919cd316da6bdc2c2e6a",
+            clientSecret: "ae2c200effb3d1e09777cdba146557d4c2eb8bea",
+            repo: "cyr580.github.io",
+            owner: "cyr580",
+            admin: "cyr580",
+            id: "越狱手机上直接搭建cydia-repo源（github）",
+        });
+        gitalk.render("al_gitalk_cnt")
+    </script>
+
+
+                
+
+            </article>
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/2021/04/01/2021-04-01-daily2/">
+                    
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-left"></use>
+                        </svg>
+                        <span class="al_text_ellipsis al_post_nav_desc">iOS 越狱机重置ssh密码</span>
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2021/03/31/2021-03-31-daily/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">ios14未越狱运行hexo-git-nodejs-npm</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
+    </div>
+
+
+        <div class="al_index_footer dis_flex_center">
+    <div class="al_index_footer_item al_index_footer_title">
+        CYRCOM
+    </div>
+
+    
+    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Created By 
+        <a target="_blank" rel="noopener" href="https://github.com/iGuan7u/Acetolog">AcetoLog</a>
+         · Power By 
+        <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
+    </div>
+
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
+    </div>
+</div>
+
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    <script src="//www.googletagmanager.com/gtag/js?id=51420056"></script>
+    <script>window.dataLayer=window.dataLayeror[];function gtag(){dataLayer.push(arguments);};gtag('js', new Date());gtag('config', '${theme.google_analytice.tracking_id}');</script>
+
+        
+        
+
+    </body>
+</html>
