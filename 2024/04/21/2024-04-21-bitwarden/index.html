@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+    
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    
+    <link rel='stylesheet' href="/./css/dracula.css">
+
+        <title>Bitwarden密码管理器（使用群晖Docker）</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">iOSByte</a>
+            </div>
+        </div>
+
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="al_sidebar">
+
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>iOSByte</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                <h4>CYRCOM</h4>
+                <img class="al_sidebar_avatar" src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+                <p>Discover the fun side of iOS with iOSByte. Your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join the byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</p>
+            </div>
+
+            
+                <div class="al_sidebar_contact_info">
+                    <h4>GET IN TOUCH</h4>
+                    <p>A long way</p>
+
+                    <div class="dis_flex al_sidebar_social_widget">
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.github.com/cyr580">
+                                <svg class="al_social_icon" id="github">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_github"></use>
+                                </svg>
+                            </div>
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.twitter.com/CNCYRCOM/">
+                                <svg class="al_social_icon" id="twitter">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_twitter"></use>
+                                </svg>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        Bitwarden密码管理器（使用群晖Docker）
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            Sun April 21, 2024 03:36 PM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                492 words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                1 minutes read
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vaultwarden%E5%8A%9F%E8%83%BD%E5%AE%8C%E5%96%84%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8"><span class="toc-text">Vaultwarden功能完善与数据安全</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5%E5%8A%9F%E8%83%BD"><span class="toc-text">数据实时同步功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E7%94%A8%E7%A7%BB%E5%8A%A8%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5"><span class="toc-text">启用移动客户端推送通知</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E7%99%BB%E5%BD%95"><span class="toc-text">浏览器插件使用移动设备登录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8"><span class="toc-text">关于数据安全</span></a></li></ol></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <h3 id="Vaultwarden功能完善与数据安全"><a href="#Vaultwarden功能完善与数据安全" class="headerlink" title="Vaultwarden功能完善与数据安全"></a>Vaultwarden功能完善与数据安全</h3><p>Vaultwarden是一款开源的密码管理器，使用Rust编写，是非官方Bitwarden服务器实现。它提供了强大的密码管理功能，并支持多种客户端和浏览器插件。</p>
+<h4 id="数据实时同步功能"><a href="#数据实时同步功能" class="headerlink" title="数据实时同步功能"></a>数据实时同步功能</h4><p>作为多客户端密码管理软件，实现密码数据在多客户端上实时更新至关重要。启用WebSocket通知是一个解决方案，它用于将相关事件通知给浏览器、Bitwarden的桌面和浏览器扩展客户端。</p>
+<p>在Vaultwarden中，默认情况下WebSocket已经集成到80端口中，对于反向代理用户，需要正确配置以传递WebSocket Upgrade和Connection标头。</p>
+<h4 id="启用移动客户端推送通知"><a href="#启用移动客户端推送通知" class="headerlink" title="启用移动客户端推送通知"></a>启用移动客户端推送通知</h4><p>从Vaultwarden 1.29.0版本开始，可以启用移动客户端的推送通知，无需手动同步即可实现个人密码库的自动同步。</p>
+<ul>
+<li>访问<a target="_blank" rel="noopener" href="https://bitwarden.com/host/">Bitwarden官网</a>获取INSTALLATION ID和KEY。</li>
+<li>在docker-compose.yaml中添加相应的环境变量。</li>
+<li>重启容器后，即可启用推送通知。</li>
+</ul>
+<h4 id="浏览器插件使用移动设备登录"><a href="#浏览器插件使用移动设备登录" class="headerlink" title="浏览器插件使用移动设备登录"></a>浏览器插件使用移动设备登录</h4><p>通过设置，可以实现使用移动设备登录浏览器插件，而无需每次输入长密码。</p>
+<ol>
+<li>在手机客户端设置中打开“使用此设备批准来自其他设备的登录请求”选项。</li>
+<li>在浏览器插件设置中，将密码库超时动作设置为注销。</li>
+<li>重新登录时，选择使用设备登录，确认手机客户端上的登录请求即可。</li>
+</ol>
+<h4 id="关于数据安全"><a href="#关于数据安全" class="headerlink" title="关于数据安全"></a>关于数据安全</h4><ul>
+<li>设置SIGNUPS_ALLOWED=false和INVITATIONS_ALLOWED=false，禁止新用户注册和邀请。</li>
+<li>禁用WEB_VAULT_ENABLED，减小暴露面，但不影响客户端使用。</li>
+<li>接入cloudflare，并自定义规则，如禁止国外IP访问。</li>
+<li>定期备份数据，并进行异地备份。</li>
+<li>避免在相同地方备份数据，养成云端备份和密码保存在Vaultwarden的习惯。</li>
+</ul>
+
+                </section>
+
+                
+                
+    <div id="al_gitalk_cnt" />
+    <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: "919cd316da6bdc2c2e6a",
+            clientSecret: "ae2c200effb3d1e09777cdba146557d4c2eb8bea",
+            repo: "cyr580.github.io",
+            owner: "cyr580",
+            admin: "cyr580",
+            id: "Bitwarden密码管理器（使用群晖Docker）",
+        });
+        gitalk.render("al_gitalk_cnt")
+    </script>
+
+
+                
+
+            </article>
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/2024/06/30/2024-04-21-CloudflareGmailResend/">
+                    
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-left"></use>
+                        </svg>
+                        <span class="al_text_ellipsis al_post_nav_desc">Cloudflare + Gmail + Resend 十分钟轻松拥有免费的企业邮箱</span>
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2024/04/08/2024-04-08-xiaogpt/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">将小爱音箱接入ChatGPT（使用群晖Docker）</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
+    </div>
+
+
+        <div class="al_index_footer dis_flex_center">
+    <div class="al_index_footer_item al_index_footer_title">
+        CYRCOM
+    </div>
+
+    
+    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Created By 
+        <a target="_blank" rel="noopener" href="https://x.com/cncyrcom">X.C</a>
+         · © 2024 Online</a>
+    </div>
+
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
+    </div>
+</div>
+
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    <script src="//www.googletagmanager.com/gtag/js?id=51420056"></script>
+    <script>window.dataLayer=window.dataLayeror[];function gtag(){dataLayer.push(arguments);};gtag('js', new Date());gtag('config', '${theme.google_analytice.tracking_id}');</script>
+
+        
+        
+
+    </body>
+</html>

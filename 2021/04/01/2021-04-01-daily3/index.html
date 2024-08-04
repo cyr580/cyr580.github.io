@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+    
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    
+    <link rel='stylesheet' href="/./css/dracula.css">
+
+        <title>关于ios制作修改deb插件</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">iOSByte</a>
+            </div>
+        </div>
+
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="al_sidebar">
+
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>iOSByte</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                <h4>CYRCOM</h4>
+                <img class="al_sidebar_avatar" src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+                <p>Discover the fun side of iOS with iOSByte. Your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join the byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</p>
+            </div>
+
+            
+                <div class="al_sidebar_contact_info">
+                    <h4>GET IN TOUCH</h4>
+                    <p>A long way</p>
+
+                    <div class="dis_flex al_sidebar_social_widget">
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.github.com/cyr580">
+                                <svg class="al_social_icon" id="github">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_github"></use>
+                                </svg>
+                            </div>
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.twitter.com/CNCYRCOM/">
+                                <svg class="al_social_icon" id="twitter">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_twitter"></use>
+                                </svg>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        关于ios制作修改deb插件
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            Thu April 1, 2021 09:52 PM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                334 words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                1 minutes read
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BE%88%E6%97%A9%E6%83%B3%E5%86%99%E8%BF%99%E7%AF%87%E6%95%99%E7%A8%8B%EF%BC%8C%E4%BD%86%E6%98%AF%E6%87%92%E2%80%A6"><span class="toc-text">很早想写这篇教程，但是懒…</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9E%84"><span class="toc-text">结构</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A6%96%E5%85%88%E4%BF%AE%E6%94%B9control%E6%96%87%E4%BB%B6"><span class="toc-text">首先修改control文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%8C%85-%E6%89%93%E5%8C%85deb%F0%9F%93%A6"><span class="toc-text">解包&#x2F;打包deb📦</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B6%8A%E7%8B%B1%E5%90%8Efilza%E7%9B%B4%E6%8E%A5%E8%A7%A3%E5%8C%85%E6%89%93%E5%8C%85"><span class="toc-text">越狱后filza直接解包打包</span></a></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <p><img src="https://i.loli.net/2021/04/01/KC83IhRA4bi7cWV.jpg"></p>
+<p>简单易懂的语言来理解deb内文件</p>
+<span id="more"></span>
+<h1 id="很早想写这篇教程，但是懒…"><a href="#很早想写这篇教程，但是懒…" class="headerlink" title="很早想写这篇教程，但是懒…"></a>很早想写这篇教程，但是懒…</h1><h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h4><ul>
+<li><p>DEBIAN</p>
+<ul>
+<li>control  </li>
+</ul>
+</li>
+<li><p>/var （可以是任何文件目录，根据不同插件来决定）</p>
+<ul>
+<li>/var/mobile/Library/FrontPage/xx/xx</li>
+</ul>
+</li>
+</ul>
+<h1 id="首先修改control文件"><a href="#首先修改control文件" class="headerlink" title="首先修改control文件"></a>首先修改control文件</h1><p><img src="https://i.loli.net/2021/04/01/rW5QLyfp24snwKe.jpg">  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Package: 插件包的名称，通常是com.xx.xx</span><br><span class="line">Version: 版本</span><br><span class="line">Section: 类别</span><br><span class="line">Depends: 依赖</span><br><span class="line">Architecture: iphoneos-arm</span><br><span class="line">Name: 插件名</span><br><span class="line">Author: cyr580</span><br><span class="line">Maintainer: 维护者 &lt;cyr580@qq.com&gt;</span><br><span class="line">Description: 描述</span><br><span class="line">Icon: 图标</span><br><span class="line">Depiction: 网页描述</span><br></pre></td></tr></table></figure>
+<h1 id="解包-打包deb📦"><a href="#解包-打包deb📦" class="headerlink" title="解包/打包deb📦"></a>解包/打包deb📦</h1><ol>
+<li>定位到abc.deb插件所在文件夹，输入cd /var/mobile/aaa 回车（aaa代表文件夹路径）</li>
+<li>输入解包命令 dpkg-deb -x ./abc.deb ./tmp 回车</li>
+<li>输入命令dpkg-deb -e ./abc.deb ./tmp/DEBIAN回车</li>
+<li>修改完成退出。执行赋予权限命令以及打包命令，输入chmod –R 755 ./ tmp/DEBIAN（赋予tmp/DEBIAN文件夹0755命令，否则打包不成功），或者chmod 755 路径</li>
+<li>输入dpkg-deb -b ./tmp false8.deb</li>
+</ol>
+<h1 id="越狱后filza直接解包打包"><a href="#越狱后filza直接解包打包" class="headerlink" title="越狱后filza直接解包打包"></a><font color=#FF0000>越狱后filza直接解包打包</font></h1><ol>
+<li>打开<code>filza</code></li>
+<li>找到需要修改的<code>deb</code>，比如<code>a.deb</code></li>
+<li>点击打开a.deb（不要安装，点击解压）</li>
+<li>按照上述教程修改即可</li>
+<li><font color=#FF0000>重点来了：修改完成之后，全部选中DEBIAN文件夹和var文件夹</font>，分享，打包DEB（filza自带打包功能）</li>
+<li>接上前一篇文章教程，把deb放到debs目录，<code>.sh</code>生成packages和packages.bz2文件，push即可</li>
+</ol>
+
+                </section>
+
+                
+                
+    <div id="al_gitalk_cnt" />
+    <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: "919cd316da6bdc2c2e6a",
+            clientSecret: "ae2c200effb3d1e09777cdba146557d4c2eb8bea",
+            repo: "cyr580.github.io",
+            owner: "cyr580",
+            admin: "cyr580",
+            id: "关于ios制作修改deb插件",
+        });
+        gitalk.render("al_gitalk_cnt")
+    </script>
+
+
+                
+
+            </article>
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/2021/04/02/2021-04-02-daily-2/">
+                    
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-left"></use>
+                        </svg>
+                        <span class="al_text_ellipsis al_post_nav_desc">repo支持sileo</span>
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2021/04/01/2021-04-01-daily2/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">iOS 越狱机重置ssh密码</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
+    </div>
+
+
+        <div class="al_index_footer dis_flex_center">
+    <div class="al_index_footer_item al_index_footer_title">
+        CYRCOM
+    </div>
+
+    
+    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Created By 
+        <a target="_blank" rel="noopener" href="https://x.com/cncyrcom">X.C</a>
+         · © 2024 Online</a>
+    </div>
+
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
+    </div>
+</div>
+
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    <script src="//www.googletagmanager.com/gtag/js?id=51420056"></script>
+    <script>window.dataLayer=window.dataLayeror[];function gtag(){dataLayer.push(arguments);};gtag('js', new Date());gtag('config', '${theme.google_analytice.tracking_id}');</script>
+
+        
+        
+
+    </body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+    
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    
+    <link rel='stylesheet' href="/./css/dracula.css">
+
+        <title>转载：小雅全家桶来啦，小白用户群晖部署 Emby 简明教程</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">iOSByte</a>
+            </div>
+        </div>
+
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="al_sidebar">
+
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>iOSByte</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                <h4>CYRCOM</h4>
+                <img class="al_sidebar_avatar" src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+                <p>Discover the fun side of iOS with iOSByte. Your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join the byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</p>
+            </div>
+
+            
+                <div class="al_sidebar_contact_info">
+                    <h4>GET IN TOUCH</h4>
+                    <p>A long way</p>
+
+                    <div class="dis_flex al_sidebar_social_widget">
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.github.com/cyr580">
+                                <svg class="al_social_icon" id="github">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_github"></use>
+                                </svg>
+                            </div>
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.twitter.com/CNCYRCOM/">
+                                <svg class="al_social_icon" id="twitter">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_twitter"></use>
+                                </svg>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        转载：小雅全家桶来啦，小白用户群晖部署 Emby 简明教程
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            Thu February 15, 2024 04:00 PM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                1.2k words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                4 minutes read
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BD%AC%E8%BD%BD%EF%BC%9A%E5%B0%8F%E9%9B%85%E5%85%A8%E5%AE%B6%E6%A1%B6%E6%9D%A5%E5%95%A6%EF%BC%8C%E5%B0%8F%E7%99%BD%E7%94%A8%E6%88%B7%E7%BE%A4%E6%99%96%E9%83%A8%E7%BD%B2-Emby-%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B"><span class="toc-text">转载：小雅全家桶来啦，小白用户群晖部署 Emby 简明教程</span></a></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <h1 id="转载：小雅全家桶来啦，小白用户群晖部署-Emby-简明教程"><a href="#转载：小雅全家桶来啦，小白用户群晖部署-Emby-简明教程" class="headerlink" title="转载：小雅全家桶来啦，小白用户群晖部署 Emby 简明教程"></a>转载：小雅全家桶来啦，小白用户群晖部署 Emby 简明教程</h1><p><strong>前言：</strong></p>
+<p>为什么要出这个教程？</p>
+<p>在我写上一篇教程的时候，小雅已经更新了全家桶。经网友提醒，本次及时补上教程。鉴于网上有许多大神已经出了教程，本教程注重实操，对于像我这样的小白用户来说，简单无脑操作、能快速部署才是关键。</p>
+<p><strong>安装全家桶有什么作用？</strong></p>
+<p>因为小雅网盘挂载到本地但是 Emby 无法搜刮，本次全家桶将网盘上百T的影视资源进行整理搜刮部署到本地，实现 Emby 海报墙，优雅地看电影。</p>
+<p><strong>使用环境：</strong></p>
+<p>PVE、Unraid、ESXi、物理群晖、N1盒子都可以部署，安装需要160G以上硬盘空间也可以使用外接硬盘（U盘），本人使用PVE安装的群晖7.2。</p>
+<p><em>本教程适用于群晖下部署</em></p>
+<p><strong>正篇：</strong></p>
+<p>为了确保安全顺利，请大家提前将群晖已安装的 Emby、小雅网盘容器先删除并清空群晖 Docker文件夹，跟着教程一步一步部署。不想删除原有 Emby 可以将8096端口改为8097。</p>
+<p><strong>一、本地部署小雅网盘</strong></p>
+<p>可以参考该教程：<a target="_blank" rel="noopener" href="https://post.smzdm.com/p/a0qnlpqw/">https://post.smzdm.com/p/a0qnlpqw/</a></p>
+<ol>
+<li>在群晖下新建文件夹xiaoya（添加everyone读写权限）</li>
+</ol>
+<p><code>/volume1/docker/xiaoya</code></p>
+<ol start="2">
+<li><p>获取阿里云<code>mytoken.txt</code>、<code>myopentoken.txt</code>、<code>temp_transfer_folder_id.txt</code></p>
+<ul>
+<li><p><code>mytoken.txt</code>（推荐使用手机端）</p>
+<p>  安卓：<a target="_blank" rel="noopener" href="https://luoflower.com/128/">https://luoflower.com/128/</a></p>
+<p>  苹果：<a target="_blank" rel="noopener" href="https://aliyuntoken.vercel.app/">https://aliyuntoken.vercel.app/</a></p>
+<p>  电脑：<a target="_blank" rel="noopener" href="https://alist.nn.ci/zh/guide/drivers/aliyundrive.html">https://alist.nn.ci/zh/guide/drivers/aliyundrive.html</a></p>
+</li>
+<li><p><code>myopentoken.txt</code></p>
+<p>  <a target="_blank" rel="noopener" href="https://alist.nn.ci/tool/aliyundrive/request">https://alist.nn.ci/tool/aliyundrive/request</a></p>
+</li>
+<li><p><code>temp_transfer_folder_id.txt</code> </p>
+<p>  登陆阿里云盘<a target="_blank" rel="noopener" href="https://www.aliyundrive.com/drive">https://www.aliyundrive.com/drive</a>，在资源盘下新建文件夹（xiaoya），点击进入后复制阿里云盘转存目录 folder id 填入 <code>temp_transfer_folder_id.txt</code></p>
+</li>
+</ul>
+</li>
+<li><p>将以上获取的密钥分别填入新建文本 <code>mytoken.txt</code>、<code>myopentoken.txt</code>、<code>temp_transfer_folder_id.txt</code>，上传至群晖 <code>docker/xiaoya</code> 文件夹中。</p>
+</li>
+<li><p>使用ssh登陆群晖 <code>sudo -i</code> 登陆root账号使用以下命令</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --restart=always --name=<span class="string">&quot;xiaoya&quot;</span> -p 5678:80 -p 2345:2345 -p 2346:2346 -v /volume1/docker/xiaoya:/data xiaoyaliu/alist:latest</span><br></pre></td></tr></table></figure></li>
+<li><p>在群晖 Docker下启动 <code>xiaoya</code> 容器，浏览器打开 <code>http://群晖ip地址:5678/</code>，需等5分钟左右刷新浏览器验证是否挂载成功。</p>
+</li>
+<li><p>实时清理自己阿里盘缓存命令安装 <code>xiaoyaleep</code></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -c <span class="string">&quot;<span class="subst">$(curl -s https://xiaoyahelper.zngle.cf/aliyun_clear.sh | tail -n +2)</span>&quot;</span> -s 3 -tg</span><br></pre></td></tr></table></figure>
+
+<p> 每24h自动清除缓存在自己阿里云下小雅缓存。上面这个命令后缀 <code>-tg</code> 可以删除，这个是电报机器人接收通知。</p>
+</li>
+</ol>
+<p><strong>二、挂载 Emby 全家桶</strong></p>
+<p><strong>准备工作：</strong></p>
+<ol>
+<li><p>在 <code>/volume1/docker/xiaoya</code> 下新建两个文本文档</p>
+<ul>
+<li><code>docker_address.txt</code>，填写 <code>http://群晖ip地址:5678</code>（注意内容格式，没有/，本人就是因为格式问题导致部署失败浪费了大量时间）</li>
+<li><code>emby_server.txt</code>，填写 <code>http://群晖ip地址:8096</code></li>
+</ul>
+</li>
+<li><p>在 <code>/volume1/docker/xiaoya</code> 下新建文件夹 <code>media</code>（添加everyone读写权限）</p>
+</li>
+<li><p>登陆本地小雅网盘，<code>http://群晖ip地址:5678</code>，任意打开一个mp4视频，验证是否正常播放。出现“Failed to refresh token: Too Many Requests”说明刷新令牌次数过多需要关闭 <code>xiaoya</code> 容器等待1小时。</p>
+</li>
+</ol>
+<p><strong>部署命令：</strong></p>
+<p>使用ssh登陆群晖 <code>sudo -i</code> 登陆root账号使用以下命令</p>
+<p><em>二选一</em></p>
+<ul>
+<li><p>使用 Emby 官方容器命令（无法调用核显硬解）</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -c <span class="string">&quot;<span class="subst">$(curl http://docker.xiaoya.pro/emby_plus.sh)</span>&quot;</span> -s /volume1/docker/xiaoya/media   /volume1/docker/xiaoya</span><br></pre></td></tr></table></figure></li>
+<li><p>（推荐）使用第三方 Emby 容器命令，（可以调用核显硬解）</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -c <span class="string">&quot;<span class="subst">$(curl http://docker.xiaoya.pro/emby_plus.sh | sed &#x27;s#emby/embyserver#amilys/embyserver#&#x27;)</span>&quot;</span> -s /volume1/docker/xiaoya/media   /volume1/docker/xiaoya</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>调用核显需要高级权限，在群晖 Container Manager 找到 Emby 容器，停用后打开“使用高级权限”选项。</p>
+<p>下载缓存时间较长，需要1~2小时甚至更长，根据网络和NAS性能，完成后会有提示请耐心等待，完成后重启 <code>xiaoya</code> 容器，使用官方 Emby 推荐使用2345端口号登陆 Emby“<code>http://群晖:2345</code>，用客户端进行硬解，使用第三方 Emby 2345、8096端口都可以使用。</p>
+<p><strong>结尾：</strong></p>
+<p>大家在部署过程中遇到问题，本人小白能力有限，可以去小雅网站查找或者官群里咨询，本教程注重的是实操，小雅美女不辞辛苦为大家谋福利每天修改BUG搜刮海报付出了大量心血，请大家尊重小雅劳动果实，打赏作者为知识付费。小雅还在不断进化请大家保持关注，小雅官网地址：<a href="alist.xiaoya.pro">alist.xiaoya.pro</a>。</p>
+<p>作者声明本文无利益相关，欢迎值友理性交流，和谐讨论～<br><a href="/media%20%20%20/volume1/docker/xiaoya%20%20%20%20%20%60%60%60%20%20%E8%B0%83%E7%94%A8%E6%A0%B8%E6%98%BE%E9%9C%80%E8%A6%81%E9%AB%98%E7%BA%A7%E6%9D%83%E9%99%90%EF%BC%8C%E5%9C%A8%E7%BE%A4%E6%99%96%20Container%20Manager%20%E6%89%BE%E5%88%B0%20Emby%20%E5%AE%B9%E5%99%A8%EF%BC%8C%E5%81%9C%E7%94%A8%E5%90%8E%E6%89%93%E5%BC%80%E2%80%9C%E4%BD%BF%E7%94%A8%E9%AB%98%E7%BA%A7%E6%9D%83%E9%99%90%E2%80%9D%E9%80%89%E9%A1%B9%E3%80%82%20%20%E4%B8%8B%E8%BD%BD%E7%BC%93%E5%AD%98%E6%97%B6%E9%97%B4%E8%BE%83%E9%95%BF%EF%BC%8C%E9%9C%80%E8%A6%811~2%E5%B0%8F%E6%97%B6%E7%94%9A%E8%87%B3%E6%9B%B4%E9%95%BF%EF%BC%8C%E6%A0%B9%E6%8D%AE%E7%BD%91%E7%BB%9C%E5%92%8CNAS%E6%80%A7%E8%83%BD%EF%BC%8C%E5%AE%8C%E6%88%90%E5%90%8E%E4%BC%9A%E6%9C%89%E6%8F%90%E7%A4%BA%E8%AF%B7%E8%80%90%E5%BF%83%E7%AD%89%E5%BE%85%EF%BC%8C%E5%AE%8C%E6%88%90%E5%90%8E%E9%87%8D%E5%90%AF%20%60xiaoya%60%20%E5%AE%B9%E5%99%A8%EF%BC%8C%E4%BD%BF%E7%94%A8%E5%AE%98%E6%96%B9%20Emby%20%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A82345%E7%AB%AF%E5%8F%A3%E5%8F%B7%E7%99%BB%E9%99%86%20Emby%E2%80%9C%60http://%E7%BE%A4%E6%99%96:2345%60%EF%BC%8C%E7%94%A8%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9B%E8%A1%8C%E7%A1%AC%E8%A7%A3%EF%BC%8C%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%20Emby%202345%E3%80%818096%E7%AB%AF%E5%8F%A3%E9%83%BD%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E3%80%82%20%20**%E7%BB%93%E5%B0%BE%EF%BC%9A**%20%20%E5%A4%A7%E5%AE%B6%E5%9C%A8%E9%83%A8%E7%BD%B2%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%EF%BC%8C%E6%9C%AC%E4%BA%BA%E5%B0%8F%E7%99%BD%E8%83%BD%E5%8A%9B%E6%9C%89%E9%99%90%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%8E%BB%E5%B0%8F%E9%9B%85%E7%BD%91%E7%AB%99%E6%9F%A5%E6%89%BE%E6%88%96%E8%80%85%E5%AE%98%E7%BE%A4%E9%87%8C%E5%92%A8%E8%AF%A2%EF%BC%8C%E6%9C%AC%E6%95%99%E7%A8%8B%E6%B3%A8%E9%87%8D%E7%9A%84%E6%98%AF%E5%AE%9E%E6%93%8D%EF%BC%8C%E5%B0%8F%E9%9B%85%E7%BE%8E%E5%A5%B3%E4%B8%8D%E8%BE%9E%E8%BE%9B%E8%8B%A6%E4%B8%BA%E5%A4%A7%E5%AE%B6%E8%B0%8B%E7%A6%8F%E5%88%A9%E6%AF%8F%E5%A4%A9%E4%BF%AE%E6%94%B9BUG%E6%90%9C%E5%88%AE%E6%B5%B7%E6%8A%A5%E4%BB%98%E5%87%BA%E4%BA%86%E5%A4%A7%E9%87%8F%E5%BF%83%E8%A1%80%EF%BC%8C%E8%AF%B7%E5%A4%A7%E5%AE%B6%E5%B0%8A%E9%87%8D%E5%B0%8F%E9%9B%85%E5%8A%B3%E5%8A%A8%E6%9E%9C%E5%AE%9E%EF%BC%8C%E6%89%93%E8%B5%8F%E4%BD%9C%E8%80%85%E4%B8%BA%E7%9F%A5%E8%AF%86%E4%BB%98%E8%B4%B9%E3%80%82%E5%B0%8F%E9%9B%85%E8%BF%98%E5%9C%A8%E4%B8%8D%E6%96%AD%E8%BF%9B%E5%8C%96%E8%AF%B7%E5%A4%A7%E5%AE%B6%E4%BF%9D%E6%8C%81%E5%85%B3%E6%B3%A8%EF%BC%8C%E5%B0%8F%E9%9B%85%E5%AE%98%E7%BD%91%E5%9C%B0%E5%9D%80%EF%BC%9A%5Balist.xiaoya.pro%5D(alist.xiaoya.pro)%E3%80%82%20%20%E4%BD%9C%E8%80%85%E5%A3%B0%E6%98%8E%E6%9C%AC%E6%96%87%E6%97%A0%E5%88%A9%E7%9B%8A%E7%9B%B8%E5%85%B3%EF%BC%8C%E6%AC%A2%E8%BF%8E%E5%80%BC%E5%8F%8B%E7%90%86%E6%80%A7%E4%BA%A4%E6%B5%81%EF%BC%8C%E5%92%8C%E8%B0%90%E8%AE%A8%E8%AE%BA%EF%BD%9E">原文地址-什么值得买</a></p>
+
+                </section>
+
+                
+                
+    <div id="al_gitalk_cnt" />
+    <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: "919cd316da6bdc2c2e6a",
+            clientSecret: "ae2c200effb3d1e09777cdba146557d4c2eb8bea",
+            repo: "cyr580.github.io",
+            owner: "cyr580",
+            admin: "cyr580",
+            id: "转载：小雅全家桶来啦，小白用户群晖部署 Emby 简明教程",
+        });
+        gitalk.render("al_gitalk_cnt")
+    </script>
+
+
+                
+
+            </article>
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/2024/03/11/2024-03-11-surge/">
+                    
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-left"></use>
+                        </svg>
+                        <span class="al_text_ellipsis al_post_nav_desc">配置 Mac Mini 和 Surge 以实现强大软路由</span>
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2024/01/27/2024-01-27-1password/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">一生只记一个密码： 1Password 简明教程</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
+    </div>
+
+
+        <div class="al_index_footer dis_flex_center">
+    <div class="al_index_footer_item al_index_footer_title">
+        CYRCOM
+    </div>
+
+    
+    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Created By 
+        <a target="_blank" rel="noopener" href="https://x.com/cncyrcom">X.C</a>
+         · © 2024 Online</a>
+    </div>
+
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
+    </div>
+</div>
+
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    <script src="//www.googletagmanager.com/gtag/js?id=51420056"></script>
+    <script>window.dataLayer=window.dataLayeror[];function gtag(){dataLayer.push(arguments);};gtag('js', new Date());gtag('config', '${theme.google_analytice.tracking_id}');</script>
+
+        
+        
+
+    </body>
+</html>
