@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+    
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    
+    <link rel='stylesheet' href="/./css/dracula.css">
+
+        <title>SSL证书</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">iOSByte</a>
+            </div>
+        </div>
+
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="al_sidebar">
+
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>iOSByte</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                <h4>CYRCOM</h4>
+                <img class="al_sidebar_avatar" src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+                <p>Discover the fun side of iOS with iOSByte. Your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join the byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</p>
+            </div>
+
+            
+                <div class="al_sidebar_contact_info">
+                    <h4>GET IN TOUCH</h4>
+                    <p>A long way</p>
+
+                    <div class="dis_flex al_sidebar_social_widget">
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.github.com/cyr580">
+                                <svg class="al_social_icon" id="github">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_github"></use>
+                                </svg>
+                            </div>
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.twitter.com/CNCYRCOM/">
+                                <svg class="al_social_icon" id="twitter">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_twitter"></use>
+                                </svg>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        SSL证书
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            Mon October 7, 2024 01:14 PM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                385 words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                1 minutes read
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE-Certbot-%E5%8F%8A-Nginx-%E7%9A%84%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B"><span class="toc-text">安装和配置 Certbot 及 Nginx 的完整教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85-Certbot"><span class="toc-text">1. 安装 Certbot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AE-DNS"><span class="toc-text">2. 配置 DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%A1%AE%E4%BF%9D-SSL-TLS-%E5%8A%A0%E5%AF%86%E6%A8%A1%E5%BC%8F"><span class="toc-text">3. 确保 SSL&#x2F;TLS 加密模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%94%B3%E8%AF%B7%E8%AF%81%E4%B9%A6"><span class="toc-text">4. 申请证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AE%89%E8%A3%85-Nginx"><span class="toc-text">5. 安装 Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E9%85%8D%E7%BD%AE-Nginx"><span class="toc-text">6. 配置 Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E8%87%AA%E5%8A%A8%E7%BB%AD%E7%AD%BE"><span class="toc-text">7. 自动续签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Cloudflare-%E5%8E%9F%E5%A7%8B-HTTPS-%E8%A7%84%E5%88%99"><span class="toc-text">8. Cloudflare 原始 HTTPS 规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF"><span class="toc-text">9. 安装宝塔面板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E4%BD%BF%E7%94%A8-Docker-%E5%92%8C-Docker-Compose"><span class="toc-text">10. 使用 Docker 和 Docker Compose</span></a></li></ol></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <h1 id="安装和配置-Certbot-及-Nginx-的完整教程"><a href="#安装和配置-Certbot-及-Nginx-的完整教程" class="headerlink" title="安装和配置 Certbot 及 Nginx 的完整教程"></a>安装和配置 Certbot 及 Nginx 的完整教程</h1><h2 id="1-安装-Certbot"><a href="#1-安装-Certbot" class="headerlink" title="1. 安装 Certbot"></a>1. 安装 Certbot</h2><p>apt update<br>apt install certbot</p>
+<h2 id="2-配置-DNS"><a href="#2-配置-DNS" class="headerlink" title="2. 配置 DNS"></a>2. 配置 DNS</h2><p>登录 Cloudflare，选择您的域名，确保 DNS 记录中开启小黄云（代理模式）。</p>
+<h2 id="3-确保-SSL-TLS-加密模式"><a href="#3-确保-SSL-TLS-加密模式" class="headerlink" title="3. 确保 SSL/TLS 加密模式"></a>3. 确保 SSL/TLS 加密模式</h2><p>将 SSL/TLS 加密模式设置为 灵活。</p>
+<h2 id="4-申请证书"><a href="#4-申请证书" class="headerlink" title="4. 申请证书"></a>4. 申请证书</h2><p>运行以下命令：</p>
+<p>certbot certonly —manual —preferred-challenges dns -d *.cyr580.top</p>
+<p>按照提示添加 TXT 记录并验证。</p>
+<h2 id="5-安装-Nginx"><a href="#5-安装-Nginx" class="headerlink" title="5. 安装 Nginx"></a>5. 安装 Nginx</h2><p>apt install nginx</p>
+<h2 id="6-配置-Nginx"><a href="#6-配置-Nginx" class="headerlink" title="6. 配置 Nginx"></a>6. 配置 Nginx</h2><p>编辑 Nginx 配置文件，设置 SSL 证书路径：</p>
+<figure class="highlight plaintext"><figcaption><span>&#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    listen 443 ssl;</span><br><span class="line">    server_name cyr580.top *.cyr580.top;</span><br><span class="line"></span><br><span class="line">    ssl_certificate /etc/letsencrypt/live/cyr580.top/fullchain.pem;</span><br><span class="line">    ssl_certificate_key /etc/letsencrypt/live/cyr580.top/privkey.pem;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://localhost:3002;</span><br><span class="line">        # 其他代理设置</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重启 Nginx：</p>
+<p>systemctl restart nginx</p>
+<h2 id="7-自动续签"><a href="#7-自动续签" class="headerlink" title="7. 自动续签"></a>7. 自动续签</h2><p>设置自动续签，编辑 crontab：</p>
+<p>crontab -e</p>
+<p>添加以下行：</p>
+<p>0 0 * * * certbot renew —quiet</p>
+<h2 id="8-Cloudflare-原始-HTTPS-规则"><a href="#8-Cloudflare-原始-HTTPS-规则" class="headerlink" title="8. Cloudflare 原始 HTTPS 规则"></a>8. Cloudflare 原始 HTTPS 规则</h2><ol>
+<li>配置 DNS：确保 DNS 中开启小黄云。</li>
+<li>SSL/TLS 模式：设置为灵活。</li>
+<li>创建规则：点击“规则”&gt;“Origin Rules”，创建规则，设置字段为主机名，通配符等于 *.cyr580.top，重定向到服务器的 3002 端口。</li>
+</ol>
+<h2 id="9-安装宝塔面板"><a href="#9-安装宝塔面板" class="headerlink" title="9. 安装宝塔面板"></a>9. 安装宝塔面板</h2><ol>
+<li>下载并运行安装脚本：</li>
+</ol>
+<p>wget -O install.sh <a target="_blank" rel="noopener" href="http://install.sh/">http://install.sh</a><br>bash install.sh</p>
+<p>按照提示完成安装。</p>
+<h2 id="10-使用-Docker-和-Docker-Compose"><a href="#10-使用-Docker-和-Docker-Compose" class="headerlink" title="10. 使用 Docker 和 Docker Compose"></a>10. 使用 Docker 和 Docker Compose</h2><ol>
+<li>安装 Docker：</li>
+</ol>
+<p>apt install docker.io<br>systemctl enable —now docker</p>
+<ol start="2">
+<li>安装 Docker Compose：</li>
+</ol>
+<p>apt install docker-compose</p>
+<p>总结</p>
+<p>以上步骤完成后，您的域名将能够通过 HTTPS 访问，SSL 证书自动续签，并且在 Cloudflare 上配置了适当的原始 HTTPS 规则。如果您在任何步骤遇到问题，请随时询问！</p>
+
+                </section>
+
+                
+                
+    <div id="al_gitalk_cnt" />
+    <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: "919cd316da6bdc2c2e6a",
+            clientSecret: "ae2c200effb3d1e09777cdba146557d4c2eb8bea",
+            repo: "cyr580.github.io",
+            owner: "cyr580",
+            admin: "cyr580",
+            id: "SSL证书",
+        });
+        gitalk.render("al_gitalk_cnt")
+    </script>
+
+
+                
+
+            </article>
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/">
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2024/06/30/2024-04-21-CloudflareGmailResend/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">Cloudflare + Gmail + Resend 十分钟轻松拥有免费的企业邮箱</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
+    </div>
+
+
+        <div class="al_index_footer dis_flex_center">
+    <div class="al_index_footer_item al_index_footer_title">
+        CYRCOM
+    </div>
+
+    
+    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Created By 
+        <a target="_blank" rel="noopener" href="https://x.com/cncyrcom">X.C</a>
+         · © 2024 Online</a>
+    </div>
+
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
+    </div>
+</div>
+
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    <script src="//www.googletagmanager.com/gtag/js?id=51420056"></script>
+    <script>window.dataLayer=window.dataLayeror[];function gtag(){dataLayer.push(arguments);};gtag('js', new Date());gtag('config', '${theme.google_analytice.tracking_id}');</script>
+
+        
+        
+
+    </body>
+</html>
