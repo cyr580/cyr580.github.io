@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+    
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    
+    <link rel='stylesheet' href="/./css/dracula.css">
+
+        <title>Cloudflare + Gmail + Resend 十分钟轻松拥有免费的企业邮箱</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">iOSByte</a>
+            </div>
+        </div>
+
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="al_sidebar">
+
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>iOSByte</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                <h4>CYRCOM</h4>
+                <img class="al_sidebar_avatar" src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+                <p>Discover the fun side of iOS with iOSByte. Your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join the byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</p>
+            </div>
+
+            
+                <div class="al_sidebar_contact_info">
+                    <h4>GET IN TOUCH</h4>
+                    <p>A long way</p>
+
+                    <div class="dis_flex al_sidebar_social_widget">
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.github.com/cyr580">
+                                <svg class="al_social_icon" id="github">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_github"></use>
+                                </svg>
+                            </div>
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.twitter.com/CNCYRCOM/">
+                                <svg class="al_social_icon" id="twitter">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_twitter"></use>
+                                </svg>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        Cloudflare + Gmail + Resend 十分钟轻松拥有免费的企业邮箱
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            Sun June 30, 2024 05:52 PM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                538 words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                1 minutes read
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="toc-text">前提条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A41%EF%BC%9A%E8%AE%BE%E7%BD%AECloudflare%E9%82%AE%E4%BB%B6%E8%BD%AC%E5%8F%91%E8%87%B3Gmail"><span class="toc-text">步骤1：设置Cloudflare邮件转发至Gmail</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A42%EF%BC%9A%E5%9C%A8Resend%E8%8E%B7%E5%8F%96API-Key"><span class="toc-text">步骤2：在Resend获取API Key</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A43%EF%BC%9A%E9%85%8D%E7%BD%AEGmail%E5%88%A9%E7%94%A8Resend%E6%9C%8D%E5%8A%A1%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6"><span class="toc-text">步骤3：配置Gmail利用Resend服务发送邮件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%8C%E6%88%90%EF%BC%81"><span class="toc-text">完成！</span></a></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <p>创建一个企业邮箱对于提升你的品牌形象和管理邮件非常重要，尤其是对于独立开发者和初创公司来说。本文介绍了一个完全免费的方法来设置企业邮箱，利用Cloudflare、Gmail和Resend的结合使用。以下是详细步骤：</p>
+<h1 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h1><p>确保你已拥有一个域名，并且此域名的DNS管理权在Cloudflare上。</p>
+<h1 id="步骤1：设置Cloudflare邮件转发至Gmail"><a href="#步骤1：设置Cloudflare邮件转发至Gmail" class="headerlink" title="步骤1：设置Cloudflare邮件转发至Gmail"></a>步骤1：设置Cloudflare邮件转发至Gmail</h1><ol>
+<li>登录Cloudflare，找到「电子邮件路由」选项，进入。</li>
+<li>在目标规则标签中启用Catch-All功能，并点击编辑。</li>
+<li>设置转发规则，将所有邮件都转发到你的Gmail邮箱。<br> • 利用Gmail的”+“功能，例如<a href="mailto:&#x79;&#x6f;&#117;&#x72;&#110;&#x61;&#x6d;&#x65;&#x2b;&#97;&#x6e;&#121;&#116;&#x61;&#x67;&#64;&#103;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#109;">&#x79;&#x6f;&#117;&#x72;&#110;&#x61;&#x6d;&#x65;&#x2b;&#97;&#x6e;&#121;&#116;&#x61;&#x67;&#64;&#103;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#109;</a>，可以帮助你更好地管理邮件。</li>
+</ol>
+<h1 id="步骤2：在Resend获取API-Key"><a href="#步骤2：在Resend获取API-Key" class="headerlink" title="步骤2：在Resend获取API Key"></a>步骤2：在Resend获取API Key</h1><ol>
+<li>创建Resend账户并登陆，找到API Keys标签下申请新的API Key。</li>
+<li>记下或保存SMTP设置信息，稍后设置Gmail时会用到。</li>
+</ol>
+<h1 id="步骤3：配置Gmail利用Resend服务发送邮件"><a href="#步骤3：配置Gmail利用Resend服务发送邮件" class="headerlink" title="步骤3：配置Gmail利用Resend服务发送邮件"></a>步骤3：配置Gmail利用Resend服务发送邮件</h1><ol>
+<li>在Gmail设置中找到「账户和导入」或「账户」，点击「添加另一个邮件地址」。</li>
+<li>输入你在步骤1设置的企业邮箱名称和地址。</li>
+<li>输入步骤2中获得的Resend SMTP服务信息，使用获取的API Key作为密码。</li>
+<li>完成SMTP设置后，查收Gmail发出的确认邮件并确认。</li>
+</ol>
+<h1 id="完成！"><a href="#完成！" class="headerlink" title="完成！"></a>完成！</h1><p>现在，你就可以使用自己的企业邮箱来发送和接收邮件了，而且这整个流程是完全免费的。适用于独立开发者、小企业或任何预算有限但希望建立专业形象的人士。</p>
+<p>查看详细信息和示意图，请访问原始文章：Cloudflare + Gmail + Resend 完全免费企业邮箱设置教程。</p>
+<p>这个方法不仅经济实惠，同时提供了强大的灵活性和高度的定制性，让你的通信更加专业，同时也为你的业务或个人品牌增添亮点。</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://cleanclip.cc/zh/developer/cloudflare-worker-gmail-resend-enterprise-email">https://cleanclip.cc/zh/developer/cloudflare-worker-gmail-resend-enterprise-email</a></p>
+
+                </section>
+
+                
+                
+    <div id="al_gitalk_cnt" />
+    <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: "919cd316da6bdc2c2e6a",
+            clientSecret: "ae2c200effb3d1e09777cdba146557d4c2eb8bea",
+            repo: "cyr580.github.io",
+            owner: "cyr580",
+            admin: "cyr580",
+            id: "Cloudflare + Gmail + Resend 十分钟轻松拥有免费的企业邮箱",
+        });
+        gitalk.render("al_gitalk_cnt")
+    </script>
+
+
+                
+
+            </article>
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/2024/10/07/2024-10-07-Cloudflare-SSL/">
+                    
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-left"></use>
+                        </svg>
+                        <span class="al_text_ellipsis al_post_nav_desc">SSL证书</span>
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2024/04/21/2024-04-21-bitwarden/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">Bitwarden密码管理器（使用群晖Docker）</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
+    </div>
+
+
+        <div class="al_index_footer dis_flex_center">
+    <div class="al_index_footer_item al_index_footer_title">
+        CYRCOM
+    </div>
+
+    
+    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Created By 
+        <a target="_blank" rel="noopener" href="https://x.com/cncyrcom">X.C</a>
+         · © 2024 Online</a>
+    </div>
+
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
+    </div>
+</div>
+
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    <script src="//www.googletagmanager.com/gtag/js?id=51420056"></script>
+    <script>window.dataLayer=window.dataLayeror[];function gtag(){dataLayer.push(arguments);};gtag('js', new Date());gtag('config', '${theme.google_analytice.tracking_id}');</script>
+
+        
+        
+
+    </body>
+</html>

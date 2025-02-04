@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+    
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    
+    <link rel='stylesheet' href="/./css/dracula.css">
+
+        <title>使用 pass 命令管理 Linux 密码</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">iOSByte</a>
+            </div>
+        </div>
+
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="al_sidebar">
+
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>iOSByte</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                <h4>CYRCOM</h4>
+                <img class="al_sidebar_avatar" src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+                <p>Discover the fun side of iOS with iOSByte. Your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join the byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</p>
+            </div>
+
+            
+                <div class="al_sidebar_contact_info">
+                    <h4>GET IN TOUCH</h4>
+                    <p>A long way</p>
+
+                    <div class="dis_flex al_sidebar_social_widget">
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.github.com/cyr580">
+                                <svg class="al_social_icon" id="github">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_github"></use>
+                                </svg>
+                            </div>
+                        
+
+                        
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.twitter.com/CNCYRCOM/">
+                                <svg class="al_social_icon" id="twitter">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_twitter"></use>
+                                </svg>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        使用 pass 命令管理 Linux 密码
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            Mon January 15, 2024 08:13 AM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                959 words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                3 minutes read
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-pass-%E5%91%BD%E4%BB%A4%E7%AE%A1%E7%90%86-Linux-%E5%AF%86%E7%A0%81"><span class="toc-text">使用 pass 命令管理 Linux 密码</span></a></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <h1 id="使用-pass-命令管理-Linux-密码"><a href="#使用-pass-命令管理-Linux-密码" class="headerlink" title="使用 pass 命令管理 Linux 密码"></a>使用 pass 命令管理 Linux 密码</h1><p><strong>作者：Thomas Tuffin（Sudoer，Red Hat）</strong></p>
+<p>密码管理是近十年来的热门话题。通过快速的谷歌搜索，你会发现各种选择密码管理工具的选项，以保护解锁个人信息的字符串。一些应用程序仅在计算机上运行，并以加密格式离线存储密码。另一些功能更丰富，提供与多个设备的在线同步、密码共享、双因素身份验证（2FA）等。然而，这些服务中的一些，由于在线库的便利性，使密码管理的简单性在提供的功能海洋中失落，同时也失去了对数据的一些控制，因为您的凭据与您无法控制的服务器同步。</p>
+<p>有一种替代方案可以提供简单性并让您完全掌控您的凭据。它可以提供许多与付费服务相同的功能，同时保持其简单性。它是开源的，并由创建 Wireguard 的同一作者编写，该项目在进入 Linux 内核之前受到了 Linus Torvalds 的高度赞扬。这个替代方案被称为 pass，也被称为 password-store。</p>
+<p><strong>为什么使用 password-store?</strong></p>
+<ul>
+<li>它是开源的</li>
+<li>使用简单</li>
+<li>文档完善</li>
+<li>基于命令行，但有可用的图形界面扩展</li>
+<li>使用 GnuPG 加密，加密级别由您选择</li>
+<li>完全在您的掌控之下。密码不同步到第三方服务器</li>
+<li>您的密码存储可以仅保留在您的系统上，或者您可以将其与您选择的私有 Git 存储库同步（强烈建议）</li>
+</ul>
+<p><strong>安装</strong></p>
+<ol>
+<li><p>安装 pass：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dnf install pass</span><br></pre></td></tr></table></figure></li>
+<li><p>如果您还没有 GPG 密钥对，需要创建一个：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gpg2 --full-generate-key</span><br></pre></td></tr></table></figure>
+<p>选择选项 1（RSA 和 RSA）作为密钥类型。选择您想要的密钥大小，例如选择 4096。然后选择密钥有效期，在这个示例中选择两年。</p>
+</li>
+<li><p>现在，列出您的密钥并记下密钥 ID：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gpg2 --list-secret-keys --keyid-format LONG</span><br></pre></td></tr></table></figure></li>
+<li><p>使用您的 GPG 密钥 ID 初始化 pass 数据存储：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pass init &#x27;AAAA2222CCCC4444&#x27;</span><br></pre></td></tr></table></figure></li>
+<li><p>现在您可以从 RSA4096 加密的密码存储中生成和获取密码。例如，生成一个新密码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pass generate -c Internet/github.com 21</span><br></pre></td></tr></table></figure>
+<p>获取存储中的密码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pass show Internet/github.com</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>附加步骤</strong><br>一个 pass 的默认安装为您提供了一个安全的本地数据存储。但为了提高可用性，我认为有几个其他功能是重要的。</p>
+<p><strong>同步到 Git 存储库</strong></p>
+<p>为了实现冗余性和在多个设备之间共享凭据，强烈建议将 pass 存储与 Git 存储库同步。pass 已经内置了 Git 功能，您只需在 pass 存储中创建远程存储库并初始化即可。以下是使用 Github 的示例，但请记住，您可以使用任何版本控制托管提供商或设置自己的托管服务。</p>
+<ol>
+<li><p>在远程 Git 服务器上设置私有存储库后，需要在本地使用以下命令初始化 pass 存储并添加远程 origin：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pass git init</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Initialized empty Git repository in /home/myhome/.password-store/.git/</span><br><span class="line">[master (root-commit) 998c8fd] Added current contents of password store. 1 file changed, 1 insertion(+)</span><br><span class="line">create mode 100644 .gpg-id</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pass git remote add origin git@github.com:johndoe/pass-store.git</span><br></pre></td></tr></table></figure></li>
+<li><p>只要您对存储库的身份验证正确配置，就可以使用内置的 pass git push 命令将 pass 存储推送到远程存储库：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pass git push -u --all</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Enumerating objects: 14, done.</span><br><span class="line">Counting objects: 100% (14/14), done.</span><br><span class="line">Delta compression using up to 12 threads</span><br><span class="line">Compressing objects: 100% (12/12), done.</span><br><span class="line">Writing objects: 100% (12/12), 2.68 KiB | 913.00 KiB/s, done.</span><br><span class="line">Total 12 (delta 6), reused 0 (delta 0), pack-reused 0</span><br><span class="line">To git@github.com:johndoe/pass-store.git</span><br><span class="line">  212af8c..d1c11c5  master -&gt; master</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>完成后，您的 pass 存储将与远程存储库同步。</p>
+
+                </section>
+
+                
+                
+    <div id="al_gitalk_cnt" />
+    <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: "919cd316da6bdc2c2e6a",
+            clientSecret: "ae2c200effb3d1e09777cdba146557d4c2eb8bea",
+            repo: "cyr580.github.io",
+            owner: "cyr580",
+            admin: "cyr580",
+            id: "使用 pass 命令管理 Linux 密码",
+        });
+        gitalk.render("al_gitalk_cnt")
+    </script>
+
+
+                
+
+            </article>
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/2024/01/27/2024-01-27-1password/">
+                    
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-left"></use>
+                        </svg>
+                        <span class="al_text_ellipsis al_post_nav_desc">一生只记一个密码： 1Password 简明教程</span>
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2024/01/14/2024-01-14-pass-2/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">pass密码管理本不复杂</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
+    </div>
+
+
+        <div class="al_index_footer dis_flex_center">
+    <div class="al_index_footer_item al_index_footer_title">
+        CYRCOM
+    </div>
+
+    
+    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Created By 
+        <a target="_blank" rel="noopener" href="https://x.com/cncyrcom">X.C</a>
+         · © 2024 Online</a>
+    </div>
+
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
+    </div>
+</div>
+
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    <script src="//www.googletagmanager.com/gtag/js?id=51420056"></script>
+    <script>window.dataLayer=window.dataLayeror[];function gtag(){dataLayer.push(arguments);};gtag('js', new Date());gtag('config', '${theme.google_analytice.tracking_id}');</script>
+
+        
+        
+
+    </body>
+</html>
