@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cyr580.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="您的域名将能够通过 HTTPS 访问，SSL 证书自动续签，并且在 Cloudflare 上配置了适当的原始 HTTPS 规则。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSL证书">
+<meta property="og:url" content="https://cyr580.github.io/2024/10/07/2024-10-07-Cloudflare-SSL/index.html">
+<meta property="og:site_name" content="iOSByte">
+<meta property="og:description" content="您的域名将能够通过 HTTPS 访问，SSL 证书自动续签，并且在 Cloudflare 上配置了适当的原始 HTTPS 规则。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-10-07T05:14:02.000Z">
+<meta property="article:modified_time" content="2024-10-07T05:14:02.000Z">
+<meta property="article:author" content="CYRCOM">
+<meta property="article:tag" content="Cloudflare">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://cyr580.github.io/2024/10/07/2024-10-07-Cloudflare-SSL/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>SSL证书 | iOSByte</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=51420056"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '51420056');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">iOSByte</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Navigating iOS, Byte by Byte.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2024/10/07/2024-10-07-Cloudflare-SSL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SSL证书
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-10-07 13:14:02" itemprop="dateCreated datePublished" datetime="2024-10-07T13:14:02+08:00">2024-10-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Cloudflare/" itemprop="url" rel="index"><span itemprop="name">Cloudflare</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">您的域名将能够通过 HTTPS 访问，SSL 证书自动续签，并且在 Cloudflare 上配置了适当的原始 HTTPS 规则。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="安装和配置-Certbot-及-Nginx-的完整教程"><a href="#安装和配置-Certbot-及-Nginx-的完整教程" class="headerlink" title="安装和配置 Certbot 及 Nginx 的完整教程"></a>安装和配置 Certbot 及 Nginx 的完整教程</h1><h2 id="1-安装-Certbot"><a href="#1-安装-Certbot" class="headerlink" title="1. 安装 Certbot"></a>1. 安装 Certbot</h2><p>apt update<br>apt install certbot</p>
+<h2 id="2-配置-DNS"><a href="#2-配置-DNS" class="headerlink" title="2. 配置 DNS"></a>2. 配置 DNS</h2><p>登录 Cloudflare，选择您的域名，确保 DNS 记录中开启小黄云（代理模式）。</p>
+<h2 id="3-确保-SSL-TLS-加密模式"><a href="#3-确保-SSL-TLS-加密模式" class="headerlink" title="3. 确保 SSL/TLS 加密模式"></a>3. 确保 SSL/TLS 加密模式</h2><p>将 SSL/TLS 加密模式设置为 灵活。</p>
+<h2 id="4-申请证书"><a href="#4-申请证书" class="headerlink" title="4. 申请证书"></a>4. 申请证书</h2><p>运行以下命令：</p>
+<p>certbot certonly —manual —preferred-challenges dns -d *.cyr580.top</p>
+<p>按照提示添加 TXT 记录并验证。</p>
+<h2 id="5-安装-Nginx"><a href="#5-安装-Nginx" class="headerlink" title="5. 安装 Nginx"></a>5. 安装 Nginx</h2><p>apt install nginx</p>
+<h2 id="6-配置-Nginx"><a href="#6-配置-Nginx" class="headerlink" title="6. 配置 Nginx"></a>6. 配置 Nginx</h2><p>编辑 Nginx 配置文件，设置 SSL 证书路径：</p>
+<figure class="highlight plaintext"><figcaption><span>&#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    listen 443 ssl;</span><br><span class="line">    server_name cyr580.top *.cyr580.top;</span><br><span class="line"></span><br><span class="line">    ssl_certificate /etc/letsencrypt/live/cyr580.top/fullchain.pem;</span><br><span class="line">    ssl_certificate_key /etc/letsencrypt/live/cyr580.top/privkey.pem;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://localhost:3002;</span><br><span class="line">        # 其他代理设置</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重启 Nginx：</p>
+<p>systemctl restart nginx</p>
+<h2 id="7-自动续签"><a href="#7-自动续签" class="headerlink" title="7. 自动续签"></a>7. 自动续签</h2><p>设置自动续签，编辑 crontab：</p>
+<p>crontab -e</p>
+<p>添加以下行：</p>
+<p>0 0 * * * certbot renew —quiet</p>
+<h2 id="8-Cloudflare-原始-HTTPS-规则"><a href="#8-Cloudflare-原始-HTTPS-规则" class="headerlink" title="8. Cloudflare 原始 HTTPS 规则"></a>8. Cloudflare 原始 HTTPS 规则</h2><ol>
+<li>配置 DNS：确保 DNS 中开启小黄云。</li>
+<li>SSL/TLS 模式：设置为灵活。</li>
+<li>创建规则：点击“规则”&gt;“Origin Rules”，创建规则，设置字段为主机名，通配符等于 *.cyr580.top，重定向到服务器的 3002 端口。</li>
+</ol>
+<h2 id="9-安装宝塔面板"><a href="#9-安装宝塔面板" class="headerlink" title="9. 安装宝塔面板"></a>9. 安装宝塔面板</h2><ol>
+<li>下载并运行安装脚本：</li>
+</ol>
+<p>wget -O install.sh <a target="_blank" rel="noopener" href="http://install.sh/">http://install.sh</a><br>bash install.sh</p>
+<p>按照提示完成安装。</p>
+<h2 id="10-使用-Docker-和-Docker-Compose"><a href="#10-使用-Docker-和-Docker-Compose" class="headerlink" title="10. 使用 Docker 和 Docker Compose"></a>10. 使用 Docker 和 Docker Compose</h2><ol>
+<li>安装 Docker：</li>
+</ol>
+<p>apt install docker.io<br>systemctl enable —now docker</p>
+<ol start="2">
+<li>安装 Docker Compose：</li>
+</ol>
+<p>apt install docker-compose</p>
+<p>总结</p>
+<p>以上步骤完成后，您的域名将能够通过 HTTPS 访问，SSL 证书自动续签，并且在 Cloudflare 上配置了适当的原始 HTTPS 规则。如果您在任何步骤遇到问题，请随时询问！</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Cloudflare/" rel="tag"># Cloudflare</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/06/30/2024-04-21-CloudflareGmailResend/" rel="prev" title="Cloudflare + Gmail + Resend 十分钟轻松拥有免费的企业邮箱">
+      <i class="fa fa-chevron-left"></i> Cloudflare + Gmail + Resend 十分钟轻松拥有免费的企业邮箱
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/04/13/2025-04-13-mcp/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE-Certbot-%E5%8F%8A-Nginx-%E7%9A%84%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">安装和配置 Certbot 及 Nginx 的完整教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85-Certbot"><span class="nav-number">1.1.</span> <span class="nav-text">1. 安装 Certbot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AE-DNS"><span class="nav-number">1.2.</span> <span class="nav-text">2. 配置 DNS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%A1%AE%E4%BF%9D-SSL-TLS-%E5%8A%A0%E5%AF%86%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">3. 确保 SSL&#x2F;TLS 加密模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%94%B3%E8%AF%B7%E8%AF%81%E4%B9%A6"><span class="nav-number">1.4.</span> <span class="nav-text">4. 申请证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%AE%89%E8%A3%85-Nginx"><span class="nav-number">1.5.</span> <span class="nav-text">5. 安装 Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E9%85%8D%E7%BD%AE-Nginx"><span class="nav-number">1.6.</span> <span class="nav-text">6. 配置 Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E8%87%AA%E5%8A%A8%E7%BB%AD%E7%AD%BE"><span class="nav-number">1.7.</span> <span class="nav-text">7. 自动续签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Cloudflare-%E5%8E%9F%E5%A7%8B-HTTPS-%E8%A7%84%E5%88%99"><span class="nav-number">1.8.</span> <span class="nav-text">8. Cloudflare 原始 HTTPS 规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF"><span class="nav-number">1.9.</span> <span class="nav-text">9. 安装宝塔面板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E4%BD%BF%E7%94%A8-Docker-%E5%92%8C-Docker-Compose"><span class="nav-number">1.10.</span> <span class="nav-text">10. 使用 Docker 和 Docker Compose</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CYRCOM"
+      src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+  <p class="site-author-name" itemprop="name">CYRCOM</p>
+  <div class="site-description" itemprop="description">Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cyr580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cyr580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CNCYRCOM" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CNCYRCOM" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CYRCOM</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '919cd316da6bdc2c2e6a',
+      clientSecret: 'ae2c200effb3d1e09777cdba146557d4c2eb8bea',
+      repo        : 'cyr580.github.io',
+      owner       : 'cyr580',
+      admin       : ['cyr580'],
+      id          : 'd13714fc82c7d4fe2e84f915752db718',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

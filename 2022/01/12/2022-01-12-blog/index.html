@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cyr580.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="准备工具 U盘一个(格式化成FAT32格式) 能访问路由器后台、访问SSH、使用U盘的电脑或手机一台 预先下载好OpenWrt固件(下载页面，找Firmware OpenWrt Install URL) （Github下载地址，openwrt-ramips-mt7621-xiaomi_mir3p-squashfs-factory.bin）  刷入开发版固件，获取SSH访问权限 获取到SSH权限之后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小米路由器Pro(R3P)刷入OpenWrt">
+<meta property="og:url" content="https://cyr580.github.io/2022/01/12/2022-01-12-blog/index.html">
+<meta property="og:site_name" content="iOSByte">
+<meta property="og:description" content="准备工具 U盘一个(格式化成FAT32格式) 能访问路由器后台、访问SSH、使用U盘的电脑或手机一台 预先下载好OpenWrt固件(下载页面，找Firmware OpenWrt Install URL) （Github下载地址，openwrt-ramips-mt7621-xiaomi_mir3p-squashfs-factory.bin）  刷入开发版固件，获取SSH访问权限 获取到SSH权限之后">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cyr580.github.io/assets/IMG_1.jpg">
+<meta property="article:published_time" content="2022-01-12T03:18:23.000Z">
+<meta property="article:modified_time" content="2022-01-12T03:18:23.000Z">
+<meta property="article:author" content="CYRCOM">
+<meta property="article:tag" content="blog">
+<meta property="article:tag" content="小米路由器">
+<meta property="article:tag" content="openwrt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cyr580.github.io/assets/IMG_1.jpg">
+
+<link rel="canonical" href="https://cyr580.github.io/2022/01/12/2022-01-12-blog/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>小米路由器Pro(R3P)刷入OpenWrt | iOSByte</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=51420056"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '51420056');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">iOSByte</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Navigating iOS, Byte by Byte.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2022/01/12/2022-01-12-blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          小米路由器Pro(R3P)刷入OpenWrt
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-12 11:18:23" itemprop="dateCreated datePublished" datetime="2022-01-12T11:18:23+08:00">2022-01-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PC/" itemprop="url" rel="index"><span itemprop="name">PC</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/assets/IMG_1.jpg" alt="mi"></p>
+<span id="more"></span>
+<h1 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h1><p>U盘一个(格式化成FAT32格式) 能访问路由器后台、访问SSH、使用U盘的电脑或手机一台 预先下载好OpenWrt固件(<a target="_blank" rel="noopener" href="https://openwrt.org/toh/hwdata/xiaomi/xiaomi_mi_router_3_pro">下载页面</a>，找<strong>Firmware OpenWrt Install URL</strong>)<br>（Github下载地址，<a target="_blank" rel="noopener" href="https://github.com/cyr580/openwrt-ramips-mt7621-xiaomi_mir3p/blob/master/openwrt-ramips-mt7621-xiaomi_mir3p-squashfs-factory.bin?raw=true">openwrt-ramips-mt7621-xiaomi_mir3p-squashfs-factory.bin</a>）</p>
+<h1 id="刷入开发版固件，获取SSH访问权限"><a href="#刷入开发版固件，获取SSH访问权限" class="headerlink" title="刷入开发版固件，获取SSH访问权限"></a>刷入开发版固件，获取SSH访问权限</h1><p>获取到SSH权限之后，才能刷入非官方固件。<br>小米路由器获取SSH权限的方法是：先刷入开发版固件，用app绑定路由器后，访问开放平台，可以获取到root密码、下载ssh解锁工具。<br>接下来就按照这个步骤进行操作：</p>
+<p>首先，打开MiWiFi下载页，点击ROM图标，找到小米路由器Pro 开发版的下载按钮，点击下载。 开发版最后一次更新时间是2017年8月25日，看样子也不会再更新了，所以直接放<a target="_blank" rel="noopener" href="http://bigota.miwifi.com/xiaoqiang/rom/r3p/miwifi_r3p_firmware_daddf_2.13.65.bin">下载链接</a>。</p>
+<p>下载好固件后，直接去路由器后台更新固件，等待重启。</p>
+<p>手机下载MiWiFi app，打开并绑定路由器到小米账号，然后卸载。</p>
+<p>访问<a target="_blank" rel="noopener" href="https://d.miwifi.com/rom/ssh">MiWiFi SSH页面</a>。登录小米账号后，就可以看到绑定的路由器，后面跟着root密码和一个下载工具包的按钮。记住这个root密码，然后把工具包下载下来，文件名应该是miwifi_ssh.bin。</p>
+<p>这个页面写有详细的使用方法，此处复读：</p>
+<blockquote>
+<ol>
+<li>请将下载的工具包bin文件复制到U盘（FAT/FAT32格式）的根目录下，保证文件名为miwifi_ssh.bin；</li>
+<li>断开小米路由器的电源，将U盘插入USB接口；</li>
+<li>按住reset按钮之后重新接入电源，指示灯变为黄色闪烁状态即可松开reset键；</li>
+<li>等待3-5秒后安装完成之后，小米路由器会自动重启，之后您就可以尽情折腾啦 ：）</li>
+</ol>
+</blockquote>
+<p>第1步复制miwifi_ssh.bin到U盘的同时，顺便把OpenWrt固件一起放进去，改名为factory.bin。</p>
+<p>路由器开机完成后，就可以尝试着拿刚才获取到的root密码访问SSH了。但不一定刚开好机就能访问，可能要等几分钟。</p>
+<h1 id="刷入OpenWrt固件"><a href="#刷入OpenWrt固件" class="headerlink" title="刷入OpenWrt固件"></a>刷入OpenWrt固件</h1><p>假设此时已经将OpenWrt固件放入U盘并改名为<font color=red>factory.bin</font>，也可以<strong>SCP传入/tmp目录</strong>，记得改个简短的文件名，方便操作，如<font color=red>firmware.bin</font></p>
+<p>ssh 进入到路由器，然后执行下面的指令，小米路由器 IP 一般是<font color=red>192.168.31.1</font></p>
+<p>打开ssh，输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cd /extdisks/sda1</span><br><span class="line">nvram set flag_try_sys1_failed=1</span><br><span class="line">nvram set flag_try_sys2_failed=0</span><br><span class="line">nvram set flag_boot_success=0</span><br><span class="line">nvram commit</span><br><span class="line">dd if=factory.bin bs=1M count=4 | mtd write - kernel1</span><br><span class="line">mtd erase rootfs0</span><br><span class="line">mtd erase rootfs1</span><br><span class="line">mtd erase overlay</span><br><span class="line">dd if=factory.bin bs=1M skip=4 | mtd write - rootfs0</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<p>/extdisks/sda1 对应的是U盘根目录。如果重插过U盘，这个路径可能会有变化。</p>
+<p>或者：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">nvram set flag_try_sys1_failed=1 </span><br><span class="line">nvram set flag_try_sys2_failed=0 </span><br><span class="line">nvram set flag_boot_success=0 </span><br><span class="line">nvram commit</span><br><span class="line">dd if=firmware.bin bs=1M count=4 | mtd write - kernel1</span><br><span class="line">mtd erase rootfs0</span><br><span class="line">mtd erase rootfs1</span><br><span class="line">mtd erase overlay</span><br><span class="line">dd if=firmware.bin bs=1M skip=4 | mtd write - rootfs0</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<p>输入完命令后，路由器会自动重启，之后就会变成OpenWrt了。</p>
+<h1 id="如果想刷回官方固件"><a href="#如果想刷回官方固件" class="headerlink" title="如果想刷回官方固件"></a>如果想刷回官方固件</h1><p>假设此时U盘仍然是FAT/FAT32格式。建议先将U盘里的文件清空。</p>
+<p>从刚才的下载页面，下载官方固件，放入U盘，并重命名为miwifi.bin。</p>
+<p>打开路由器ssh，输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fw_setenv flag_try_sys1_failed 0</span><br><span class="line">fw_setenv flag_try_sys2_failed 1</span><br><span class="line">fw_setenv flag_boot_success 0</span><br></pre></td></tr></table></figure>
+<p>断电，将U盘插入路由器，按住reset键通电，黄灯闪烁时松开。（同上面的2、3、4步）</p>
+<p>等待几分钟，黄灯/蓝灯常亮后，就刷回官方固件了。</p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>SCP上传固件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp firmware.bin root@192.168.31.1:/tmp</span><br></pre></td></tr></table></figure>
+
+<p>刷完不要着急，等个十分钟左右指示灯变蓝（非要着急拔电源变砖了，后果自负），然后进入后台管理即可<br>路由器 IP ：<font color=red>192.168.1.1</font><br>默认用户名：<font color=red>root</font><br>默认密码：<font color=red>password</font></p>
+<p>如果和宽带冲突，自己先别把路由器和宽带连一起，先连路由器和设备登录进去（WiFi 或网线都行），改下路由器的 IP ，<font color=red>网络 -&gt; 接口 -&gt; LAN</font>，改成自己想要的，宽带是 <font color=red>1.1</font>，你随便改个 <font color=red>2.1</font></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/blog/" rel="tag"># blog</a>
+              <a href="/tags/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag"># 小米路由器</a>
+              <a href="/tags/openwrt/" rel="tag"># openwrt</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/06/2022-01-06-blog/" rel="prev" title="各种代码（备份）">
+      <i class="fa fa-chevron-left"></i> 各种代码（备份）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/01/13/2022-01-13-blog/" rel="next" title="openwrt本地安装ipk">
+      openwrt本地安装ipk <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">准备工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%B7%E5%85%A5%E5%BC%80%E5%8F%91%E7%89%88%E5%9B%BA%E4%BB%B6%EF%BC%8C%E8%8E%B7%E5%8F%96SSH%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90"><span class="nav-number">2.</span> <span class="nav-text">刷入开发版固件，获取SSH访问权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%B7%E5%85%A5OpenWrt%E5%9B%BA%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">刷入OpenWrt固件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%83%B3%E5%88%B7%E5%9B%9E%E5%AE%98%E6%96%B9%E5%9B%BA%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">如果想刷回官方固件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">5.</span> <span class="nav-text">补充</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CYRCOM"
+      src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+  <p class="site-author-name" itemprop="name">CYRCOM</p>
+  <div class="site-description" itemprop="description">Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cyr580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cyr580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CNCYRCOM" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CNCYRCOM" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CYRCOM</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '919cd316da6bdc2c2e6a',
+      clientSecret: 'ae2c200effb3d1e09777cdba146557d4c2eb8bea',
+      repo        : 'cyr580.github.io',
+      owner       : 'cyr580',
+      admin       : ['cyr580'],
+      id          : 'c6dc872118d34cb73802e32075d51580',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
