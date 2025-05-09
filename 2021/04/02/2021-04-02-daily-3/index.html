@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cyr580.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"搜索文章","hits_empty":"未找到结果：${query}","hits_stats":"共${hits}条结果，用时${time}毫秒"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="转载内容，比较详细 Cydia中的软件源地址保存在 &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F; 目录下，分为两种：   1. 以软件包形式安装的软件源，如Cydia默认的软件源，Modmyi、BigBoss等，该类软件源是以独立的.list文件记录软件源地址。  2. 由用户在Cydia里输入地址添加的软件源，该类软件源全部保存在 cydia.list中。     以上两种形式的软件源本质没">
+<meta property="og:type" content="article">
+<meta property="og:title" content="转载：网上对ios插件的介绍">
+<meta property="og:url" content="https://cyr580.github.io/2021/04/02/2021-04-02-daily-3/index.html">
+<meta property="og:site_name" content="iOSByte">
+<meta property="og:description" content="转载内容，比较详细 Cydia中的软件源地址保存在 &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F; 目录下，分为两种：   1. 以软件包形式安装的软件源，如Cydia默认的软件源，Modmyi、BigBoss等，该类软件源是以独立的.list文件记录软件源地址。  2. 由用户在Cydia里输入地址添加的软件源，该类软件源全部保存在 cydia.list中。     以上两种形式的软件源本质没">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://img.5iqiqu.com/images6/46/46c8b054896ebdc032eacc833610af5e.jpg">
+<meta property="article:published_time" content="2021-04-02T06:50:30.000Z">
+<meta property="article:modified_time" content="2021-04-02T06:50:30.000Z">
+<meta property="article:author" content="CYRCOM">
+<meta property="article:tag" content="ios14">
+<meta property="article:tag" content="github">
+<meta property="article:tag" content="cydia">
+<meta property="article:tag" content="sileo">
+<meta property="article:tag" content="zebra">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.5iqiqu.com/images6/46/46c8b054896ebdc032eacc833610af5e.jpg">
+
+<link rel="canonical" href="https://cyr580.github.io/2021/04/02/2021-04-02-daily-3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>转载：网上对ios插件的介绍 | iOSByte</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GTGCJ6QK00"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GTGCJ6QK00');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">iOSByte</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Navigating iOS, Byte by Byte.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/cyr580" class="github-corner" title="关注我GitHub" aria-label="关注我GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2021/04/02/2021-04-02-daily-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          转载：网上对ios插件的介绍
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-02 14:50:30" itemprop="dateCreated datePublished" datetime="2021-04-02T14:50:30+08:00">2021-04-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iPhone/" itemprop="url" rel="index"><span itemprop="name">iPhone</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="转载内容，比较详细"><a href="#转载内容，比较详细" class="headerlink" title="转载内容，比较详细"></a>转载内容，比较详细</h4><span id="more"></span>
+<p>Cydia中的软件源地址保存在 /etc/apt/sources.list.d/ 目录下，分为两种：</p>
+<ol>
+<li>以软件包形式安装的软件源，如Cydia默认的软件源，Modmyi、BigBoss等，该类软件源是以独立的.list文件记录软件源地址。</li>
+<li>由用户在Cydia里输入地址添加的软件源，该类软件源全部保存在 cydia.list中。<br>以上两种形式的软件源本质没有差别，但只软件源的文件存放位置上是有不同的。<br>以Saurik自己的软件源为例。打开 saurik.list文件， 可以看到有以下内容 （以#开头的行属于注释，没有实际用途）</li>
+</ol>
+<p>deb <a target="_blank" rel="noopener" href="http://apt.saurik.com/">http://apt.saurik.com/</a> tangelo-3.7 main<br>那么，软件源的 Release 文件的地址是 <a target="_blank" rel="noopener" href="http://apt.saurik.com/dists/tangelo-3.7/Release">http://apt.saurik.com/dists/tangelo-3.7/Release</a><br>Cydia就是通过或许Release文件进而检测软件源的存在，然后再下载记录软件包相关信息的 Packages 文件。<br>而对于在Cydia中输入软件源地址进行添加的这种源，方法有些不同。因为默认情况下，输入地址以后，Cydia会认为Release文件存放于输入的地址所在的目录下。在list文件中的记录信息为：</p>
+<blockquote>
+<p>deb <a target="_blank" rel="noopener" href="http://www.xxx.com/">http://www.xxx.com</a> ./<br>并不会继续往子目录里检测Release文件。<br>因此，搭建Cydia软件源首先需要配置服务器上相关目录和文件的存放位置。<br>取决于软件源的添加方式，文件/目录的路径设置可以分为以下两种情况：</p>
+<ol>
+<li> 只公布软件源的地址，让用户手动输入地址来添加。这种方式的文件/目录设置最为简单。<br>以威锋源为例，威锋源的地址为 <a target="_blank" rel="noopener" href="http://app.weiphone.com/cydia">http://app.weiphone.com/cydia</a><br>那么在郁闷app.weiphone.com下，存在目录cydia。目录cydia即使软件源所在的目录。<br>将文件Release放置在cydia目录下即完成了软件源的搭建。<br>要注意，搭建软件源，必须保证至少有Release和Packages两个文件。</li>
+<li>以软件包的形式安装，即直接在 /etc/apt/source.list.d/ 目录以文件的形式添加，那么这个就没有什么固定的位置了。<br>基本上仿照Saurik和BigBoss的list文件的格式即可。<br>list文件格式：</li>
+<li><h1 id="do-not-edit-this-file-to-add-your-own-custom-sources"><a href="#do-not-edit-this-file-to-add-your-own-custom-sources" class="headerlink" title="do not edit this file to add your own custom sources"></a>do not edit this file to add your own custom sources</h1></li>
+<li><h1 id="this-file-is-subject-to-be-upgraded-as-part-of-a-package"><a href="#this-file-is-subject-to-be-upgraded-as-part-of-a-package" class="headerlink" title="this file is subject to be upgraded as part of a package"></a>this file is subject to be upgraded as part of a package</h1></li>
+<li><h1 id="either-add-your-own-list-file-to-etc-apt-sources-list-d"><a href="#either-add-your-own-list-file-to-etc-apt-sources-list-d" class="headerlink" title="either add your own .list file to /etc/apt/sources.list.d"></a>either add your own .list file to /etc/apt/sources.list.d</h1></li>
+<li><h1 id="or-add-your-entry-to-the-global-etc-apt-sources-list-file"><a href="#or-add-your-entry-to-the-global-etc-apt-sources-list-file" class="headerlink" title="or add your entry to the global /etc/apt/sources.list file"></a>or add your entry to the global /etc/apt/sources.list file</h1>deb 软件源地址 项目名 类型<br>文件名任意<br>其中，Release文件应放置于 软件源地址/项目名/ 这个目录下，Packages文件放置位置由Release文件来决定（详情见后文）。<br>之前提到过，搭建软件源必须要有Release和Packages两个文件。前者的作用是记录软件源本身的相关信息，而后者的作用则是记录具体软件包的存放位置和安装信息等数据。</li>
+</ol>
+</blockquote>
+<p>以下是Release文件的格式：</p>
+<blockquote>
+<p>Origin: BigBoss</p>
+</blockquote>
+<blockquote>
+<p>Label: BigBoss</p>
+</blockquote>
+<blockquote>
+<p>Suite: stable</p>
+</blockquote>
+<blockquote>
+<p>Version: 1.0</p>
+</blockquote>
+<blockquote>
+<p>Codename: BigBoss</p>
+</blockquote>
+<blockquote>
+<p>Support: <a target="_blank" rel="noopener" href="http://cydia.saurik.com/support/">http://cydia.saurik.com/support/</a>*</p>
+</blockquote>
+<blockquote>
+<p>Architectures: darwin-arm iphoneos-arm</p>
+</blockquote>
+<blockquote>
+<p>Components: main</p>
+</blockquote>
+<blockquote>
+<p>Description: Apps &amp; Themes! We host your apps. Email me.</p>
+</blockquote>
+<blockquote>
+<p>MD5Sum:<br>be8806290d5904cdf45b542706f6a3ad 165020 main/binary-darwin-arm/Packages<br>  03026ac993187b0eecae50466f64fb3c 35049 main/binary-darwin-arm/Packages.gz<br>  93091f5ca485e066d5fc32ca1327830c 3031061 main/binary-iphoneos-arm/Packages<br>  d7aec18dee5b627339b77a9d91e3f92f 368222 main/binary-iphoneos-arm/Packages.bz2  </p>
+</blockquote>
+<p>其中红字部分是必填内容，紫色部分是可选内容。<br>每项的作用：</p>
+<blockquote>
+<p>Origin: 软件源名称，可以使用中文（Cydia的软件源列表中显示的标题）</p>
+</blockquote>
+<blockquote>
+<p>Label:  同上，也可以使用中文</p>
+</blockquote>
+<blockquote>
+<p>Suite: 软件源的类型，比如正式源，测试源等，可以分别用stable, beta, unstable等来表示，一般填 stable就可以了</p>
+</blockquote>
+<blockquote>
+<p>Version: 版本号，这个其实不重要，随便填，一般都是写1.0</p>
+</blockquote>
+<blockquote>
+<p>Codename: 代码代号，比如BigBoss的就写BigBoss，威锋的就写WeiPhone，也没什么限制，只能用英文</p>
+</blockquote>
+<blockquote>
+<p>Architectures: 结构。iPhone平台统一写 iphoneos-arm</p>
+</blockquote>
+<blockquote>
+<p>Components: main</p>
+</blockquote>
+<blockquote>
+<p>Description: 软件介绍，可以使用中文和html代码，具体能使用哪些代码在下面会介绍。<br>可选</p>
+</blockquote>
+<blockquote>
+<p>Support: 支持，没什么作用，除非特别需要，否则可以不要这个。</p>
+</blockquote>
+<blockquote>
+<p>MD5Sum: 不是必须的，但如果Packages文件位置不与Release文件在同一目录下，则必须有此项。另外，如果需要签名Release文件，也必须有这个。关于MD5Sum的格式，在下文也会介绍。</p>
+</blockquote>
+<blockquote>
+<p>Description格式<br>显示在Cydia中每个软件页面最下方。<br>不能直接换行，如果要实现显示换行显示，可以使用<br>代码。<br>要加粗显示，可以使用<strong></strong>代码<br>可以使用html代码设置字体颜色。<br>不能使用超链接代码。<br>代码： Description: WeiPhone-威锋网为您提供iPhone所需软件/补丁。<br><br>联系我们: <strong>weip.com@ gmail.com</strong><br>实际显示效果如下：  </p>
+</blockquote>
+<blockquote>
+<p>MD5Sum格式<br>MD5Sum是用来记录Packages即相关文件的文件大小，存放路径和MD5值。<br>MD5Sum: 之后另起一行，开头要空一格（论坛里用quote或code代码之后都不显示开头的空格）<br>每行格式是：<br>空格+文件MD5值+空格+文件大小(以字节为单位)+文件路径 （全部没有+）<br>而文件路径的格式则有文件存放位置来决定。<br>如果是没有设置Release文件的路径，那么Release和Packages同在根目录，则路径为 Packages，直接就是文件名，没有其它路径。<br>如果在之前设置了Release文件的路径，如Saurik和BigBoss，那么Packages 的路径为 main/binary-iphoneos-arm/Packages，起始文件夹，即main，要与Release文件同在一个目录下。main和binary-iphoneos-arm要与Releases中的对应信息相匹配。<br>对于Packages.gz和Packages.bz2，格式相同，也记得要另起一行。<br>因此，Packages文件的保存位置就是 软件源地址/dists/main/Codename（与Release文件中一致）/main/binary-iphoneos-arm下。</p>
+</blockquote>
+<blockquote>
+<p>Release文件的示例可以参看以下几个地址：<br><a target="_blank" rel="noopener" href="http://app.weiphone.com/cydia/Release">http://app.weiphone.com/cydia/Release</a><br><a target="_blank" rel="noopener" href="http://apt.saurik.com/dists/tangelo-3.7/Release">http://apt.saurik.com/dists/tangelo-3.7/Release</a><br><a target="_blank" rel="noopener" href="http://apt.bigboss.us.com/repofiles/cydia/dists/stable/Release">http://apt.bigboss.us.com/repofiles/cydia/dists/stable/Release</a></p>
+</blockquote>
+<p>以下是生成Packages文件的方法：<br>Packages文件格式</p>
+<blockquote>
+<p>Package: 3proxy<br>Version: 0.5.3k-2<br>Architecture: iphoneos-arm<br>Maintainer: Jay Freeman (saurik) <img data-src="http://img.5iqiqu.com/images6/46/46c8b054896ebdc032eacc833610af5e.jpg"><br>Installed-Size: 1208<br>Filename: debs/3proxy_0.5.3k-2_iphoneos-arm.deb<br>Size: 416318<br>MD5sum: f84cb6764a9df30ab326c17f51de15fd<br>Section: Networking<br>Priority: optional<br>Homepage: <a target="_blank" rel="noopener" href="http://3proxy.ru/download/">http://3proxy.ru/download/</a><br>Description: tiny free proxy server<br>Name: 3proxy<br>Depiction: <a target="_blank" rel="noopener" href="http://cydia.saurik.com/info/3proxy/">http://cydia.saurik.com/info/3proxy/</a><br>Tag: purpose::daemon, role::hacker</p>
+</blockquote>
+<p>Packages实质上是deb文件的control信息集合，另外多了deb文件本身的信息。（control文件是记录软件包本身的信息，但没有deb文件本身）<br>多出的deb文件信息为：</p>
+<blockquote>
+<p>Filename（deb文件位置与文件名）<br>Size（deb文件大小，字节为单位）<br>MD5sum（deb文件MD5值） 要保证Cydia能正确获取deb的相关数据，除了以上3个deb文件信息以为，还必须保证至少有以下两项：</p>
+</blockquote>
+<blockquote>
+<p>Package（软件标识符，相当于身份证号码，用于识别唯一的软件）</p>
+</blockquote>
+<blockquote>
+<p>Version（软件版本号） 这里重点关注的是Filename。Filename项决定了在服务器上deb文件的存放位置。如果没有上级目录，即deb文件和Packages文件处于同一目录，那么只需要一个单独的文件名就可以了，不需要加上目录名，即xxxx.deb。但这样在软件数量多的时候会导致管理上的混乱。<br>假设deb文件存放在debs目录下，那么Filename就应该是 debs/xxx.deb 这样的格式。<br>其余项会在二楼deb制作教程中介绍。<br>一个软件包的全部信息在Packages文件中是以连续的一段存在，每一行是不同的信息。不同软件之间以空行做分隔。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>CYRCOM
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://cyr580.github.io/2021/04/02/2021-04-02-daily-3/" title="转载：网上对ios插件的介绍">https://cyr580.github.io/2021/04/02/2021-04-02-daily-3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ios14/" rel="tag"># ios14</a>
+              <a href="/tags/github/" rel="tag"># github</a>
+              <a href="/tags/cydia/" rel="tag"># cydia</a>
+              <a href="/tags/sileo/" rel="tag"># sileo</a>
+              <a href="/tags/zebra/" rel="tag"># zebra</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/02/2021-04-02-daily/" rel="prev" title="Filza直接生成packages.bz2">
+      <i class="fa fa-chevron-left"></i> Filza直接生成packages.bz2
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/09/2021-04-09-daily/" rel="next" title="Sketch绝佳搭配！30秒制作交互原型的次时代神器Flinto🔥">
+      Sketch绝佳搭配！30秒制作交互原型的次时代神器Flinto🔥 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E8%BD%BD%E5%86%85%E5%AE%B9%EF%BC%8C%E6%AF%94%E8%BE%83%E8%AF%A6%E7%BB%86"><span class="nav-number">1.</span> <span class="nav-text">转载内容，比较详细</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#do-not-edit-this-file-to-add-your-own-custom-sources"><span class="nav-number"></span> <span class="nav-text">do not edit this file to add your own custom sources</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#this-file-is-subject-to-be-upgraded-as-part-of-a-package"><span class="nav-number"></span> <span class="nav-text">this file is subject to be upgraded as part of a package</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#either-add-your-own-list-file-to-etc-apt-sources-list-d"><span class="nav-number"></span> <span class="nav-text">either add your own .list file to &#x2F;etc&#x2F;apt&#x2F;sources.list.d</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#or-add-your-entry-to-the-global-etc-apt-sources-list-file"><span class="nav-number"></span> <span class="nav-text">or add your entry to the global &#x2F;etc&#x2F;apt&#x2F;sources.list file</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CYRCOM"
+      src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+  <p class="site-author-name" itemprop="name">CYRCOM</p>
+  <div class="site-description" itemprop="description">Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cyr580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cyr580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CNCYRCOM" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CNCYRCOM" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CYRCOM</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '919cd316da6bdc2c2e6a',
+      clientSecret: 'ae2c200effb3d1e09777cdba146557d4c2eb8bea',
+      repo        : 'cyr580.github.io',
+      owner       : 'cyr580',
+      admin       : ['cyr580'],
+      id          : 'c084806608d28943ee6ef252cc3ef0f9',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

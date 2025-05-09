@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cyr580.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"搜索文章","hits_empty":"未找到结果：${query}","hits_stats":"共${hits}条结果，用时${time}毫秒"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="告别AI局限！本指南手把手教你配置ChatWise MCP，赋予AI大模型连接互联网、操作应用、访问数据的超能力，打造真正懂你的智能助理！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="释放AI超能力：ChatWise MCP 玩转指南，打造你的智能助理">
+<meta property="og:url" content="https://cyr580.github.io/2025/04/13/2025-04-13-mcp/index.html">
+<meta property="og:site_name" content="iOSByte">
+<meta property="og:description" content="告别AI局限！本指南手把手教你配置ChatWise MCP，赋予AI大模型连接互联网、操作应用、访问数据的超能力，打造真正懂你的智能助理！">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-04-13T14:25:20.000Z">
+<meta property="article:modified_time" content="2025-04-13T14:25:20.000Z">
+<meta property="article:author" content="CYRCOM">
+<meta property="article:tag" content="MCP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://cyr580.github.io/2025/04/13/2025-04-13-mcp/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>释放AI超能力：ChatWise MCP 玩转指南，打造你的智能助理 | iOSByte</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GTGCJ6QK00"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GTGCJ6QK00');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">iOSByte</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Navigating iOS, Byte by Byte.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/cyr580" class="github-corner" title="关注我GitHub" aria-label="关注我GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2025/04/13/2025-04-13-mcp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          释放AI超能力：ChatWise MCP 玩转指南，打造你的智能助理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-04-13 22:25:20" itemprop="dateCreated datePublished" datetime="2025-04-13T22:25:20+08:00">2025-04-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MCP/" itemprop="url" rel="index"><span itemprop="name">MCP</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">告别AI局限！本指南手把手教你配置ChatWise MCP，赋予AI大模型连接互联网、操作应用、访问数据的超能力，打造真正懂你的智能助理！</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>你是否觉得AI大模型的能力还不够强大？是否渴望它们能像专家一样，高效地搜索信息、系统地管理知识，甚至智能地操控浏览器？那么，MCP（Model Context Protocol）正是你解锁AI超能力的钥匙。本文将带你深入了解MCP，并以ChatWise客户端为例，手把手教你配置和使用MCP服务，打造真正属于你的智能助理。</p>
+<h3 id="什么是MCP？"><a href="#什么是MCP？" class="headerlink" title="什么是MCP？"></a>什么是MCP？</h3><p>MCP（模型上下文协议），全称Model Context Protocol，是由Anthropic公司提出的一个开放标准。它赋予AI模型访问外部工具和服务的能力，从而突破自身能力的限制，实现更广泛的应用场景。通过MCP，我们可以让AI模型：</p>
+<ul>
+<li>  <strong>无缝连接互联网</strong>：实时进行网页搜索，获取最新资讯和动态。</li>
+<li>  <strong>智能操作外部应用</strong>：自动化控制浏览器，高效管理各类文件。</li>
+<li>  <strong>安全访问私有数据</strong>：连接本地知识库，对接企业内部系统，实现定制化服务。</li>
+</ul>
+<p>简而言之，MCP就像一个强大的通用接口，让AI模型能够与现实世界进行深度互动，从而完成更加复杂和个性化的任务。</p>
+<h3 id="准备工作：工欲善其事，必先利其器"><a href="#准备工作：工欲善其事，必先利其器" class="headerlink" title="准备工作：工欲善其事，必先利其器"></a>准备工作：工欲善其事，必先利其器</h3><p>在开始配置MCP之前，我们需要安装一些必要的工具。请根据你的操作系统，选择相应的安装方式。</p>
+<h4 id="1-安装uvx-Python-MCP服务运行器"><a href="#1-安装uvx-Python-MCP服务运行器" class="headerlink" title="1. 安装uvx (Python MCP服务运行器)"></a>1. 安装uvx (Python MCP服务运行器)</h4><p><code>uvx</code> 是一个轻量级的Python MCP服务运行器，它是<code>uv</code>项目的一部分。<code>uv</code> 是一个现代化的Python包安装器和解析器，旨在显著提升Python项目的依赖管理速度和效率。</p>
+<ul>
+<li><p><strong>Windows</strong>:</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell <span class="literal">-ExecutionPolicy</span> ByPass <span class="literal">-c</span> “<span class="built_in">irm</span> https://astral.sh/uv/install.ps1 | <span class="built_in">iex</span>”</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>macOS/Linux</strong>:</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -LsSf https://astral.sh/uv/install.sh | sh</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>安装完成后，请务必将 <code>uv</code> 添加到你的系统环境变量中，以便在命令行中能够直接调用 <code>uvx</code> 命令。</p>
+<h4 id="2-安装npx-Node-js-MCP服务运行器"><a href="#2-安装npx-Node-js-MCP服务运行器" class="headerlink" title="2. 安装npx (Node.js MCP服务运行器)"></a>2. 安装npx (Node.js MCP服务运行器)</h4><p><code>npx</code> 是Node.js自带的包执行器，用于便捷地运行基于Node.js开发的MCP服务。如果你尚未安装Node.js，请前往<a target="_blank" rel="noopener" href="https://nodejs.org/">Node.js官网</a>下载并安装最新版本。安装Node.js时，<code>npm</code> (Node.js包管理器) 也会一并安装。<code>npx</code> 通常随 <code>npm</code> 一起发布，因此安装Node.js后，你就可以直接在命令行中使用 <code>npx</code> 命令了。</p>
+<h3 id="获取MCP服务：巧妇难为无米之炊"><a href="#获取MCP服务：巧妇难为无米之炊" class="headerlink" title="获取MCP服务：巧妇难为无米之炊"></a>获取MCP服务：巧妇难为无米之炊</h3><p>拥有了运行MCP服务的工具，接下来我们需要寻找可用的MCP服务。以下是一些常用的MCP服务获取渠道：</p>
+<ul>
+<li><strong>精选MCP聚合网站</strong>：<ul>
+<li>  **<a target="_blank" rel="noopener" href="https://mcp.so/zh">mcp.so</a>**：汇集了各种类型的MCP服务，你可以浏览并选择需要的服务，网站会自动生成可导入的JSON配置。</li>
+<li>  <strong><a target="_blank" rel="noopener" href="https://smithery.ai/">Smithery - Model Context Protocol Registry</a></strong>: 提供了丰富的MCP服务，包括Web搜索、Memory Management、Browser Automation等，可以满足你不同的应用场景。</li>
+</ul>
+</li>
+<li>  <strong>开源社区GitHub</strong>：在GitHub上搜索 “MCP server” 或 “Model Context Protocol”，你可以发现许多由开发者贡献的开源MCP服务，这些服务往往具有高度的灵活性和可定制性。</li>
+<li>  <strong>技术社区论坛</strong>：积极参与AI技术社区的讨论，与其他开发者交流经验，获取最新的MCP服务分享和推荐。</li>
+</ul>
+<h3 id="ChatWise配置：化繁为简，一键导入"><a href="#ChatWise配置：化繁为简，一键导入" class="headerlink" title="ChatWise配置：化繁为简，一键导入"></a>ChatWise配置：化繁为简，一键导入</h3><p>ChatWise 客户端支持直接从JSON新建MCP，极大地简化了配置过程，让你可以快速上手体验MCP的强大功能。</p>
+<ol>
+<li><p><strong>导入JSON配置</strong>：</p>
+<ul>
+<li>  在ChatWise客户端中，点击界面左下角的加号按钮，选择“从剪切板导入Json”选项。</li>
+<li>  将从MCP网站或GitHub复制的JSON配置粘贴到剪切板，ChatWise会自动解析并导入配置信息。</li>
+</ul>
+</li>
+<li><p><strong>手动添加MCP服务器</strong> (适用于没有提供JSON配置的MCP服务)：</p>
+<ul>
+<li>  点击ChatWise界面左下角的头像，进入设置页面，找到“工具”选项，点击左下角的加号按钮即可手动添加MCP服务器。</li>
+<li>根据MCP服务提供商的说明，填写以下关键信息：<ul>
+<li>  <strong>类型</strong>：如果MCP服务提供的是JSON格式的配置信息，选择 “Stdio” 类型。</li>
+<li>  <strong>ID</strong>：为你的MCP服务自定义一个易于识别的名称。</li>
+<li>  <strong>命令和环境变量</strong>：将从MCP网站获取的Json代码发送给AI模型（例如Claude或Deepseek），让其将Json代码转换为可执行的命令，并将所需的环境变量单独列出。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="实战演练：MCP应用案例"><a href="#实战演练：MCP应用案例" class="headerlink" title="实战演练：MCP应用案例"></a>实战演练：MCP应用案例</h3><h4 id="1-构建本地知识管理系统"><a href="#1-构建本地知识管理系统" class="headerlink" title="1. 构建本地知识管理系统"></a>1. 构建本地知识管理系统</h4><p>通过使用 <code>uvx basic-memory mcp</code> 命令，你可以构建一个本地知识管理系统，用于系统化地整理和存储AI对话中的知识，有效避免信息碎片化的问题。这个MCP服务可以将你的对话历史安全地存储在本地，并允许AI模型随时检索和利用这些信息，从而提升对话的连贯性和智能化程度。</p>
+<h4 id="2-实现智能网页内容获取"><a href="#2-实现智能网页内容获取" class="headerlink" title="2. 实现智能网页内容获取"></a>2. 实现智能网页内容获取</h4><p>借助 <code>uvx mcp-server-fetch</code> 命令，你可以轻松实现智能化的网页内容获取功能。结合其他搜索MCP服务，你可以构建一个类似深度搜索的强大工具。例如，你可以先使用搜索MCP服务找到与特定主题相关的网页链接，然后使用 <code>mcp-server-fetch</code> 命令自动抓取网页内容，最后利用AI模型对抓取的内容进行深入分析和总结，提取关键信息。</p>
+<h3 id="常见问题及解决方案"><a href="#常见问题及解决方案" class="headerlink" title="常见问题及解决方案"></a>常见问题及解决方案</h3><ul>
+<li>  <strong>Windows环境问题</strong>：由于Windows操作系统在环境配置和网络设置方面可能存在一些复杂性，因此在配置过程中可能会遇到一些问题。建议参考相关的Windows环境配置教程或寻求专业人士的帮助。</li>
+<li>  <strong>“命令未找到”错误</strong>：当你在命令行中执行命令时，如果系统提示“命令未找到”错误，请尝试使用命令的完整路径来执行，以确保系统能够正确识别该命令。</li>
+<li>  <strong>GPT-4o 兼容性</strong>：需要注意的是，GPT-4o 和 GPT-4o-mini 等较新的AI模型可能无法完全兼容所有的MCP服务。在使用过程中，请关注MCP服务的兼容性说明，并及时更新相关组件。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过本文详尽的教程，相信你已经全面掌握了ChatWise MCP的配置和使用方法。现在，就让我们一起开启探索MCP的无限可能，打造真正属于你的智能助理吧！</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>希望本文能够帮助你更好地理解和应用ChatWise MCP技术。如果你在实践过程中遇到任何问题，欢迎在评论区留言，与我们共同探讨，共同进步！</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>CYRCOM
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://cyr580.github.io/2025/04/13/2025-04-13-mcp/" title="释放AI超能力：ChatWise MCP 玩转指南，打造你的智能助理">https://cyr580.github.io/2025/04/13/2025-04-13-mcp/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MCP/" rel="tag"># MCP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/10/07/2024-10-07-Cloudflare-SSL/" rel="prev" title="SSL证书">
+      <i class="fa fa-chevron-left"></i> SSL证书
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/04/30/2025-04-30-mcpproxy/" rel="next" title="TBXark/mcp-proxy 构建你的 MCP 代理服务器">
+      TBXark/mcp-proxy 构建你的 MCP 代理服务器 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFMCP%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">什么是MCP？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%EF%BC%9A%E5%B7%A5%E6%AC%B2%E5%96%84%E5%85%B6%E4%BA%8B%EF%BC%8C%E5%BF%85%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">准备工作：工欲善其事，必先利其器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85uvx-Python-MCP%E6%9C%8D%E5%8A%A1%E8%BF%90%E8%A1%8C%E5%99%A8"><span class="nav-number">3.1.</span> <span class="nav-text">1. 安装uvx (Python MCP服务运行器)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85npx-Node-js-MCP%E6%9C%8D%E5%8A%A1%E8%BF%90%E8%A1%8C%E5%99%A8"><span class="nav-number">3.2.</span> <span class="nav-text">2. 安装npx (Node.js MCP服务运行器)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96MCP%E6%9C%8D%E5%8A%A1%EF%BC%9A%E5%B7%A7%E5%A6%87%E9%9A%BE%E4%B8%BA%E6%97%A0%E7%B1%B3%E4%B9%8B%E7%82%8A"><span class="nav-number">4.</span> <span class="nav-text">获取MCP服务：巧妇难为无米之炊</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ChatWise%E9%85%8D%E7%BD%AE%EF%BC%9A%E5%8C%96%E7%B9%81%E4%B8%BA%E7%AE%80%EF%BC%8C%E4%B8%80%E9%94%AE%E5%AF%BC%E5%85%A5"><span class="nav-number">5.</span> <span class="nav-text">ChatWise配置：化繁为简，一键导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83%EF%BC%9AMCP%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B"><span class="nav-number">6.</span> <span class="nav-text">实战演练：MCP应用案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%9E%84%E5%BB%BA%E6%9C%AC%E5%9C%B0%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="nav-number">6.1.</span> <span class="nav-text">1. 构建本地知识管理系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%AE%9E%E7%8E%B0%E6%99%BA%E8%83%BD%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9%E8%8E%B7%E5%8F%96"><span class="nav-number">6.2.</span> <span class="nav-text">2. 实现智能网页内容获取</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">7.</span> <span class="nav-text">常见问题及解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">9.</span> <span class="nav-text">结语</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CYRCOM"
+      src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+  <p class="site-author-name" itemprop="name">CYRCOM</p>
+  <div class="site-description" itemprop="description">Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cyr580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cyr580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CNCYRCOM" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CNCYRCOM" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CYRCOM</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '919cd316da6bdc2c2e6a',
+      clientSecret: 'ae2c200effb3d1e09777cdba146557d4c2eb8bea',
+      repo        : 'cyr580.github.io',
+      owner       : 'cyr580',
+      admin       : ['cyr580'],
+      id          : '6ebe2ab820113ea12e5491339a539548',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

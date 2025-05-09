@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cyr580.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"搜索文章","hits_empty":"未找到结果：${query}","hits_stats":"共${hits}条结果，用时${time}毫秒"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="使用 TBXark&#x2F;mcp-proxy 构建高效、安全的 MCP 代理服务器，简化多服务管理，提升 AI 应用性能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TBXark&#x2F;mcp-proxy 构建你的 MCP 代理服务器">
+<meta property="og:url" content="https://cyr580.github.io/2025/04/30/2025-04-30-mcpproxy/index.html">
+<meta property="og:site_name" content="iOSByte">
+<meta property="og:description" content="使用 TBXark&#x2F;mcp-proxy 构建高效、安全的 MCP 代理服务器，简化多服务管理，提升 AI 应用性能">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-04-30T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-30T04:00:00.000Z">
+<meta property="article:author" content="CYRCOM">
+<meta property="article:tag" content="MCP-Proxy">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://cyr580.github.io/2025/04/30/2025-04-30-mcpproxy/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>TBXark/mcp-proxy 构建你的 MCP 代理服务器 | iOSByte</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GTGCJ6QK00"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GTGCJ6QK00');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">iOSByte</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Navigating iOS, Byte by Byte.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/cyr580" class="github-corner" title="关注我GitHub" aria-label="关注我GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2025/04/30/2025-04-30-mcpproxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TBXark/mcp-proxy 构建你的 MCP 代理服务器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-04-30 12:00:00" itemprop="dateCreated datePublished" datetime="2025-04-30T12:00:00+08:00">2025-04-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MCP-Proxy/" itemprop="url" rel="index"><span itemprop="name">MCP-Proxy</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">使用 TBXark/mcp-proxy 构建高效、安全的 MCP 代理服务器，简化多服务管理，提升 AI 应用性能</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="TBXark-mcp-proxy-教程：构建你的-MCP-代理服务器"><a href="#TBXark-mcp-proxy-教程：构建你的-MCP-代理服务器" class="headerlink" title="TBXark/mcp-proxy 教程：构建你的 MCP 代理服务器"></a>TBXark/mcp-proxy 教程：构建你的 MCP 代理服务器</h2><p><strong>项目地址:</strong> <a target="_blank" rel="noopener" href="https://github.com/TBXark/mcp-proxy">https://github.com/TBXark/mcp-proxy</a></p>
+<h3 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h3><p><code>mcp-proxy</code> 是一个强大的 MCP (Model Context Protocol) 代理服务器，旨在简化和统一对多个 MCP 资源服务器的访问。通过将多个 MCP 服务器聚合到一个单一的 HTTP 入口点，<code>mcp-proxy</code> 极大地简化了客户端配置和管理，尤其是在复杂的 AI 应用场景中。</p>
+<h3 id="什么是-MCP？"><a href="#什么是-MCP？" class="headerlink" title="什么是 MCP？"></a>什么是 MCP？</h3><p>MCP (Model Context Protocol) 是一种用于在不同系统或服务之间传递上下文信息的协议。在人工智能领域，MCP 充当桥梁，允许在模型的不同组件之间高效地共享数据、配置和状态信息。这对于构建模块化、可扩展且易于维护的 AI 系统至关重要。</p>
+<h3 id="为什么需要-MCP-代理服务器？"><a href="#为什么需要-MCP-代理服务器？" class="headerlink" title="为什么需要 MCP 代理服务器？"></a>为什么需要 MCP 代理服务器？</h3><p>在微服务架构盛行的今天，一个 AI 应用可能依赖于多个独立的 MCP 服务器来提供不同的功能。直接与这些服务器交互会带来以下挑战：</p>
+<ul>
+<li>  <strong>配置复杂性:</strong> 客户端需要维护多个服务器的地址和认证信息。</li>
+<li>  <strong>管理困难:</strong> 难以对多个 MCP 服务器进行统一的管理和监控。</li>
+<li>  <strong>安全风险:</strong> 每个客户端都需要单独进行权限控制，增加了安全漏洞的风险。</li>
+</ul>
+<p><code>mcp-proxy</code> 通过以下方式解决了这些问题：</p>
+<ul>
+<li>  <strong>统一入口:</strong> 将多个 MCP 服务器聚合到一个地址，客户端只需与代理服务器交互。</li>
+<li>  <strong>简化配置:</strong> 客户端只需要配置一个代理服务器地址，无需关心后端多个 MCP 服务器的细节。</li>
+<li>  <strong>灵活管理:</strong> 可以对 MCP 服务器进行统一的管理和控制，例如权限控制、流量控制、日志记录等。</li>
+<li>  <strong>增强安全性:</strong> 集中进行身份验证和授权，降低安全风险。</li>
+</ul>
+<h3 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h3><ul>
+<li>  <strong>多 MCP 客户端代理:</strong> 连接到多个 MCP 资源服务器，并将它们的功能整合到一个统一的接口中。</li>
+<li>  <strong>SSE (Server-Sent Events) 支持:</strong> 提供 SSE 服务器，允许客户端接收来自 MCP 服务器的实时更新。这对于需要实时反馈的应用场景非常有用。</li>
+<li>  <strong>灵活的配置选项:</strong> 支持多种客户端类型 (<code>stdio</code>, <code>sse</code> 和 <code>streamable-http</code>)，并提供丰富的配置选项，以满足不同的需求。</li>
+<li>  <strong>工具过滤:</strong> 允许你根据需要选择性地启用或禁用特定的工具，从而增强系统的安全性并减少不必要的资源消耗。</li>
+<li>  <strong>认证和授权:</strong> 支持基于令牌的身份验证，确保只有授权的客户端才能访问 MCP 服务器。</li>
+<li>  <strong>日志记录:</strong> 记录所有请求和响应，方便进行故障排除和性能分析。</li>
+<li>  <strong>可扩展性:</strong> 易于扩展，可以添加新的 MCP 服务器和功能。</li>
+</ul>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><code>mcp-proxy</code> 提供了多种安装方式，你可以根据自己的需求选择最适合的方式。</p>
+<h4 id="1-从源码构建"><a href="#1-从源码构建" class="headerlink" title="1. 从源码构建"></a>1. 从源码构建</h4><p>这是最灵活的安装方式，允许你自定义构建过程。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/TBXark/mcp-proxy.git</span><br><span class="line">cd mcp-proxy</span><br><span class="line">make build</span><br><span class="line">./build/mcp-proxy --config path/to/config.json</span><br></pre></td></tr></table></figure>
+
+<p>详细步骤：</p>
+<ol>
+<li> <strong>克隆代码仓库:</strong> 使用 <code>git clone</code> 命令将 <code>mcp-proxy</code> 的代码仓库克隆到你的本地机器上。</li>
+<li> <strong>进入项目目录:</strong> 使用 <code>cd</code> 命令进入 <code>mcp-proxy</code> 目录。</li>
+<li> <strong>构建项目:</strong> 使用 <code>make build</code> 命令编译项目。这将会生成一个可执行文件 <code>mcp-proxy</code> 在 <code>build</code> 目录下。</li>
+<li> <strong>运行代理服务器:</strong> 使用 <code>./build/mcp-proxy --config path/to/config.json</code> 命令运行 <code>mcp-proxy</code>，并指定配置文件的路径。</li>
+</ol>
+<p><strong>依赖:</strong></p>
+<ul>
+<li>  Go 语言环境 (&gt;= 1.18)</li>
+<li>  Make</li>
+</ul>
+<h4 id="2-使用-Go-安装"><a href="#2-使用-Go-安装" class="headerlink" title="2. 使用 Go 安装"></a>2. 使用 Go 安装</h4><p>如果你已经安装了 Go 语言环境，可以使用 <code>go install</code> 命令快速安装 <code>mcp-proxy</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go install github.com/TBXark/mcp-proxy@latest</span><br></pre></td></tr></table></figure>
+
+<p>这将会将 <code>mcp-proxy</code> 安装到你的 <code>$GOPATH/bin</code> 目录下。确保 <code>$GOPATH/bin</code> 目录已经添加到你的 <code>PATH</code> 环境变量中。</p>
+<h4 id="3-使用-Docker"><a href="#3-使用-Docker" class="headerlink" title="3. 使用 Docker"></a>3. 使用 Docker</h4><p>Docker 是一个流行的容器化平台，可以让你轻松地部署和管理 <code>mcp-proxy</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 9090:9090 -v /path/to/config.json:/config/config.json ghcr.io/tbxark/mcp-proxy:latest</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者</span></span><br><span class="line">docker run -d -p 9090:9090 ghcr.io/tbxark/mcp-proxy:latest --config https://example.com/path/to/config.json</span><br></pre></td></tr></table></figure>
+
+<p>详细说明：</p>
+<ul>
+<li>  <code>-d</code>: 在后台运行容器。</li>
+<li>  <code>-p 9090:9090</code>: 将主机的 9090 端口映射到容器的 9090 端口。你可以根据需要修改端口号。</li>
+<li>  <code>-v /path/to/config.json:/config/config.json</code>: 将主机上的配置文件挂载到容器中。你需要将 <code>/path/to/config.json</code> 替换为你实际的配置文件路径。</li>
+<li>  <code>ghcr.io/tbxark/mcp-proxy:latest</code>: <code>mcp-proxy</code> 的 Docker 镜像。</li>
+<li>  <code>--config https://example.com/path/to/config.json</code>:  你也可以使用一个 URL 作为配置文件。</li>
+</ul>
+<p><strong>注意:</strong></p>
+<ul>
+<li>  你需要将 <code>/path/to/config.json</code> 替换为你实际的配置文件路径。</li>
+<li>  确保 Docker 已经正确安装并运行。</li>
+</ul>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><code>mcp-proxy</code> 使用 JSON 格式的配置文件。以下是一个示例配置：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;mcpProxy&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;baseURL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://mcp.example.com&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;addr&quot;</span><span class="punctuation">:</span> <span class="string">&quot;:9090&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;MCP Proxy&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;panicIfInvalid&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;logEnabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;authTokens&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;DefaultTokens&quot;</span></span><br><span class="line">      <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;mcpServers&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;github&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;npx&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;-y&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;@modelcontextprotocol/server-github&quot;</span></span><br><span class="line">      <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;env&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;GITHUB_PERSONAL_ACCESS_TOKEN&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&lt;YOUR_TOKEN&gt;&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;toolFilter&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;mode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;block&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;list&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">&quot;create_or_update_file&quot;</span></span><br><span class="line">          <span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;fetch&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;uvx&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;mcp-server-fetch&quot;</span></span><br><span class="line">      <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;panicIfInvalid&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;logEnabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;authTokens&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">          <span class="string">&quot;SpecificTokens&quot;</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;amap&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://mcp.amap.com/sse?key=&lt;YOUR_TOKEN&gt;&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="配置文件结构"><a href="#配置文件结构" class="headerlink" title="配置文件结构"></a>配置文件结构</h4><p>配置文件主要分为两个部分：</p>
+<ul>
+<li>  <code>mcpProxy</code>: 配置代理服务器自身的属性。</li>
+<li>  <code>mcpServers</code>: 配置需要代理的 MCP 服务器。</li>
+</ul>
+<h4 id="mcpProxy-配置项"><a href="#mcpProxy-配置项" class="headerlink" title="mcpProxy 配置项"></a><code>mcpProxy</code> 配置项</h4><ul>
+<li>  <code>baseURL</code>:  公共可访问的服务器 URL。用于生成客户端的 URL。例如: <code>&quot;https://your-mcp-proxy.com&quot;</code></li>
+<li>  <code>addr</code>: 服务器监听的地址。例如: <code>&quot;:9090&quot;</code> (监听所有接口的 9090 端口)</li>
+<li>  <code>name</code>: 服务器的名称。例如: <code>&quot;My MCP Proxy&quot;</code></li>
+<li>  <code>version</code>: 服务器的版本。例如: <code>&quot;1.0.0&quot;</code></li>
+<li>  <code>options</code>:  <code>mcpServers</code> 的默认选项。</li>
+</ul>
+<h4 id="mcpServers-配置项"><a href="#mcpServers-配置项" class="headerlink" title="mcpServers 配置项"></a><code>mcpServers</code> 配置项</h4><p><code>mcpServers</code> 是一个 JSON 对象，每个 key 代表一个 MCP 服务器的名称，value 是该服务器的配置信息。</p>
+<ul>
+<li><code>transportType</code>: MCP 客户端的传输类型。支持以下三种类型：<ul>
+<li>  <code>stdio</code>:  MCP 客户端是一个命令行工具，在子进程中运行。</li>
+<li>  <code>sse</code>: MCP 客户端是一个支持 SSE (Server-Sent Events) 的服务器。</li>
+<li>  <code>streamable-http</code>: MCP 客户端是一个支持 HTTP 流的服务器。</li>
+</ul>
+</li>
+</ul>
+<h5 id="stdio-类型的-MCP-服务器配置"><a href="#stdio-类型的-MCP-服务器配置" class="headerlink" title="stdio 类型的 MCP 服务器配置"></a><code>stdio</code> 类型的 MCP 服务器配置</h5><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;github&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;npx&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;-y&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;@modelcontextprotocol/server-github&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;env&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;GITHUB_PERSONAL_ACCESS_TOKEN&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&lt;YOUR_TOKEN&gt;&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;toolFilter&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;mode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;block&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;list&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;create_or_update_file&quot;</span></span><br><span class="line">      <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  <code>command</code>: 运行 MCP 客户端的命令。例如: <code>&quot;npx&quot;</code></li>
+<li>  <code>args</code>: 传递给命令的参数。例如: <code>[&quot;-y&quot;, &quot;@modelcontextprotocol/server-github&quot;]</code></li>
+<li>  <code>env</code>:  设置命令的环境变量。例如: <code>&#123;&quot;GITHUB_PERSONAL_ACCESS_TOKEN&quot;: &quot;&lt;YOUR_TOKEN&gt;&quot;&#125;</code></li>
+<li>  <code>options</code>: 客户端特定的选项。</li>
+</ul>
+<h5 id="sse-类型的-MCP-服务器配置"><a href="#sse-类型的-MCP-服务器配置" class="headerlink" title="sse 类型的 MCP 服务器配置"></a><code>sse</code> 类型的 MCP 服务器配置</h5><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;amap&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://mcp.amap.com/sse?key=&lt;YOUR_TOKEN&gt;&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  <code>url</code>: MCP 客户端的 URL。例如: <code>&quot;https://mcp.amap.com/sse?key=&lt;YOUR_TOKEN&gt;&quot;</code></li>
+</ul>
+<h5 id="streamable-http-类型的-MCP-服务器配置"><a href="#streamable-http-类型的-MCP-服务器配置" class="headerlink" title="streamable-http 类型的 MCP 服务器配置"></a><code>streamable-http</code> 类型的 MCP 服务器配置</h5><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;fetch&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://localhost:8080/fetch&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;transportType&quot;</span><span class="punctuation">:</span> <span class="string">&quot;streamable-http&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;headers&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;Authorization&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Bearer &lt;YOUR_TOKEN&gt;&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;timeout&quot;</span><span class="punctuation">:</span> <span class="number">30</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  <code>url</code>: MCP 客户端的 URL。例如: <code>&quot;http://localhost:8080/fetch&quot;</code></li>
+<li>  <code>transportType</code>: 必须设置为 <code>&quot;streamable-http&quot;</code>。</li>
+<li>  <code>headers</code>:  随请求发送到 MCP 客户端的 Headers。例如: <code>&#123;&quot;Authorization&quot;: &quot;Bearer &lt;YOUR_TOKEN&gt;&quot;&#125;</code></li>
+<li>  <code>timeout</code>: 请求超时时间，单位为秒。</li>
+</ul>
+<h4 id="options-配置项"><a href="#options-配置项" class="headerlink" title="options 配置项"></a><code>options</code> 配置项</h4><p><code>options</code> 部分包含 <code>mcpProxy</code> 和 <code>mcpServers</code> 的通用选项。</p>
+<ul>
+<li>  <code>panicIfInvalid</code>: 如果为 <code>true</code>，当客户端无效时，服务器会 panic。默认值为 <code>false</code>。</li>
+<li>  <code>logEnabled</code>: 如果为 <code>true</code>，服务器会记录客户端的请求。默认值为 <code>false</code>。</li>
+<li>  <code>authTokens</code>: 客户端的身份验证令牌列表。<code>Authorization</code> header 将根据此列表进行检查。例如: <code>[&quot;token1&quot;, &quot;token2&quot;]</code></li>
+<li>  <code>toolFilter</code>: 可选的工具过滤配置。<strong>此配置仅在 <code>mcpServers</code> 中有效。</strong></li>
+</ul>
+<h5 id="toolFilter-配置"><a href="#toolFilter-配置" class="headerlink" title="toolFilter 配置"></a><code>toolFilter</code> 配置</h5><p><code>toolFilter</code> 允许你根据需要选择性地启用或禁用特定的工具。</p>
+<ul>
+<li><code>mode</code>: 指定过滤模式。必须显式设置为 <code>allow</code> 或 <code>block</code>。<ul>
+<li>  <code>allow</code>: 只允许列表中的工具。</li>
+<li>  <code>block</code>: 阻止列表中的工具。</li>
+</ul>
+</li>
+<li>  <code>list</code>: 要过滤的工具名称列表。</li>
+</ul>
+<p>例如，以下配置只允许 <code>github</code> 服务器使用 <code>get_issue</code> 和 <code>create_issue</code> 工具：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;github&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;npx&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;-y&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;@modelcontextprotocol/server-github&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;env&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;GITHUB_PERSONAL_ACCESS_TOKEN&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&lt;YOUR_TOKEN&gt;&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;toolFilter&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;mode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;allow&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;list&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;get_issue&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;create_issue&quot;</span></span><br><span class="line">      <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>启动 <code>mcp-proxy</code> 后，你可以通过以下 URL 访问代理的 MCP 服务器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http(s)://&#123;baseURL&#125;/&#123;clientName&#125;/sse</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  <code>&#123;baseURL&#125;</code>:  <code>mcpProxy</code> 配置中的 <code>baseURL</code>。</li>
+<li>  <code>&#123;clientName&#125;</code>:  <code>mcpServers</code> 中 MCP 服务器的名称。</li>
+</ul>
+<p>例如，如果你的 <code>baseURL</code> 是 <code>https://mcp.example.com</code>，并且你配置了一个名为 <code>github</code> 的 MCP 服务器，那么你可以通过以下 URL 访问该服务器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://mcp.example.com/github/sse</span><br></pre></td></tr></table></figure>
+
+<h4 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h4><p><code>mcp-proxy</code> 支持以下命令行参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Usage of mcp-proxy:</span><br><span class="line">  -config string</span><br><span class="line">        path to config file or a http(s) url (default &quot;config.json&quot;)</span><br><span class="line">  -help</span><br><span class="line">        print help and exit</span><br><span class="line">  -version</span><br><span class="line">        print version and exit</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  <code>-config</code>: 指定配置文件的路径。默认值为 <code>config.json</code>。你也可以使用一个 HTTP(S) URL 作为配置文件。</li>
+<li>  <code>-help</code>: 打印帮助信息并退出。</li>
+<li>  <code>-version</code>: 打印版本信息并退出。</li>
+</ul>
+<h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><ul>
+<li>  <strong>使用环境变量管理敏感信息:</strong>  不要将敏感信息（例如 API 密钥、访问令牌）直接Hardcode在配置文件中。而是使用环境变量来传递这些信息。</li>
+<li>  <strong>配置日志记录:</strong> 启用日志记录可以帮助你诊断问题和监控系统性能。</li>
+<li>  <strong>使用工具过滤:</strong>  只允许必要的工具，可以提高系统的安全性。</li>
+<li>  <strong>定期更新:</strong>  定期更新 <code>mcp-proxy</code> 到最新版本，以获取最新的功能和安全补丁。</li>
+<li>  <strong>监控系统资源:</strong> 监控 <code>mcp-proxy</code> 的 CPU、内存和网络使用情况，确保系统运行稳定。</li>
+</ul>
+<h3 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h3><ul>
+<li>  该项目受到了 <a target="_blank" rel="noopener" href="https://github.com/adamwattis/mcp-proxy-server">adamwattis/mcp-proxy-server</a> 项目的启发。</li>
+<li>  如果你对部署有任何疑问，可以参考 <a target="_blank" rel="noopener" href="https://miantiao.me/posts/guide-to-running-mcp-server-in-a-sandbox/">《在 Docker 沙箱中运行 MCP Server》</a>(<a target="_blank" rel="noopener" href="https://github.com/ccbikai">@ccbikai</a>)。</li>
+</ul>
+<h3 id="许可证"><a href="#许可证" class="headerlink" title="许可证"></a>许可证</h3><p>本项目使用 MIT 许可证。有关详细信息，请参阅 <a target="_blank" rel="noopener" href="https://github.com/TBXark/mcp-proxy/blob/master/LICENSE">LICENSE</a> 文件。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><code>mcp-proxy</code> 是一个功能强大且易于使用的 MCP 代理服务器，可以帮助你更轻松地管理和使用多个 MCP 服务器。希望本教程能够帮助你快速上手 <code>mcp-proxy</code>，并将其应用到你的 AI 项目中。通过合理配置和使用 <code>mcp-proxy</code>，你可以构建更模块化、可扩展和安全的 AI 系统。</p>
+<pre><code>
+</code></pre>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>CYRCOM
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://cyr580.github.io/2025/04/30/2025-04-30-mcpproxy/" title="TBXark&#x2F;mcp-proxy 构建你的 MCP 代理服务器">https://cyr580.github.io/2025/04/30/2025-04-30-mcpproxy/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MCP-Proxy/" rel="tag"># MCP-Proxy</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/04/13/2025-04-13-mcp/" rel="prev" title="释放AI超能力：ChatWise MCP 玩转指南，打造你的智能助理">
+      <i class="fa fa-chevron-left"></i> 释放AI超能力：ChatWise MCP 玩转指南，打造你的智能助理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/05/02/2025-05-01-pve/" rel="next" title="2025年PVE8最新安装使用指南|新手入门|安装|优化|Proxmox VE 8.3">
+      2025年PVE8最新安装使用指南|新手入门|安装|优化|Proxmox VE 8.3 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TBXark-mcp-proxy-%E6%95%99%E7%A8%8B%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%BD%A0%E7%9A%84-MCP-%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">TBXark&#x2F;mcp-proxy 教程：构建你的 MCP 代理服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">项目简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-MCP%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">什么是 MCP？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-MCP-%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">为什么需要 MCP 代理服务器？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E7%89%B9%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">功能特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.5.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%8E%E6%BA%90%E7%A0%81%E6%9E%84%E5%BB%BA"><span class="nav-number">1.5.1.</span> <span class="nav-text">1. 从源码构建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8-Go-%E5%AE%89%E8%A3%85"><span class="nav-number">1.5.2.</span> <span class="nav-text">2. 使用 Go 安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E4%BD%BF%E7%94%A8-Docker"><span class="nav-number">1.5.3.</span> <span class="nav-text">3. 使用 Docker</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">1.6.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">1.6.1.</span> <span class="nav-text">配置文件结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mcpProxy-%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">1.6.2.</span> <span class="nav-text">mcpProxy 配置项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mcpServers-%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">1.6.3.</span> <span class="nav-text">mcpServers 配置项</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#stdio-%E7%B1%BB%E5%9E%8B%E7%9A%84-MCP-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">1.6.3.1.</span> <span class="nav-text">stdio 类型的 MCP 服务器配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sse-%E7%B1%BB%E5%9E%8B%E7%9A%84-MCP-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">1.6.3.2.</span> <span class="nav-text">sse 类型的 MCP 服务器配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#streamable-http-%E7%B1%BB%E5%9E%8B%E7%9A%84-MCP-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">1.6.3.3.</span> <span class="nav-text">streamable-http 类型的 MCP 服务器配置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#options-%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">1.6.4.</span> <span class="nav-text">options 配置项</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#toolFilter-%E9%85%8D%E7%BD%AE"><span class="nav-number">1.6.4.1.</span> <span class="nav-text">toolFilter 配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.7.</span> <span class="nav-text">使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0"><span class="nav-number">1.7.1.</span> <span class="nav-text">命令行参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">1.8.</span> <span class="nav-text">最佳实践</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%84%9F%E8%B0%A2"><span class="nav-number">1.9.</span> <span class="nav-text">感谢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%B8%E5%8F%AF%E8%AF%81"><span class="nav-number">1.10.</span> <span class="nav-text">许可证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.11.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CYRCOM"
+      src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+  <p class="site-author-name" itemprop="name">CYRCOM</p>
+  <div class="site-description" itemprop="description">Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cyr580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cyr580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CNCYRCOM" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CNCYRCOM" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CYRCOM</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '919cd316da6bdc2c2e6a',
+      clientSecret: 'ae2c200effb3d1e09777cdba146557d4c2eb8bea',
+      repo        : 'cyr580.github.io',
+      owner       : 'cyr580',
+      admin       : ['cyr580'],
+      id          : '8ca4367986970fa005b707adb51800cc',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

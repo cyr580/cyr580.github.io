@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cyr580.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"搜索文章","hits_empty":"未找到结果：${query}","hits_stats":"共${hits}条结果，用时${time}毫秒"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="Welcome to my blog, enter password to read.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Github Actions">
+<meta property="og:url" content="https://cyr580.github.io/2021/03/29/2021-03-29-daily-4/index.html">
+<meta property="og:site_name" content="iOSByte">
+<meta property="og:description" content="Welcome to my blog, enter password to read.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-29T12:08:30.000Z">
+<meta property="article:modified_time" content="2021-03-29T12:08:30.000Z">
+<meta property="article:author" content="CYRCOM">
+<meta property="article:tag" content="ios14">
+<meta property="article:tag" content="github">
+<meta property="article:tag" content="hexo">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://cyr580.github.io/2021/03/29/2021-03-29-daily-4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Github Actions | iOSByte</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GTGCJ6QK00"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GTGCJ6QK00');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">iOSByte</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Navigating iOS, Byte by Byte.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/cyr580" class="github-corner" title="关注我GitHub" aria-label="关注我GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2021/03/29/2021-03-29-daily-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Github Actions
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-29 20:08:30" itemprop="dateCreated datePublished" datetime="2021-03-29T20:08:30+08:00">2021-03-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/github/" itemprop="url" rel="index"><span itemprop="name">github</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="e20c526269bf61ab7307243aa49b1aef4566df28a04d79f152849ab504593ecb">2b2d79dcaaaf257561ebd420255d9e4a12469237d7ffaaef51054530625fd76a1622362fb6a57f48959fe214c70a592ce378cb21e6871187b75de46d0dfad0dfee6a0f55ea70211a2dd944903b97a637714d2927fe7154055892cd36e2a25af4148b2af43c994619e4c6a4d6da26c9bc92fc75acea0205d77180aa0e4502eb3076e68f205ed45cc2a4b9a6f16eeb2e7b4f196758cc576528e872fe789d752edb09aee5a6cffb29579cce21a00cef9353b12802536deb13b8478e753ac86ce4b83c4ba556179ce4be2e65a3655ac39eac41fcba452ae7acf3ac302279ed2c6b25304d8f98358c4c6d6373ae1288351609dc8b1f18377fa2b08a74d7ac120181b864257dbf0e877db0f5edfac957d7c236467d8edce01e904edeb59f1942f2d2d24424072ea69d64a4038d2bb5bed8789119656374896842c7ccb2f97833717c40fb9182bf170e42520b7f9de8fa3fbcde8ca83b8f64fd5a49e000cd5b32ddcae0f7019e7a674622925ddf0d67dafdbf34d1baf1d48eada3a3cf64f85665217e297b38ee99ef909310be85db2beb14708596d1f1fb5c545f986bc6c6fd5ab1cd18797e7678cd7f7b2cf9606aad56dbb73ab9b8a806f585c691e8960ba8d9e99feefc1f2a353d64efb4bc64176474335f5a7ea109e131ab9b24ed96d79cb26a33ae20b3e225d9146e6d99cce434a520a8ebfb668073787d1966fad1e4d5fc0bb69804a554159c891351cabf0988d1b8b91a85fa1bbce6f7dd20773f7d94c417c40c5a749b2430f4f3b53b61b273bd28a7274f6cc360dde708d66939abd3a68ede2b69485223cbb2ecffe93b326b49e7d8aa56f364f3ec22781cfeb8618c58d66a39f461c8a568573e8d6473e0901117ea031d729b68192af07328a1a8256e1224ad6fff87f563cac5669344be3e15841995359711db3666dae9c17100ad30dfb94e5d785aa4f7ab55dc1cccf3cdaa25cfa01019f5196c4d630509c6b377da7299d2170061acbc34dba7bcffb655a840ae7c5b5340ebe8c466507a26c33ab5efde836d9b32704e9e2eb6c2684add34dc60caf6d7961c53bb131a71cf2ff1b51966f337f67d562f143fb692c274057a397500d8c40f32eadba8444a52762f55424f79bfea926fd39ff1ef63af825e91f99aa1dea75b3073aa662264259eb830765a40eb6b751da220464ffb15dbe33aa9aedc8caf6a261d953404e31e53845c5af29691473af073107ad06bbfbdfea4dd70370a121a414c84f1cc7efa2e149151fd359733e20739cc624dfacff14997938260886aaf0902e4a888b67fb4a106cbbf88e7565ccccf9c265c049a3965f0bdd1f6859791fea7d755c5e3007c7bf36850dfaf0604667db4844a1685377db588ad4ced3c4e72d0c3fe8f12ca4138253c702537d9e060acb2bd8c6cf7d4faab32065745aa02fcf2a71677b07de3e3f45abbd157e2f99719755d7fce08271777a07f3d92bc9f0522d10fd14fe178f6789fe1947e6534746fd192b0dd07edbd65004bb63d61614139262234a379ccfc3e9e762bb583440b3a308655f02af4381d70710396c86540e385b55df05bfb5a9357ba0662d1edcfc2084dee2670c41464f50792c55b7b39dcc11fcbf60850b4df6c99b7d1c62a4e1782837f6d731389e46750c4371f121dbf4c3a01403b3753e68c8a263f9fdc47529a82ba6ea4f379fc547697b4a9fc57001d7f25813d2cc5eb002ae647fd46380a63f9923020785a790c11c3866ea726cdf92e360aa19763cd4ebbeac425e815ce54624f135f4347e8ae3e84b174775c2bae8e50a8c29e3a455e228789344766073888ab50f7f2b29d54d19df27a9a352906b47e968dc024e2a145035355959cc8211b337849c1559badbee38bb6470e8a7376481083554523e86d677f06aea38cc0f60650947420a39c72f00ea0eafc6c39aed77f2a3af0160c8ae7ce54da81c0dccf30c539624da2b4c8aa88648744ebb3fa4150fd81ffbe12dad6de9b8d7ba74e068c2ac563aa80da81d578f3141fbed76d350d4a280ef008c7423561e9cf13f13bedfb869dc0cb5dc1694c6f3774e719c4a586f369ba1414327923566d7f75b168e056595b546e5de89c8e3f36592f12c5f539e37196f0fd916559ace8dea4dddb7295dcf7c2d0d04a1c68b378e0fe1dc7bc59617f1c48c8f2db1be012f95169b44fbe3e5cb276e3197070a4947e262fe3800cf49255ca86a3a8ba97f42b16fc7a5e96a2c2ed780468bfda3854c9ed529fb245aad561b22f04d533a766d0891db0fcd5efc8f94aa94b430fc7b2f558abebc5dcf7c4d815b3c5beeee438c03477904fe4802637f42005c7b230417d8426ddc75b12b16de4c387ea3d0246dc762bc665c3c7ec43c717ec4eb8b73e776feb5786629d6a30c19b034f7cf0887b4ead77d82c05e8a34218a69761e3c6c37529989b6c8c82790e018d53dfce0db8840749d0f66fedb820ddc03c893aabab00db0ee93585a12c91c6750008d38bc89e330476db8c226d935b2c31d9c2c9e8e5f4edd3cfc8593eb7bcb6ffa44c3fa46aaf74189b06d06630b17c1a57f203585ec9b72663a7e137a8c95d171920653b37f46ea27918bda1f6123d801e09c84c078a983b4679e3dd6682be0107df98c4ca93887405b59a57daea16cf0b373de6f66ddb4a00232156a7c6bf29b57d6152a0ceaee753e130648deeec1d09291bfa877f50ee7f8b8c1cbc3d96403790be599ec18644472eaca6ae2a539e09d79612be62d7287afe52bf34c4a1177716f24c87ffd32c98bd0fb093cd481b5a10b234e83c5666486246abce68819e39d6cc8a706af96c13f0616720460cef058e60ede49d5e70dbac16c33def18958982bb89998aa650e9dcb9029344aa200fbb9cf3e67c21cf4ad63a0d0220bb8ad86003badd0f51ddca7738ea13eec70460151003c8765c5e472fc870106cce64c54edaac23bd0e90c32ebef41c4846270de40db1f6e8f46abb4be7fb9f7aedb06c0c038a5698d17d7e8a9561d78f1e92c72fa6604bea0c0a0de4efffff82ae334043729a235d84fa0a7158d6dbd9f0b21c803afc95d9f55486bdf39219f6c925e2c5406ef6c0efa04ef54ef3a642c04ac2833005f039b0380486889b222bc453297560516bb4820e43a87e660e95fa9c1f27d7fe85f8af1997c03e0b0293c89c884f20ea7491a854090efa205927ace9ff4fd6d098ebed7f093ffef843e6df46eb0d85e09211d057f82eafa679049363612bc9696da928a51e2fb3adaba2e4b9c656d268568b6b0ef58318f5ed3c934ec4f0ccae7f76cac09131c2839b1c035492ce1cf59f4a151e237f82f1e884649bed37eabb876f8786e80cc48a3660d4668d1b7968a4028e90510b9f74579e7f1dae89f182fc400673d7b4a0c94d6f670d23b9fa6091373eaa55cf99d548b3f3842a8a8b851bcae3f63dc8ba11dc558868f03ed130442bee678fe24e1cbbc50eb13ffa27f093defceb53880cba11d784dac68ec119829fc1a2af44017599e5bad11c045ea2a1684297350ab705230c8b809c0658543454105928dbe99bb507d62cbf8fbe97b389cbf74b77f0f50f8836102709d5ae90d9b59f5e184cee458c53388ac71b77d5ee309c8edc4c5115289fa8cc67008c047899e5ed6bfbc4b9a612f4a85e6b229977b9779d43f03464e4e9c25dd92bbf293af3cecc33b19cd007d84b89069fc130906bbef8c20358d7ff7f83819050d34269b322ca48b23f16f2f5b34e048f8680ba4adcaf706934f997442a1bb30e9883125a3da88040b16210346065bf0f897f6bb490487a1e76afcf3cbe929f0cbf7698a8c95f0a8b3e2ecc2f899fb56eebf7a0d4a2428bc30857e66d67cd66e9a1500f91a66c646874c3e541b1a063f9318e502abaab5ff6705989c7a90ebaca3706d22b7337cd70284c2a603fc1472572ec56fb70155ab851ac4f9567a0796021a8498318156f183c100b17a15744e4947caa24246611a79076996795b61bcca472193b3b144f5df8126afc085e3b883550386136b13ed907057bc7a64df65c57df7a2d1cc56c11a47948f84033d3f4043008f07c7d1482f0bf01380264ff9d6c11f8ad3b869d72512b0a6eb07c12080e5ae06bb14651b2b106645bacee6c52a96cdd75b6a15c53ca0b687e2bf32b4714d45200e81d5049741130c663ae0f8b72a396ee8b52269d6b8873a0f2da00fdfbb84d3120fe6f476b329848f86d62cc600af4d826e869f49af44cae56b91c1c15f4800eb210c533870f3840ff47a8d974f960eb3ee0941a4eb2ea8508020e2d19d1e9a78fac409c183627042f282bd7157afaabc95729e450bdf7c035f0a9dbcc939e8a7bfaef574e68bb8adf5a35e2c3b1772f3c557506c109995d29931ef79adb0e78773527deae571bae4a85c874ea220bf88ec3be249fc91a7d213004a2b934d5db95595ef7aaf8348ac14da3d11e961d4b43b0af13fc25711cd5b5135565620386a2805561de84ef04967c902246c724faba0ce127ea0838dd7fe0ef582177593d2346a2fc8565390225112fcae7cd6ba0a1b242770b9b8eab258c423f42360bc001bf52557b89a3d357f4fa0b5fe10d5cfb9b5cc5777bb12271d999e332c57beb2cebcee99892324a7c92653c590cc56548bfb50e67da18b48f14182505dea6e55d61b7dc393e41dcc5b463714e569ddbe42bd845583d7d000d57cc8952c9b6f8057e3e3690c6679f32a5cca14262a2c7c483f22612128a486a2b813f43084ca3771f0b8f4a6949e9869b602b25dd2b9e56e22a17a5e83d4b8e7db484e3b90343c2d7c80e0e595c3c936702c67fb1f0102f7c97c25d2394fb2d89ab763624ec03fb476dfbbdc0cf96a6e07f899f4163598f8d02132b9927d010be593e9a12c4b033b8a18dfa4504dd24058c5b32c54389b272b20c86a3d31e779fda56b10e2417727a5b7c5f47e41794c07c00c88cf8f5737d0fdd1f3baeb8db0df9a0baaa1438d908b933d5defbc46f35eb4cea82eab40f7045f3679659b9f472e7a0994765044c3d377c4763cfcc3b0add655e7f452b695a37bf4cbf3898581e3f19fd5e0ba7110ad9c9653b96b61c963ef25b19d69081eb6d23d51ae324ac8ad26020f478d7c7f47260ec38c2dc1605fc5594ac7808cff436bc4abfcd3628a807778bb4899694a3b243c94a7fb8624ffde43c5ddf5358146276860217d8346ef77bfd4d6cc4863a560ed41d06700a6c45b119cb931287a29683ff8012d307df85bcce20fb430de12cd991f08b1e3105377b13a2731dab4c68f0399439cd1a50e1cbc357bf12dca103555f9014ccc348697f91fc229625b0524ab34a2135f0a81110577e2ecd2dc2bd54d16dff59288b5ec4cb31a38487e07bbec0fff6a4dccc8c6ebc1d36ae1a9d57c6c24f7dc63c1e978c116704388e719e917e55908e304060fdec74c9494e5240e505b3848eaea093e3f13c8c958cf25070f902afa6db706aafbe56b81f0cc4924e3480b3daf8b59412e1edd0d8bfaca33300a2949f28bda0e817d6208f1dbcbffef95ed9d07e11791daa41afc3c774c6d6439b3869545aa7b9a18dbc85e9feb3d95be8e11b8f7b82cbd07c0d1777e6a31faadaa2453a0195926b9187a5610d0b9cd3fd35e66bbb590f47870606be12376e2d5e8295170440c54aec6f8f14eb0351a2c5785d4f3b62464547086a2b42975133515003c6c12107b534ad3b12250f0840ee5ad93279f50ac37645a9e6fda27b8fd21bfa3312efa311a3d52b88b591e4f2b78c8da12c11917b69a950af2eea7671390e7f5570fbb8cf2c6fedd87488391d8d5838f9e058bb0f678c1b7a58b534a81d9bb6685bf840bb7f6a72780ab7e29cb514a987513fd1592ef4a0faa5488c0229583a57a5a6bbc9e5f9ffee5297e1369e15d433d37c4a564673ee8e881e29f799b16629a464a1b8626289c69431e8037fc3c4618ddfb20e8c9fcb6499b9bb73e4f0538ac3452c1d01227e5df4fe0d910cd89cdc7e737e3512416bdda98aa7566263e30935e488c19c083e4f0543ee9a0cbcc1922baf340a1772d190f4a779cbe0a9f6e48e80017f435acf7769919eb1f99b3a859b587f7c95777f31ca147faca1ad0580e90ba1ed5623e58374262f243830cc1c</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Welcome to my blog, enter password to read.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>CYRCOM
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://cyr580.github.io/2021/03/29/2021-03-29-daily-4/" title="Github Actions">https://cyr580.github.io/2021/03/29/2021-03-29-daily-4/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ios14/" rel="tag"># ios14</a>
+              <a href="/tags/github/" rel="tag"># github</a>
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/29/2021-03-29-daily-3/" rel="prev" title="hexo安装">
+      <i class="fa fa-chevron-left"></i> hexo安装
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/30/2021-03-29-daily-5/" rel="next" title="Hexo文章加密">
+      Hexo文章加密 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CYRCOM"
+      src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+  <p class="site-author-name" itemprop="name">CYRCOM</p>
+  <div class="site-description" itemprop="description">Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cyr580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cyr580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CNCYRCOM" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CNCYRCOM" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CYRCOM</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '919cd316da6bdc2c2e6a',
+      clientSecret: 'ae2c200effb3d1e09777cdba146557d4c2eb8bea',
+      repo        : 'cyr580.github.io',
+      owner       : 'cyr580',
+      admin       : ['cyr580'],
+      id          : '35a3a35545128cd2cb05d7afd69ff308',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
