@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cyr580.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"搜索文章","hits_empty":"未找到结果：${query}","hits_stats":"共${hits}条结果，用时${time}毫秒"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="Welcome to my blog, enter password to read.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo文章加密">
+<meta property="og:url" content="https://cyr580.github.io/2021/03/30/2021-03-29-daily-5/index.html">
+<meta property="og:site_name" content="iOSByte">
+<meta property="og:description" content="Welcome to my blog, enter password to read.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-29T16:36:30.000Z">
+<meta property="article:modified_time" content="2021-03-29T16:36:30.000Z">
+<meta property="article:author" content="CYRCOM">
+<meta property="article:tag" content="ios14">
+<meta property="article:tag" content="github">
+<meta property="article:tag" content="hexo">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://cyr580.github.io/2021/03/30/2021-03-29-daily-5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Hexo文章加密 | iOSByte</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GTGCJ6QK00"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GTGCJ6QK00');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">iOSByte</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Navigating iOS, Byte by Byte.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/cyr580" class="github-corner" title="关注我GitHub" aria-label="关注我GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2021/03/30/2021-03-29-daily-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo文章加密
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-30 00:36:30" itemprop="dateCreated datePublished" datetime="2021-03-30T00:36:30+08:00">2021-03-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="cda65a8cbb3184c60255c58646b83fda97cfc656c745ba1552f79c8ceea3c1ca">d7eadd0b02eee5183a694f4706bc48026c16e01e14e13fedeb667dabc37171fbbd442f5dd218c11533622f13b6a92fb9386d31dead3e806fe8909f288b475aed79a53a9d95c493127ba6ad66a757fec0f45d344f03b1fda68228876ad91b361b17590c12bcca360e104869ae6a21c7618e767c6b0c4437b01ab0effe312f68639288a355098212297d4ae962abe80cd6800f25efcfaf41b5ad78629fcf940f0120c057081298c7a609f2f4f46d0303d1e819e73c2ee55aea9892c122297358041c26becfbdc4045b28f7a6904f1f8fd21438df4280704ec7dd8469bde26d9893167ec81eab0d6835fe23e7957896b47494b1570106956f202627d84689875fe5a11a8b8991788237dfa84c9ec7b5c5e2acd80eecb3af18795a87d7bc9c03e8646fa191915903fed439288384531e24f10b0b5b8766e66e0e6f90c22901f145c30a7ff2d9780f89bc06e12f71a00e67e7b420101fc5c360ea119a3739616f95ed8e5a2c87b1fd4aff80c9f7b4a41fac84ac7aa77fa18997e29f541ac4846ed6bab960a59bd6cca123c03f702f8268817c9177e5ce42c9b9be7d5e8844157a003f6fa43dc0bcaf3886de8ea5d466c0c8063650cc3a012e108ea31927dcfa8877dac77ccfaa08b8fb9108ca4d2da8167764d08ac9640231802bddb6a0f235f4430a1d8c889f5fbb03586de7f5e2e3f1bc1f94b8f943deff7c4b6c0ee0e1fd5f47c67a4c0dd25a3fa48b671e2dafbc37507a6b681ff6b1c2d1a43d70d3426697cf3c28277c8c2f9a5a06737141e9319a51adb9715fcf0cfdcd475c337c72926a019710b11f89c2d43df553e592acc8b767a3a6c52b05d2426d46170db6eebd6e52523faa7597a1bc76c660fa321d7008010efb05a23f1b93db31bdf507aeee46d8cf41a1fb491f1783e17a0a47944b49fef441889155584f5ed34b78bdbe2bfe4d43976049b89df203e30b23fd8ed89d18e378540e4ea1e8caed9c4777e22a70ddfdebcdf17226512e7f5ee3109edf6e1c829a65d3a0c92dd99f20155543b900c8f31903ae08bc48bb14f44f0697ac7bab7a731a82aed856998d9db23a5e057ad6daf91ff08b239f547c774b2e555b59423a8e18228db9c5ebd77678971101d89b09330c46efb73645c89fa63b9b8ed9873d80a29b61b0deaf8652f6aa3a6000d9212754836292ee0e947935bac4382b52e73d8e731e47703c74a89aa99c990db7302aa1edabd437037b10dca816512f41c66eec46512a3f963f8e5b60c2d30118638fec65a3ba7161599f3caa9316ecf1cc6cc17d12e5b606d91510e9a0dbb49b25996056f021c51bda5e3414f335bf83a21cb039f4715c8b4ec01e737265182d911958ffe5f30c22e01b37e013d350dbc408d6b4efb227716eb2da05d389aa598cc9f129a2d7654a8f6a8934a873ff723afc1e6e069bc6662cce8aadb815bc636b82cbf63db43741d09b16fd55c4748effc5e96b841238a2d563844ed3aa1f39eaaca415363d09adeb3f83c85fbefdb95328a457daf17ea16107eb86b5c12e9817c971db37f89b1fac2abfc781742ff2deb4f43dd0876c41c1bb0963e9bb19d8baf0b83065898559bc4fffff4481a0c17d5477a90b42f6b8d5d9da91f00b7319d877ccc6d5e3843c759a523d227c17f4eac5a1a81505fa5ee39ba8fbcc97c58847544bdedf7af7f7cec6a541ab6ff43bc968e9ad522b9509e97494e27dbd19924d4ac71d23d6c05391ba47f3a0b88a35b42b03073336d24a6d2f8088fdf1e64999d0158a70a617beba5692cdbcb4cb81f417ffb12584aabeea104fac220d5ffe7aa3ca44afe61063ae9a457edf82b34ccd0f0ed6ee53152bd59caba952ca8bb4556bf4ee4e7ca1a4be01be1bbba42eabe9180b66e8f2a7442aab2dafe7b6ea94f3df68e635428fbc958d7db337b287311ddaedb2559aee2deee635817868737afd6945c8288da0f091274be202d9e8545fd89a9d7597889af9c6b6a02af2bd6491f2b735ba3bac2788f9d5c2dccdaf1843efbeaadbe246435190d0059630428e9382544fb175db7bcd456bdb9bd7aaff69d502f2d40dbcfec404c82c1fabda387c9375523c1c1a80fa1d454aecabc51c5496c4f160205c51af0d93d1c1fe2a6d1815ff57e7ecba00125e4b48829315c3b59e9e5d43ade9f01dfad364d39da2f3a1dd901cf04c27436477e034091649bf95b001dee2d8c540a13b686056891e8f8cc0a23d9517e0410f7f108b3ad38cad756f4331bfebaf10a92f502df2468766be045d4d9752097b2b345f306c3300f61a1c188527a4773ae3f7e47fe0de5c75182235176cff451ef84fcbb4fd5fa7d4ae174692fc5b1d69bf6be0821ad5e466ba5ffa7970db3a7d014ab71bfbd268ba52711808ddd2d7e628614482f293e09a0278b7623c8e59e67c93789ab72645224c2a699768fb564e111e6e4af1750b0f751dad83ad76b47d99ca8152b4f11788a1602badb261bebc32c1c105fa47c9f58921beca6124c27b72dd486331a747cf1ad362a4eb4a06282278bf6acc481f0ef918dbf0d746b7b6d5a6e7787ff9b5b8b25d5618a1d2f213250697608f8f4b9daf418ae188213f72c318bdd38fa09781dfd24c97284bf65702b697ed71312e8d5c37c1ce2e04423c46cef8028883dd70f73ad3fd11d8f2383dff3267e40704eb22460c77cc21503651d3354ccc95c9d7acb2263b8303f4ae4d3a21a3901f4d26ee9073f29614d5cca7b9e34c3e55a176d95d6f33f4845f322f9bfa9cb5705e74e005ec81f7b73fb8f7f6b444527b3309eefce98fc6859581180b7738ce7f43ffae74f8e5b2895b1aa8269b38e915cd08903673888fdb8a36feb6df336610548ae641ffa0303cd3f07c50bafef2a1e536be1854638563a247eb9b1a368698bfebea1a2495ef7b4ce4bbbee7a93299404d9fcaf09731414d6f550a9e689187d0a93d6f4f7d33b3789ead17fa4c5d1592fc5a7165d1acc15fccbe561df6a1ce881296d16e81e9c76b9b94d2904ef6b9cdaad360092c89b9c0ce0de3db491982c0bfbe58fd7507ad9e7b8d104041f6eba6d023ead712c11f928b057628d0637800dcdce0d029fc2b66182d1ac70812ec6324615d70e185cc848088f6cff779aed36abbda7b0835a4bfa22171cf014f887a00102e4ff0f2ef36848ef172a9e0d2c8400bc3fd49a4e3c82892b4131fec89409399691a859b1ffabf5ccf3d4b1c9b550b7abdf1637a28a68e40b1434d954fb80cbc6e4e7dd827ed495c0d5cf7d41ec5d403d0b0386a55cbfc19f0465031173cd649e34c705413599188d69aa8595c87ec8990fcda7be391f3d7418c99c29889665cf9fed90528777cf0c0b3dccd18e5a2f1ac8dfcc6dabb1af9f6e228a0424a85a3d4774a621ae115923f1c9b42f980d57b36308e50ff4fca1829d3621841a2aae99aeb437f9e8cf9eb6a80fad83c96c7cb3c6976de65af5dd4779b040497b527bf735f06f7c9398780cddb72f3322471228a17b5afad89857095cc5e4432d97477bf6c2a4b05acbdcd24fdcfd1687bfe92adeb79fa7799bc143aaadb85efcf82fd6422ebffd303453c410bb6721eab6fcfe0face91a9648b8bf72c2c490497a8a9e4ae34ebd3f836a9c79e1b58c2859c96e8744bbc0903d0be9a1ffffd54f47334725debd97090bf40ad82501717d10bba862e731b61308572924565ae5016dd27a5e0ee5bf76511135d6db11c5081032a6b9ae69ac49c89bb1bac733f00bb13388269f2419c492f3be42de41066799860f55584c75301c0f0e64c31e55a05789bd6a44f1e2f08a584c1f80d7d48425d9a8d124f1d840ae426d6c87a34b5816e3d935dbf72a0b2a814c930328cebe45ed6ec388ab693f639d542ed725e1da734672ba976793de42875ab558055b846156704735fc0e4e231baf12bc25e3bea9289ba7df2cf1332d72ee4dd6eb3fdcc9b9fa072e0402d7bce3b40ec5d8b5520cd416082445edd793ab7885491263e0f7837dc8e3576c6cb11ecf65ed22630ef782718c18f9f33fa8c099c467f62649b102fcb9f915b4acb32b60ecad80df77ee3f7f6d352beb1cee612da694ba088b1b5081a5f4c0e11a366e58ea02c432ad2ec7df7f5f400088dcdaf6bff6c17e6bf706bceb35d9d34b9f1c48cdc340cefc6242ff2ff2f8f09db23ecf94556fe33b3dd30618110743614c5fde95b8f02716f921d8c648c71e721ba2cc7adb27d33a7cde05855dc143ccd768bb24d56d60373c9d68d20c512de6bbb25ab8f9c59135f2c0a73f6fe9875f57a3641f164f138ba67bbaa19a5509c482201cbaa9afd89917e13c199c43d7877ad1e37292083030a86940f1add033bd1a808d68a5eb0446b9e74b446e4f763defb4bb16a596071483ddb6a2e9b8c76ee7a9ca8e33e6b643da77df3ac48ea171abcc02fa31c2b73bdd52c7351cc35cd22e62a430468f37455924af87ec43d3f56574f0ff0e26e7ba6966f2ca42a75085356df651cf86a855020d6f3e711273cc38a0129f46f354b63209e17de4ca2ff026b807db5e7106b1ac0f51e4886acd579b7d67b6b43991f535a54c621f3bca1b2ac3b9b704ea48f7553ee4ca7cc766bdbe47e23ce7952826e8de996e52bdaf0b7e48174cfe91de03aeb28d04a8dda2c07028adfa839668c726c9d347233a212d24fc015a5208130aca312646a7902eef2beafa67b92084e7aeb5524f460f6fa76e1d1b033b82692fc8f0dcbbbc728b822db2d852099ab012bbe593e727ff7c69b70f2afa5e5f931a28c669034db75ab3a9b872c30277441ee218ec8b230e273e55e46932246943a4483149fa695f7ce406d69c4485c7df7e05f435a45024ddbab33b525776f07089776b3b8c76080883a290889e057c8b465e0ecdc208191fa3694aeaddf3c9b1fa295191855c4cf3ba76304260a636d012836dbf32888426f0f9763654aeb49de66d29c86d0da94d8bacc2afa23828fa655effb0ea25ce641ea038071ddff54e4a5c0af0d3b2ae27b95a372bd571078d404ed03abe317745bf3665d90ea9867d87289eacbc854962c055d919d65f1344080bcb905a4b3b9a82d1974a5ce6d7d369680fbd44c36c827ac762d066fb5bf37f906fa8a0502377cc943af449ae73e69973833c8aa7e95ee781f1834121258b465eeff</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Welcome to my blog, enter password to read.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>CYRCOM
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://cyr580.github.io/2021/03/30/2021-03-29-daily-5/" title="Hexo文章加密">https://cyr580.github.io/2021/03/30/2021-03-29-daily-5/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ios14/" rel="tag"># ios14</a>
+              <a href="/tags/github/" rel="tag"># github</a>
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/29/2021-03-29-daily-4/" rel="prev" title="Github Actions">
+      <i class="fa fa-chevron-left"></i> Github Actions
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/31/2021-03-31-daily/" rel="next" title="ios14未越狱运行hexo-git-nodejs-npm">
+      ios14未越狱运行hexo-git-nodejs-npm <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CYRCOM"
+      src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+  <p class="site-author-name" itemprop="name">CYRCOM</p>
+  <div class="site-description" itemprop="description">Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cyr580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cyr580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CNCYRCOM" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CNCYRCOM" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CYRCOM</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '919cd316da6bdc2c2e6a',
+      clientSecret: 'ae2c200effb3d1e09777cdba146557d4c2eb8bea',
+      repo        : 'cyr580.github.io',
+      owner       : 'cyr580',
+      admin       : ['cyr580'],
+      id          : '5ee5ae17f97748cc1e6aad8dfa786f28',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

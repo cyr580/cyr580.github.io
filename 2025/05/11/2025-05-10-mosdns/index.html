@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cyr580.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"搜索文章","hits_empty":"未找到结果：${query}","hits_stats":"共${hits}条结果，用时${time}毫秒"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="本文详细介绍了两种 OpenClash 与 MosDNS 配合实现 DNS 防泄漏的配置方案，帮助您确保网络隐私和安全。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenClash 与 MosDNS 配合实现 DNS 防泄漏配置教程">
+<meta property="og:url" content="https://cyr580.github.io/2025/05/11/2025-05-10-mosdns/index.html">
+<meta property="og:site_name" content="iOSByte">
+<meta property="og:description" content="本文详细介绍了两种 OpenClash 与 MosDNS 配合实现 DNS 防泄漏的配置方案，帮助您确保网络隐私和安全。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-11T07:15:00.000Z">
+<meta property="article:modified_time" content="2025-05-11T07:15:00.000Z">
+<meta property="article:author" content="CYRCOM">
+<meta property="article:tag" content="DNS">
+<meta property="article:tag" content="OpenClash">
+<meta property="article:tag" content="MosDNS">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://cyr580.github.io/2025/05/11/2025-05-10-mosdns/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>OpenClash 与 MosDNS 配合实现 DNS 防泄漏配置教程 | iOSByte</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GTGCJ6QK00"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GTGCJ6QK00');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">iOSByte</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Navigating iOS, Byte by Byte.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/cyr580" class="github-corner" title="关注我GitHub" aria-label="关注我GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2025/05/11/2025-05-10-mosdns/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OpenClash 与 MosDNS 配合实现 DNS 防泄漏配置教程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-05-11 15:15:00" itemprop="dateCreated datePublished" datetime="2025-05-11T15:15:00+08:00">2025-05-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">网络配置</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">本文详细介绍了两种 OpenClash 与 MosDNS 配合实现 DNS 防泄漏的配置方案，帮助您确保网络隐私和安全。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="OpenClash-与-MosDNS-配合实现-DNS-防泄漏配置教程"><a href="#OpenClash-与-MosDNS-配合实现-DNS-防泄漏配置教程" class="headerlink" title="OpenClash 与 MosDNS 配合实现 DNS 防泄漏配置教程"></a>OpenClash 与 MosDNS 配合实现 DNS 防泄漏配置教程</h1><p>在使用代理工具（如 OpenClash）时，正确的 DNS 配置对于确保网络安全和隐私（特别是防止 DNS 泄漏）至关重要。同时，结合 MosDNS 这样的 DNS 分流工具，可以实现更灵活和高效的 DNS 解析。</p>
+<p>本文将介绍两种常见的 OpenClash 与 MosDNS 配合实现 DNS 防泄漏的配置方案。</p>
+<h2 id="方案一：OpenClash-前置"><a href="#方案一：OpenClash-前置" class="headerlink" title="方案一：OpenClash 前置"></a>方案一：OpenClash 前置</h2><p><strong>核心思想：</strong> 让 OpenClash 作为主要的 DNS 入口，将 DNS 请求转发给 MosDNS 进行分流处理。MosDNS 根据规则将国内请求发往国内 DNS，国外请求发往国外 DNS，并在 MosDNS 中进行防泄漏处理。</p>
+<p><strong>设置步骤：</strong></p>
+<ol>
+<li><p><strong>OpenClash 设置：</strong></p>
+<ul>
+<li>  在 OpenClash 的 DNS 设置中，将 <strong>Nameserver</strong> (主 DNS 服务器) 和 <strong>Fallback</strong> (备用 DNS 服务器) 都设置为 MosDNS 的监听地址和端口。</li>
+<li>  <strong>Nameserver 设置值：</strong> <code>127.0.0.1:MosDNS的监听端口</code> (例如 <code>127.0.0.1:5335</code>)</li>
+<li>  <strong>Fallback 设置值：</strong> <code>127.0.0.1:MosDNS的监听端口</code> (例如 <code>127.0.0.1:5335</code>)</li>
+<li>  这样设置的目的是让所有 DNS 请求都先经过 OpenClash，然后由 OpenClash 统一转发给 MosDNS。</li>
+</ul>
+</li>
+<li><p><strong>MosDNS 设置：</strong></p>
+<ul>
+<li>在 MosDNS 中，配置两个服务器组：<ul>
+<li>  <strong>国内 DNS 服务器组：</strong> 正常设置国内的 DNS 服务器地址（例如 <code>223.5.5.5:53</code>, <code>119.29.29.29:53</code> 等）。</li>
+<li>  <strong>国外 DNS 服务器组：</strong> 设置国外支持 DOT/DOH 的 DNS 服务器地址（例如 <code>tls://1.1.1.1:853</code>, <code>https://8.8.8.8/dns-query</code> 等）。</li>
+</ul>
+</li>
+<li>  配置 MosDNS 的规则，将国内域名的 DNS 请求导向国内 DNS 服务器组，将国外域名的 DNS 请求导向国外 DNS 服务器组。</li>
+<li>  在 MosDNS 的设置中，找到并<strong>勾选“防 DNS 泄漏”</strong>或类似的选项。这是确保 DNS 不泄漏的关键步骤。</li>
+</ul>
+</li>
+</ol>
+<p><strong>流程：</strong> 设备 -&gt; OpenClash -&gt; MosDNS -&gt; (国内域名) 国内 DNS / (国外域名) 国外 DNS</p>
+<h2 id="方案二：MosDNS-前置"><a href="#方案二：MosDNS-前置" class="headerlink" title="方案二：MosDNS 前置"></a>方案二：MosDNS 前置</h2><p><strong>核心思想：</strong> 让 MosDNS 作为主要的 DNS 入口，根据规则将国内流量导向国内 DNS 服务器，将国外流量导向 OpenClash 的 DNS 服务端口，再由 OpenClash 通过代理处理国外 DNS 请求。MosDNS 负责防 DNS 泄漏。</p>
+<p><strong>设置步骤：</strong></p>
+<ol>
+<li><p><strong>MosDNS 设置：</strong></p>
+<ul>
+<li>在 MosDNS 中，配置两个服务器组：<ul>
+<li>  <strong>国内 DNS 服务器组：</strong> 正常设置国内的 DNS 服务器地址（例如 <code>223.5.5.5:53</code>, <code>119.29.29.29:53</code> 等）。</li>
+<li>  <strong>远程/国外 DNS 服务器组：</strong> 将此服务器组设置为 OpenClash 的 DNS 监听地址和端口。</li>
+<li>  <strong>远程/国外服务器组设置值：</strong> <code>127.0.0.1:OpenClash的DNS端口</code> (例如 <code>127.0.0.1:7874</code>)。</li>
+</ul>
+</li>
+<li>  配置 MosDNS 的规则，将国内域名的 DNS 请求导向国内 DNS 服务器组，将国外域名的 DNS 请求导向远程/国外 DNS 服务器组（即 OpenClash 的 DNS 端口）。</li>
+<li>  在 MosDNS 的设置中，找到并<strong>勾选“防 DNS 泄漏”</strong>或类似的选项。这是确保 DNS 不泄漏的关键步骤。</li>
+</ul>
+</li>
+<li><p><strong>OpenClash 设置：</strong></p>
+<ul>
+<li>  在 OpenClash 的 DNS 设置中，将 <strong>Nameserver</strong> (主 DNS 服务器) 设置为 MosDNS 的监听地址和端口。</li>
+<li>  <strong>Nameserver 设置值：</strong> <code>127.0.0.1:MosDNS的监听端口</code> (例如 <code>127.0.0.1:5335</code>)。</li>
+<li>  将 <strong>Fallback</strong> (备用 DNS 服务器) 设置为一个或多个国外支持 DOT/DOH 的服务器地址。OpenClash 会将从 MosDNS 接收到的国外域名请求通过代理发送到这里。</li>
+<li>  <strong>Fallback 设置值：</strong> 国外 DOT/DOH 服务器地址（例如 <code>tls://1.1.1.1:853</code>, <code>https://8.8.8.8/dns-query</code> 等）。</li>
+<li>  <strong>禁用 OpenClash 的“本地 DNS 劫持”</strong>功能，确保 DNS 请求首先到达 MosDNS。</li>
+</ul>
+</li>
+</ol>
+<p><strong>流程：</strong> 设备 -&gt; MosDNS -&gt; (国内域名) 国内 DNS / (国外域名) OpenClash 的 DNS 端口 -&gt; OpenClash 通过代理 -&gt; 国外 DOT/DOH 服务器</p>
+<h2 id="关于不介意-DNS-泄漏的方案-基于方案二修改"><a href="#关于不介意-DNS-泄漏的方案-基于方案二修改" class="headerlink" title="关于不介意 DNS 泄漏的方案 (基于方案二修改)"></a>关于不介意 DNS 泄漏的方案 (基于方案二修改)</h2><p>如果您不介意 DNS 泄漏问题，并且追求最快的速度和最好的效果，可以在方案二的基础上进行修改：</p>
+<ul>
+<li><strong>MosDNS 设置：</strong><ul>
+<li>  <strong>不要勾选</strong> MosDNS 中的“防 DNS 泄漏”选项。</li>
+<li>  国内服务器组正常设置。</li>
+<li>  远程服务器组仍然设置为 OpenClash 的 DNS 服务端口（<code>127.0.0.1:OpenClash的DNS端口</code>）。</li>
+</ul>
+</li>
+<li><strong>OpenClash 设置：</strong><ul>
+<li>  <strong>Nameserver</strong> 设置为国内 DNS 地址（例如 <code>223.5.5.5:53</code>）。</li>
+<li>  <strong>Fallback</strong> 组留空，不要设置。</li>
+</ul>
+</li>
+</ul>
+<p><strong>流程：</strong> 设备 -&gt; MosDNS -&gt; (国内域名) 国内 DNS / (国外域名) OpenClash 的 DNS 端口 -&gt; OpenClash 通过代理 -&gt; (此时 OpenClash 会使用其代理的上游 DNS 进行解析，可能存在泄漏)</p>
+<p>这种方案下，国内 DNS 请求直接由 MosDNS 发往国内 DNS，速度快。国外 DNS 请求经过 MosDNS 转发到 OpenClash，再由 OpenClash 通过代理解析。由于 OpenClash 的 Nameserver 设置为国内 DNS 且 Fallback 为空，国外域名的解析可能会依赖 OpenClash 通过代理访问国内 DNS 或其他默认 DNS，存在 DNS 泄漏的风险。但理论上，如果代理链路稳定且快速，这种方式在不考虑泄漏的情况下可能提供较好的体验。</p>
+<p><strong>重要提示：</strong></p>
+<ul>
+<li>  请根据您的实际安装和配置，确认 MosDNS 和 OpenClash 的监听地址和端口是否为 <code>127.0.0.1:5335</code> 和 <code>127.0.0.1:7874</code>，如果不是，请替换为实际的地址和端口。</li>
+<li>  确保您的设备或路由器的 DNS 设置指向您选择的方案中作为第一跳的 DNS 服务器（方案一指向 OpenClash 的 DNS 监听地址，方案二指向 MosDNS 的监听地址）。</li>
+<li>  配置完成后，建议进行 DNS 泄漏测试，以验证配置是否生效。</li>
+</ul>
+<p>希望这份 Markdown 文章能够帮助您理解和配置 OpenClash 与 MosDNS 的 DNS 设置！</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>CYRCOM
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://cyr580.github.io/2025/05/11/2025-05-10-mosdns/" title="OpenClash 与 MosDNS 配合实现 DNS 防泄漏配置教程">https://cyr580.github.io/2025/05/11/2025-05-10-mosdns/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DNS/" rel="tag"># DNS</a>
+              <a href="/tags/OpenClash/" rel="tag"># OpenClash</a>
+              <a href="/tags/MosDNS/" rel="tag"># MosDNS</a>
+              <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"># 教程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/05/02/2025-05-01-pve/" rel="prev" title="2025年PVE8最新安装使用指南|新手入门|安装|优化|Proxmox VE 8.3">
+      <i class="fa fa-chevron-left"></i> 2025年PVE8最新安装使用指南|新手入门|安装|优化|Proxmox VE 8.3
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenClash-%E4%B8%8E-MosDNS-%E9%85%8D%E5%90%88%E5%AE%9E%E7%8E%B0-DNS-%E9%98%B2%E6%B3%84%E6%BC%8F%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">OpenClash 与 MosDNS 配合实现 DNS 防泄漏配置教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%9AOpenClash-%E5%89%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">方案一：OpenClash 前置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9AMosDNS-%E5%89%8D%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">方案二：MosDNS 前置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%B8%8D%E4%BB%8B%E6%84%8F-DNS-%E6%B3%84%E6%BC%8F%E7%9A%84%E6%96%B9%E6%A1%88-%E5%9F%BA%E4%BA%8E%E6%96%B9%E6%A1%88%E4%BA%8C%E4%BF%AE%E6%94%B9"><span class="nav-number">1.3.</span> <span class="nav-text">关于不介意 DNS 泄漏的方案 (基于方案二修改)</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CYRCOM"
+      src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+  <p class="site-author-name" itemprop="name">CYRCOM</p>
+  <div class="site-description" itemprop="description">Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cyr580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cyr580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CNCYRCOM" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CNCYRCOM" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CYRCOM</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '919cd316da6bdc2c2e6a',
+      clientSecret: 'ae2c200effb3d1e09777cdba146557d4c2eb8bea',
+      repo        : 'cyr580.github.io',
+      owner       : 'cyr580',
+      admin       : ['cyr580'],
+      id          : 'be180918aaa4ba654cb3cc21ed430a03',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
