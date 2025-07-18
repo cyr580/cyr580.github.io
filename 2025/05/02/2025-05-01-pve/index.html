@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cyr580.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"搜索文章","hits_empty":"未找到结果：${query}","hits_stats":"共${hits}条结果，用时${time}毫秒"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="本文详细介绍了2025年最新Proxmox VE 8.3的安装、初始化和优化过程，适合新手入门。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025年PVE8最新安装使用指南|新手入门|安装|优化|Proxmox VE 8.3">
+<meta property="og:url" content="https://cyr580.github.io/2025/05/02/2025-05-01-pve/index.html">
+<meta property="og:site_name" content="iOSByte">
+<meta property="og:description" content="本文详细介绍了2025年最新Proxmox VE 8.3的安装、初始化和优化过程，适合新手入门。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-02T09:57:26.000Z">
+<meta property="article:modified_time" content="2025-05-02T09:57:26.000Z">
+<meta property="article:author" content="CYRCOM">
+<meta property="article:tag" content="PVE">
+<meta property="article:tag" content="Proxmox VE">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://cyr580.github.io/2025/05/02/2025-05-01-pve/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>2025年PVE8最新安装使用指南|新手入门|安装|优化|Proxmox VE 8.3 | iOSByte</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GTGCJ6QK00"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GTGCJ6QK00');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">iOSByte</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Navigating iOS, Byte by Byte.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/cyr580" class="github-corner" title="关注我GitHub" aria-label="关注我GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2025/05/02/2025-05-01-pve/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2025年PVE8最新安装使用指南|新手入门|安装|优化|Proxmox VE 8.3
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-05-02 17:57:26" itemprop="dateCreated datePublished" datetime="2025-05-02T17:57:26+08:00">2025-05-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">虚拟化</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">本文详细介绍了2025年最新Proxmox VE 8.3的安装、初始化和优化过程，适合新手入门。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="2025年PVE8最新安装使用指南-新手入门-安装-优化-Proxmox-VE-8-3"><a href="#2025年PVE8最新安装使用指南-新手入门-安装-优化-Proxmox-VE-8-3" class="headerlink" title="2025年PVE8最新安装使用指南|新手入门|安装|优化|Proxmox VE 8.3"></a>2025年PVE8最新安装使用指南|新手入门|安装|优化|Proxmox VE 8.3</h1><h2 id="PVE镜像下载"><a href="#PVE镜像下载" class="headerlink" title="PVE镜像下载"></a>PVE镜像下载</h2><ol>
+<li> 在浏览器输入以下网址下载pve的iso安装镜像：<code>https://www.proxmox.com/en/downloads</code></li>
+<li> 点击download进行下载。</li>
+<li> 最新的pve8.3-1镜像大小为1.45GB，接下来制作引导U盘。</li>
+</ol>
+<h2 id="引导U盘制作"><a href="#引导U盘制作" class="headerlink" title="引导U盘制作"></a>引导U盘制作</h2><ol>
+<li> 首先下载写盘工具，本文使用的写盘工具为Rufus，下载地址为<code>https://rufus.ie/downloads/</code>，选择最新版本的下载。</li>
+<li> 下载完成后直接双击运行，无需安装，设备中选择U盘，引导类型选择PVE镜像，然后点击开始，注意U盘中的原有数据会被格式化，重要数据记得备份。</li>
+<li> 当状态为准备就绪时，表示U盘写入成功，拔下U盘插入需要安装的机器的USB接口中（台式机推荐后置USB接口）。</li>
+</ol>
+<h2 id="PVE安装"><a href="#PVE安装" class="headerlink" title="PVE安装"></a>PVE安装</h2><ol>
+<li> 打开主机电源，不断按键盘F12按键（不同主机的U启动按键不同，请自行百度或者询问卖家）进入PVE安装页面，选择第一个Install Proxmox VE （Graphical)，按回车。</li>
+<li> 页面会进入如下的跑代码阶段，跑码时间看机器配置，跑码期间不要动键盘鼠标。</li>
+<li> 进入下面页面安装正式开始，首先使用协议页面点击 I agree（我同意）。</li>
+<li> 选择pve安装的硬盘，然后继续点击Next(下一步）。</li>
+<li> 设置国家、时区、键盘布局，然后点击Next(下一步）。</li>
+<li> 设置密码、和邮箱，继续点击Next(下一步）。</li>
+<li> 设置网卡、域（保持默认即可）、PVE管理地址、网关、DNS等，继续点击Next(下一步）。</li>
+<li> 在配置详情中检查配置信息是否有误，没有问题点击Install（安装）。</li>
+<li> 移除U盘，然后点击Reboot重启机器。</li>
+</ol>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><ol>
+<li> 重启完成之后出现如下页面，表示安装成功，记录下屏幕中出现的ip地址，接下来的配置无需使用PVE主机显示，单个显示器的朋友可以将显示器切换到主机了。</li>
+<li> 在浏览器输入<code>https://192.168.100.100:8006</code>进入PVE配置页面，用户名为root，密码为在安装过程中设置的，语言为了方便设置为简体中文，然后点击登录。</li>
+<li> 第一次登录会出现无效订阅不用管，直接点击确定，后续我们将通过设置去掉这个选项。</li>
+<li> 首先我们需要配置一下pve的dns来保证pve可以正确访问到网络，这里我使用了阿里云公共的DNS，223.5.5.5，223.6.6.6，然后点击ok。</li>
+<li> 使用pve自带的shell工具来ping百度，测试网络是否正常，出现正确的ping值表示外网访问通畅。</li>
+<li> 接下来还涉及到pve的换源、系统更新、直通等操作，为了方便小白和第一次接触到pve的朋友们，这里我们将使用第三方工具来实现。</li>
+</ol>
+<h2 id="优化（PVE-Source）"><a href="#优化（PVE-Source）" class="headerlink" title="优化（PVE_Source）"></a>优化（PVE_Source）</h2><p>pve_source是老虎大佬开发的pve脚本（首发于X86派论坛），可以更方便的初始化PVE，无需使用复杂的命令，使用方法很简单，登录PVE，打开Shell粘贴如下命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -q -O /root/pve_source.tar.gz \&#x27;https://bbs.x86pi.cn/file/topic/2023-11-28/file/01ac88d7d2b840cb88c15cb5e19d4305b2.gz\&#x27; &amp;&amp; tar zxvf /root/pve_source.tar.gz &amp;&amp; /root/./pve_source</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li> 脚本加载成功出现使用协议，输入Y，然后继续按回车。</li>
+<li> 进入脚本优化选项，脚本覆盖了PVE的绝大部分必备优化选项，需要使用那个直接输入数字然后按回车即可。</li>
+</ol>
+<h3 id="更换-Proxmox-VE-源"><a href="#更换-Proxmox-VE-源" class="headerlink" title="更换 Proxmox VE 源"></a>更换 Proxmox VE 源</h3><ol start="3">
+<li> 为了更方便了解脚本都干了什么，建议分步执行23456，输入数字2,然后再输入1更换 PVE 软件源 + Debian 源，分别输入列表前面的数字选择PVE版本和软件源镜像站（不清楚的直接都选择清华大学源就行）。</li>
+<li> 选择软件源以后继续按回车执行，脚本将自动执行更换源成功后会给出提示。</li>
+<li> 按照以上操作继续完成PVE Ceph 源 、PVE LXC 仓库源 的更新操作（在Shell页面输入<code>./pve_source</code>即可再次调出pve工具小技巧直接输入<code>./pve</code>然后按tab按键可自动补全后面）。</li>
+</ol>
+<h3 id="更新软件包系统"><a href="#更新软件包系统" class="headerlink" title="更新软件包系统"></a>更新软件包系统</h3><p>更新软件包有两种方法，一种是通过pve工具箱更新，另外一种因为在前面我们已经通过pve工具箱更新了软件源，所以直接在web页面更新也可以</p>
+<ol>
+<li> 点击pve节点→更新→刷新→升级，既可以完成最新软件包和组件的升级。</li>
+<li> 通过pve工具升级，在Shell中输入<code>./pve_source</code>，然后使用脚本3、4来更新软件包和系统。</li>
+</ol>
+<h3 id="设置系统DNS"><a href="#设置系统DNS" class="headerlink" title="设置系统DNS"></a>设置系统DNS</h3><ol>
+<li> 通过web页面修改，点击节点→DNS→编辑。</li>
+<li> 通过pve工具箱修改。</li>
+</ol>
+<h3 id="去除无效订阅源提示"><a href="#去除无效订阅源提示" class="headerlink" title="去除无效订阅源提示"></a>去除无效订阅源提示</h3><p>每次在登录pve的时候会弹出企业订阅提示，对于普通用户我们直接去除掉弹窗即可，登录PVE，在Shell窗口中输入<code>./pve_source</code>，进入pve工具箱，输入6，系统会自动执行去除订阅脚本，脚本运行完成后请强制刷新浏览器缓存。</p>
+<h3 id="修改PVE概要信息"><a href="#修改PVE概要信息" class="headerlink" title="修改PVE概要信息"></a>修改PVE概要信息</h3><ol>
+<li> pve默认概要中不会显示cpu温度、硬盘信息等，通过pve工具箱可以修改信息概要页面，使其信息显示更加完善。</li>
+<li> 登录PVE，在Shell窗口中输入<code>./pve_source</code>，进入pve工具箱，按7进入pve概要信息定制向导，根据自身喜好选择合适的版本，这里我使用推荐方案1：高大全版本。</li>
+<li> 修改改完成后可以看到概要信息中显示的非常全面，包括CPU温度核心占用情况，以及硬盘的温度写入量等都可以很直观的显示。</li>
+</ol>
+<h2 id="虚拟机安装"><a href="#虚拟机安装" class="headerlink" title="虚拟机安装"></a>虚拟机安装</h2><p>pve安装虚拟机还是非常简单的，本篇我们将使用pve安装win10来演示一下安装过程，其他系统安装大同小异。</p>
+<ol>
+<li> 首先需要上传安装镜像，通过local(pve)→ISO镜像→上传，将win10镜像上传到pve中。</li>
+<li> 回到pve首页，点击右上角的创建虚拟机，常规中自定义虚拟机的名称。</li>
+<li> 操作系统中选择windows10镜像，然后在类型中选择安装操作系统的类型，注意版本也要选择。</li>
+<li> 系统保持默认即可。</li>
+<li> 硬盘中总线选择sata，其他保持默认。</li>
+<li> CPU根据机器配置选择，插槽表示cpu个数单CPU机器输入1，核心根据CPU选择，类别使用HOST系统性能最大化。</li>
+<li> 内存根据机器配置设置。</li>
+<li> 网络设置中选择兼容性最高的e1000即可。</li>
+<li> 最后检查配置没有，确认无误后点击完成。</li>
+<li>稍等几秒，机器创建成功。</li>
+<li>点击控制台启动，按照正常windows系统或macOS安装流程安装即可。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>pve的安装过程还是比较简单的和一般的操作系统安装过程相同，安装完成后通过pve-source工具优化即可，后续我也会出一篇通过命令修改的教程，下一篇会讲一下PVE的显卡直通，并切在windows和群晖等系统中实现核显直通、解码等，本篇教程到此结束</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>CYRCOM
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://cyr580.github.io/2025/05/02/2025-05-01-pve/" title="2025年PVE8最新安装使用指南|新手入门|安装|优化|Proxmox VE 8.3">https://cyr580.github.io/2025/05/02/2025-05-01-pve/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PVE/" rel="tag"># PVE</a>
+              <a href="/tags/Proxmox-VE/" rel="tag"># Proxmox VE</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/04/30/2025-04-30-mcpproxy/" rel="prev" title="TBXark/mcp-proxy 构建你的 MCP 代理服务器">
+      <i class="fa fa-chevron-left"></i> TBXark/mcp-proxy 构建你的 MCP 代理服务器
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/05/11/2025-05-10-mosdns/" rel="next" title="OpenClash 与 MosDNS 配合实现 DNS 防泄漏配置教程">
+      OpenClash 与 MosDNS 配合实现 DNS 防泄漏配置教程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2025%E5%B9%B4PVE8%E6%9C%80%E6%96%B0%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8-%E5%AE%89%E8%A3%85-%E4%BC%98%E5%8C%96-Proxmox-VE-8-3"><span class="nav-number">1.</span> <span class="nav-text">2025年PVE8最新安装使用指南|新手入门|安装|优化|Proxmox VE 8.3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PVE%E9%95%9C%E5%83%8F%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.1.</span> <span class="nav-text">PVE镜像下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%AF%BCU%E7%9B%98%E5%88%B6%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">引导U盘制作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PVE%E5%AE%89%E8%A3%85"><span class="nav-number">1.3.</span> <span class="nav-text">PVE安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.4.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%EF%BC%88PVE-Source%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">优化（PVE_Source）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%8D%A2-Proxmox-VE-%E6%BA%90"><span class="nav-number">1.5.1.</span> <span class="nav-text">更换 Proxmox VE 源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.5.2.</span> <span class="nav-text">更新软件包系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%B3%BB%E7%BB%9FDNS"><span class="nav-number">1.5.3.</span> <span class="nav-text">设置系统DNS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%BB%E9%99%A4%E6%97%A0%E6%95%88%E8%AE%A2%E9%98%85%E6%BA%90%E6%8F%90%E7%A4%BA"><span class="nav-number">1.5.4.</span> <span class="nav-text">去除无效订阅源提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9PVE%E6%A6%82%E8%A6%81%E4%BF%A1%E6%81%AF"><span class="nav-number">1.5.5.</span> <span class="nav-text">修改PVE概要信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85"><span class="nav-number">1.6.</span> <span class="nav-text">虚拟机安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CYRCOM"
+      src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+  <p class="site-author-name" itemprop="name">CYRCOM</p>
+  <div class="site-description" itemprop="description">Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cyr580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cyr580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CNCYRCOM" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CNCYRCOM" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CYRCOM</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '919cd316da6bdc2c2e6a',
+      clientSecret: 'ae2c200effb3d1e09777cdba146557d4c2eb8bea',
+      repo        : 'cyr580.github.io',
+      owner       : 'cyr580',
+      admin       : ['cyr580'],
+      id          : '3e6188c17d54649cf67c1e288317e41f',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

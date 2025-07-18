@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cyr580.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"搜索文章","hits_empty":"未找到结果：${query}","hits_stats":"共${hits}条结果，用时${time}毫秒"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fasci">
+<meta property="og:type" content="website">
+<meta property="og:title" content="iOSByte">
+<meta property="og:url" content="https://cyr580.github.io/page/5/index.html">
+<meta property="og:site_name" content="iOSByte">
+<meta property="og:description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fasci">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="CYRCOM">
+<meta property="article:tag" content="cyr580, xigua, blog, CYRCOM">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://cyr580.github.io/page/5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+
+  <title>iOSByte</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GTGCJ6QK00"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GTGCJ6QK00');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">iOSByte</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Navigating iOS, Byte by Byte.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/cyr580" class="github-corner" title="关注我GitHub" aria-label="关注我GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2021/04/02/2021-04-02-daily-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/02/2021-04-02-daily-3/" class="post-title-link" itemprop="url">转载：网上对ios插件的介绍</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-02 14:50:30" itemprop="dateCreated datePublished" datetime="2021-04-02T14:50:30+08:00">2021-04-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iPhone/" itemprop="url" rel="index"><span itemprop="name">iPhone</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          转载内容，比较详细
+Cydia中的软件源地址保存在 /etc/apt/sources.list.d/ 目录下，分为两种：
+
+ 1. 以软件包形式安装的软件源，如Cydia默认的软件源，Modmyi、BigBoss等，该类软件源是以独立的.list文件记录软件源地址。
+ 2. 由用户在Cydia里输入地址添加的软件源，该类软件源全部保存在 cydia.list中。
+    以上两种形式的软件源本质没有差别，但只软件源的文件存放位置上是有不同的。
+    以Saurik自己的软件源为例。打开 saurik.list文件， 可以看到有以下内容 （以#开头的行属于注释，没有实际用途）
+
+deb htt
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/02/2021-04-02-daily-3/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2021/04/02/2021-04-02-daily/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/02/2021-04-02-daily/" class="post-title-link" itemprop="url">Filza直接生成packages.bz2</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-02 14:40:30" itemprop="dateCreated datePublished" datetime="2021-04-02T14:40:30+08:00">2021-04-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iPhone/" itemprop="url" rel="index"><span itemprop="name">iPhone</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          -
+由于ios无dpkg-scanpackages命令，无奈google，终于找到了几年前WF一位网友分享的sh，可以在手机上直接生成packages.bz2
+-
+
+环境：任何支持dpkg命令的unix系统
+工具：dpkg及相关组件
+
+ * iPhone OS（已越狱）：自带dpkg-deb命令，无dpkg-scanpackages命令
+ * Debian/Ubuntu：自带dpkg-deb和dpkg-scanpackages命令
+ * Fedora: 无dpkg相关命令
+ * Mac OS X：无任何dpkg相关命令
+ * Windows：非unix系统，无dpkg相关命令 以上系统中，Fe
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/02/2021-04-02-daily/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2021/04/02/2021-04-02-daily-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/02/2021-04-02-daily-2/" class="post-title-link" itemprop="url">repo支持sileo</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-02 14:10:30" itemprop="dateCreated datePublished" datetime="2021-04-02T14:10:30+08:00">2021-04-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iPhone/" itemprop="url" rel="index"><span itemprop="name">iPhone</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          比较简单，只需增加json
+
+结构
+ * repo.xx.com（源地址根目录） * sileo（json目录） * assets（图片目录） 
+      
+      
+   
+   
+
+模版
+点击下载 
+
+cydia/zebra与sileo网页描述，分别需要添加json，在deb插件描述文件内添加以下内容
+1
+2
+
+
+Depiction: https://evynw.github.io/depictions/?p=com.cyr580.xigua31.SB
+SileoDepiction: https://cyr580.github.io/sileo/xigua31.SB.json
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/02/2021-04-02-daily-2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2021/04/01/2021-04-01-daily3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/01/2021-04-01-daily3/" class="post-title-link" itemprop="url">关于ios制作修改deb插件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-01 21:52:30" itemprop="dateCreated datePublished" datetime="2021-04-01T21:52:30+08:00">2021-04-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iPhone/" itemprop="url" rel="index"><span itemprop="name">iPhone</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          简单易懂的语言来理解deb内文件
+
+很早想写这篇教程，但是懒…
+结构
+ * DEBIAN
+   
+    * control 
+   
+   
+ * /var （可以是任何文件目录，根据不同插件来决定）
+   
+    * /var/mobile/Library/FrontPage/xx/xx
+   
+   
+
+首先修改control文件
+ 
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+
+
+Package: 插件包的名称，通常是com.xx.xx
+Version: 版本
+Section: 类别
+Depends: 依赖
+Architecture: iphoneos-arm
+Name: 插件
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/01/2021-04-01-daily3/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2021/04/01/2021-04-01-daily2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/01/2021-04-01-daily2/" class="post-title-link" itemprop="url">iOS 越狱机重置ssh密码</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-01 21:40:30" itemprop="dateCreated datePublished" datetime="2021-04-01T21:40:30+08:00">2021-04-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iPhone/" itemprop="url" rel="index"><span itemprop="name">iPhone</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          ios14越狱后ssh/root登录密码忘记了，查资料得知iPhone的账号密码修改方式，下面有详细教程
+
+路径
+/private/etc/master.password
+
+使用filza找到下面行
+1
+2
+
+
+root:xxxxxxxxxxxxx:0:0::0:0:System Administrator:/var/root:/bin/sh
+mobile:xxxxxxxxxxxxx:501:501::0:0:Mobile User:/var/mobile:/bin/sh
+
+
+将root:及mobile:后面的13个x字符处修改成
+1
+2
+
+
+root:/smx7MYTQIi2M:0:0::0
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/01/2021-04-01-daily2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2021/04/01/2021-04-01-daily/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/01/2021-04-01-daily/" class="post-title-link" itemprop="url">越狱手机上直接搭建cydia-repo源（github）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-01 14:57:30" itemprop="dateCreated datePublished" datetime="2021-04-01T14:57:30+08:00">2021-04-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iPhone/" itemprop="url" rel="index"><span itemprop="name">iPhone</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          拥有一个自己的repo，越狱后，各种折腾美化、插件，闲得蛋疼可以试试自己搭建一个repo，搭建容易，维护不易，需要花大量时间来关注并更新！
+
+准备工作
+ 1. git ——默认Boss源或者点击直达procurs-Taurine
+ 2. newterm2 ——点击直达packix
+ 3. github仓库 ——点击直达github
+ 4. Filza ——点击直达akemi
+
+创建github仓库
+
+
+
+复制下面这个地址（后面需要推送到这里）
+
+
+手机newterm把这个仓库克隆到本地
+ 1. 打开newterm
+ 2. 输入su必须获取root权限
+ 3. 输入alpine(默认root密码
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/01/2021-04-01-daily/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2021/03/31/2021-03-31-daily/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/31/2021-03-31-daily/" class="post-title-link" itemprop="url">ios14未越狱运行hexo-git-nodejs-npm</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-31 10:35:30" itemprop="dateCreated datePublished" datetime="2021-03-31T10:35:30+08:00">2021-03-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iPhone/" itemprop="url" rel="index"><span itemprop="name">iPhone</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          如果你是一名学习计算机相关专业的学生，或是经常跟Linux打交道的用户，那么Linux必定是你一生挚友。
+
+虽然Linux不像微软的桌面系统那样，占据市场的大半江山，但是Linux的开源、免费、稳定和丰富吸引着越来越多用户与之相拥。
+
+自从接触了Linux，我就成了Linux系统的忠实用户，我使用过许多种发行版，也各有各的特色。除了有些没法在Linux上运行的软件会使用Windows，大部分情况都是用Linux。
+
+我不仅在电脑上使用Linux，也会在手机、iPad上使用。在知道iSH前，我在iPad使用Linux都是借助服务器。其实iPad越狱也可以使用Linux Shell，但是为了平板的
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/31/2021-03-31-daily/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2021/03/30/2021-03-29-daily-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/30/2021-03-29-daily-5/" class="post-title-link" itemprop="url">Hexo文章加密</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-30 00:36:30" itemprop="dateCreated datePublished" datetime="2021-03-30T00:36:30+08:00">2021-03-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          Welcome to my blog, enter password to read.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/30/2021-03-29-daily-5/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2021/03/29/2021-03-29-daily-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/29/2021-03-29-daily-4/" class="post-title-link" itemprop="url">Github Actions</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-29 20:08:30" itemprop="dateCreated datePublished" datetime="2021-03-29T20:08:30+08:00">2021-03-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/github/" itemprop="url" rel="index"><span itemprop="name">github</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          Welcome to my blog, enter password to read.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/29/2021-03-29-daily-4/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cyr580.github.io/2021/03/29/2021-03-29-daily-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+      <meta itemprop="name" content="CYRCOM">
+      <meta itemprop="description" content="Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iOSByte">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/29/2021-03-29-daily-3/" class="post-title-link" itemprop="url">hexo安装</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-29 17:10:30" itemprop="dateCreated datePublished" datetime="2021-03-29T17:10:30+08:00">2021-03-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/github/" itemprop="url" rel="index"><span itemprop="name">github</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          安装 Hexo
+所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。
+
+
+1
+
+
+npm install -g hexo-cli
+
+
+
+
+
+
+安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。
+
+
+1
+2
+3
+
+
+hexo init <folder>
+cd <folder>
+npm install
+
+
+
+
+
+
+文件结构
+
+
+
+1
+2
+3
+4
+5
+6
+7
+
+
+├── _config.yml
+├── package.json
+├── scaffolds
+├── source
+|   ├── _drafts
+|   └── _posts
+└── the
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/29/2021-03-29-daily-3/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CYRCOM"
+      src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+  <p class="site-author-name" itemprop="name">CYRCOM</p>
+  <div class="site-description" itemprop="description">Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem. Join our byte-sized journey through the fascinating world of iOS, tailored for enthusiasts like you!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cyr580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cyr580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CNCYRCOM" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CNCYRCOM" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CYRCOM</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+</body>
+</html>
