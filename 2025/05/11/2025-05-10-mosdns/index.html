@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+    
+    <link rel='stylesheet' href="/./css/dracula.css">
+
+        <title>OpenClash 与 MosDNS 配合实现 DNS 防泄漏配置教程</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+
+    <meta name="generator" content="Hexo 8.1.1"></head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">404</a>
+            </div>
+        </div>
+
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="al_sidebar">
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>404</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+            <div class="al_sidebar_author_info">
+                <h4>404</h4>
+                <img class="al_sidebar_avatar" src="https://raw.githubusercontent.com/cyr580/LPP/master/00.jpeg">
+                <p>Discover the fun side of iOS with iOSByte, your friendly space for exploring cool apps, hidden features, and everything delightful in the Apple ecosystem.</p>
+            </div>
+
+            
+                <div class="al_sidebar_contact_info">
+                    <h4>GET IN TOUCH</h4>
+                    <p>A long way</p>
+
+                    <div class="dis_flex al_sidebar_social_widget">
+                        
+
+                        
+
+                        
+
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.github.com/cyr580">
+                                <svg class="al_social_icon" id="github">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_github"></use>
+                                </svg>
+                            </div>
+                        
+
+                        
+                            <div class="al_social_icon_cnt" data_link="https://www.twitter.com/CNCYRCOM/">
+                                <svg class="al_social_icon" id="twitter">
+                                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#icon_twitter"></use>
+                                </svg>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        OpenClash 与 MosDNS 配合实现 DNS 防泄漏配置教程
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            Sun May 11, 2025 03:15 PM
+                        </div>
+
+                        
+                            <div class="al_page_content_info">
+                                1.4k words
+                            </div>
+                        
+
+                        
+                            <div class="al_page_content_info">
+                                5 minutes read
+                            </div>
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OpenClash-%E4%B8%8E-MosDNS-%E9%85%8D%E5%90%88%E5%AE%9E%E7%8E%B0-DNS-%E9%98%B2%E6%B3%84%E6%BC%8F%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B"><span class="toc-text">OpenClash 与 MosDNS 配合实现 DNS 防泄漏配置教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%9AOpenClash-%E5%89%8D%E7%BD%AE"><span class="toc-text">方案一：OpenClash 前置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9AMosDNS-%E5%89%8D%E7%BD%AE"><span class="toc-text">方案二：MosDNS 前置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E4%B8%8D%E4%BB%8B%E6%84%8F-DNS-%E6%B3%84%E6%BC%8F%E7%9A%84%E6%96%B9%E6%A1%88-%E5%9F%BA%E4%BA%8E%E6%96%B9%E6%A1%88%E4%BA%8C%E4%BF%AE%E6%94%B9"><span class="toc-text">关于不介意 DNS 泄漏的方案 (基于方案二修改)</span></a></li></ol></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <h1 id="OpenClash-与-MosDNS-配合实现-DNS-防泄漏配置教程"><a href="#OpenClash-与-MosDNS-配合实现-DNS-防泄漏配置教程" class="headerlink" title="OpenClash 与 MosDNS 配合实现 DNS 防泄漏配置教程"></a>OpenClash 与 MosDNS 配合实现 DNS 防泄漏配置教程</h1><p>在使用代理工具（如 OpenClash）时，正确的 DNS 配置对于确保网络安全和隐私（特别是防止 DNS 泄漏）至关重要。同时，结合 MosDNS 这样的 DNS 分流工具，可以实现更灵活和高效的 DNS 解析。</p>
+<p>本文将介绍两种常见的 OpenClash 与 MosDNS 配合实现 DNS 防泄漏的配置方案。</p>
+<h2 id="方案一：OpenClash-前置"><a href="#方案一：OpenClash-前置" class="headerlink" title="方案一：OpenClash 前置"></a>方案一：OpenClash 前置</h2><p><strong>核心思想：</strong> 让 OpenClash 作为主要的 DNS 入口，将 DNS 请求转发给 MosDNS 进行分流处理。MosDNS 根据规则将国内请求发往国内 DNS，国外请求发往国外 DNS，并在 MosDNS 中进行防泄漏处理。</p>
+<p><strong>设置步骤：</strong></p>
+<ol>
+<li><p><strong>OpenClash 设置：</strong></p>
+<ul>
+<li>在 OpenClash 的 DNS 设置中，将 <strong>Nameserver</strong> (主 DNS 服务器) 和 <strong>Fallback</strong> (备用 DNS 服务器) 都设置为 MosDNS 的监听地址和端口。</li>
+<li><strong>Nameserver 设置值：</strong> <code>127.0.0.1:MosDNS的监听端口</code> (例如 <code>127.0.0.1:5335</code>)</li>
+<li><strong>Fallback 设置值：</strong> <code>127.0.0.1:MosDNS的监听端口</code> (例如 <code>127.0.0.1:5335</code>)</li>
+<li>这样设置的目的是让所有 DNS 请求都先经过 OpenClash，然后由 OpenClash 统一转发给 MosDNS。</li>
+</ul>
+</li>
+<li><p><strong>MosDNS 设置：</strong></p>
+<ul>
+<li>在 MosDNS 中，配置两个服务器组：<ul>
+<li><strong>国内 DNS 服务器组：</strong> 正常设置国内的 DNS 服务器地址（例如 <code>223.5.5.5:53</code>, <code>119.29.29.29:53</code> 等）。</li>
+<li><strong>国外 DNS 服务器组：</strong> 设置国外支持 DOT&#x2F;DOH 的 DNS 服务器地址（例如 <code>tls://1.1.1.1:853</code>, <code>https://8.8.8.8/dns-query</code> 等）。</li>
+</ul>
+</li>
+<li>配置 MosDNS 的规则，将国内域名的 DNS 请求导向国内 DNS 服务器组，将国外域名的 DNS 请求导向国外 DNS 服务器组。</li>
+<li>在 MosDNS 的设置中，找到并**勾选“防 DNS 泄漏”**或类似的选项。这是确保 DNS 不泄漏的关键步骤。</li>
+</ul>
+</li>
+</ol>
+<p><strong>流程：</strong> 设备 -&gt; OpenClash -&gt; MosDNS -&gt; (国内域名) 国内 DNS &#x2F; (国外域名) 国外 DNS</p>
+<h2 id="方案二：MosDNS-前置"><a href="#方案二：MosDNS-前置" class="headerlink" title="方案二：MosDNS 前置"></a>方案二：MosDNS 前置</h2><p><strong>核心思想：</strong> 让 MosDNS 作为主要的 DNS 入口，根据规则将国内流量导向国内 DNS 服务器，将国外流量导向 OpenClash 的 DNS 服务端口，再由 OpenClash 通过代理处理国外 DNS 请求。MosDNS 负责防 DNS 泄漏。</p>
+<p><strong>设置步骤：</strong></p>
+<ol>
+<li><p><strong>MosDNS 设置：</strong></p>
+<ul>
+<li>在 MosDNS 中，配置两个服务器组：<ul>
+<li><strong>国内 DNS 服务器组：</strong> 正常设置国内的 DNS 服务器地址（例如 <code>223.5.5.5:53</code>, <code>119.29.29.29:53</code> 等）。</li>
+<li><strong>远程&#x2F;国外 DNS 服务器组：</strong> 将此服务器组设置为 OpenClash 的 DNS 监听地址和端口。</li>
+<li><strong>远程&#x2F;国外服务器组设置值：</strong> <code>127.0.0.1:OpenClash的DNS端口</code> (例如 <code>127.0.0.1:7874</code>)。</li>
+</ul>
+</li>
+<li>配置 MosDNS 的规则，将国内域名的 DNS 请求导向国内 DNS 服务器组，将国外域名的 DNS 请求导向远程&#x2F;国外 DNS 服务器组（即 OpenClash 的 DNS 端口）。</li>
+<li>在 MosDNS 的设置中，找到并**勾选“防 DNS 泄漏”**或类似的选项。这是确保 DNS 不泄漏的关键步骤。</li>
+</ul>
+</li>
+<li><p><strong>OpenClash 设置：</strong></p>
+<ul>
+<li>在 OpenClash 的 DNS 设置中，将 <strong>Nameserver</strong> (主 DNS 服务器) 设置为 MosDNS 的监听地址和端口。</li>
+<li><strong>Nameserver 设置值：</strong> <code>127.0.0.1:MosDNS的监听端口</code> (例如 <code>127.0.0.1:5335</code>)。</li>
+<li>将 <strong>Fallback</strong> (备用 DNS 服务器) 设置为一个或多个国外支持 DOT&#x2F;DOH 的服务器地址。OpenClash 会将从 MosDNS 接收到的国外域名请求通过代理发送到这里。</li>
+<li><strong>Fallback 设置值：</strong> 国外 DOT&#x2F;DOH 服务器地址（例如 <code>tls://1.1.1.1:853</code>, <code>https://8.8.8.8/dns-query</code> 等）。</li>
+<li>**禁用 OpenClash 的“本地 DNS 劫持”**功能，确保 DNS 请求首先到达 MosDNS。</li>
+</ul>
+</li>
+</ol>
+<p><strong>流程：</strong> 设备 -&gt; MosDNS -&gt; (国内域名) 国内 DNS &#x2F; (国外域名) OpenClash 的 DNS 端口 -&gt; OpenClash 通过代理 -&gt; 国外 DOT&#x2F;DOH 服务器</p>
+<h2 id="关于不介意-DNS-泄漏的方案-基于方案二修改"><a href="#关于不介意-DNS-泄漏的方案-基于方案二修改" class="headerlink" title="关于不介意 DNS 泄漏的方案 (基于方案二修改)"></a>关于不介意 DNS 泄漏的方案 (基于方案二修改)</h2><p>如果您不介意 DNS 泄漏问题，并且追求最快的速度和最好的效果，可以在方案二的基础上进行修改：</p>
+<ul>
+<li><strong>MosDNS 设置：</strong><ul>
+<li><strong>不要勾选</strong> MosDNS 中的“防 DNS 泄漏”选项。</li>
+<li>国内服务器组正常设置。</li>
+<li>远程服务器组仍然设置为 OpenClash 的 DNS 服务端口（<code>127.0.0.1:OpenClash的DNS端口</code>）。</li>
+</ul>
+</li>
+<li><strong>OpenClash 设置：</strong><ul>
+<li><strong>Nameserver</strong> 设置为国内 DNS 地址（例如 <code>223.5.5.5:53</code>）。</li>
+<li><strong>Fallback</strong> 组留空，不要设置。</li>
+</ul>
+</li>
+</ul>
+<p><strong>流程：</strong> 设备 -&gt; MosDNS -&gt; (国内域名) 国内 DNS &#x2F; (国外域名) OpenClash 的 DNS 端口 -&gt; OpenClash 通过代理 -&gt; (此时 OpenClash 会使用其代理的上游 DNS 进行解析，可能存在泄漏)</p>
+<p>这种方案下，国内 DNS 请求直接由 MosDNS 发往国内 DNS，速度快。国外 DNS 请求经过 MosDNS 转发到 OpenClash，再由 OpenClash 通过代理解析。由于 OpenClash 的 Nameserver 设置为国内 DNS 且 Fallback 为空，国外域名的解析可能会依赖 OpenClash 通过代理访问国内 DNS 或其他默认 DNS，存在 DNS 泄漏的风险。但理论上，如果代理链路稳定且快速，这种方式在不考虑泄漏的情况下可能提供较好的体验。</p>
+<p><strong>重要提示：</strong></p>
+<ul>
+<li>请根据您的实际安装和配置，确认 MosDNS 和 OpenClash 的监听地址和端口是否为 <code>127.0.0.1:5335</code> 和 <code>127.0.0.1:7874</code>，如果不是，请替换为实际的地址和端口。</li>
+<li>确保您的设备或路由器的 DNS 设置指向您选择的方案中作为第一跳的 DNS 服务器（方案一指向 OpenClash 的 DNS 监听地址，方案二指向 MosDNS 的监听地址）。</li>
+<li>配置完成后，建议进行 DNS 泄漏测试，以验证配置是否生效。</li>
+</ul>
+<p>希望这份 Markdown 文章能够帮助您理解和配置 OpenClash 与 MosDNS 的 DNS 设置！</p>
+
+                </section>
+
+                
+                
+
+                
+
+            </article>
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/2025/11/27/2025-11-27-bananapro/">
+                    
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-left"></use>
+                        </svg>
+                        <span class="al_text_ellipsis al_post_nav_desc">Gemini 全能工程制图 Prompt 母版：从单点任务到通用化思维</span>
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2025/05/02/2025-05-01-pve/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">2025年PVE8最新安装使用指南|新手入门|安装|优化|Proxmox VE 8.3</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
+    </div>
+
+
+        <div class="al_index_footer dis_flex_center">
+    <div class="al_index_footer_item al_index_footer_title">
+        404
+    </div>
+
+    
+    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Created By 
+        <a target="_blank" rel="noopener" href="https://x.com/cncyrcom">X.C</a>
+         · © 2024 Online</a>
+    </div>
+
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
+    </div>
+</div>
+
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+    <script src="//www.googletagmanager.com/gtag/js?id=G-GTGCJ6QK00"></script>
+    <script>window.dataLayer=window.dataLayeror[];function gtag(){dataLayer.push(arguments);};gtag('js', new Date());gtag('config', '${theme.google_analytice.tracking_id}');</script>
+
+        
+        
+
+    </body>
+</html>
